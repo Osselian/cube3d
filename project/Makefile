@@ -6,7 +6,7 @@ OBJ = ${patsubst srcs/%.c, obj/%.o, $(SRC)} #patsubst - функция подс�
 MLXPATH = ../libs/mlx_linux
 MINILIBX = $(MLXPATH)/libmlx_Linux.a 
 FLAGS = -I$(MLXPATH) -Wall -Wextra #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
-LIBS = -L$(MLXPATH) -lmlx_Linux -lmlx -L/usr/lib -lXext -lX11 #-lm -lz
+LIBS = -L$(MLXPATH) -lmlx_Linux -L/usr/lib -lXext -lX11 #-lm -lz
 
 all: $(NAME)
 
