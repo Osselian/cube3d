@@ -2,9 +2,14 @@ NAME = cub3D
 CC = cc
 SRC = srcs/main.c
 OBJ = ${patsubst srcs/%.c, obj/%.o, $(SRC)} #patsubst - функция подстановки строки
-
+	
 FLAGS = -Wall -Wextra #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
 
+ifeq ($(shell uname), Darwin)
+	TEST = Darwin
+else
+	TEST = Linux
+endif
 MLXPATH_LINUX = ../libs/mlx_linux
 MINILIBX = $(MLXPATH_LINUX)/libmlx_Linux.a 
 INCS_LINUX = -I$(MLXPATH_LINUX)
@@ -20,6 +25,7 @@ mac: $(NAME) $(OBJ)
 	$(CC) $(OBJ) $(INCS_MAC) $(LIBS_MAC) -o $(NAME)
 
 $(NAME):
+	echo $(TEST)
 
 $(OBJ): $(SRC)
 	$(CC) $(FLAGS) $(SRC) -c -o $@ 
