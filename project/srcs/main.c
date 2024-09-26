@@ -6,13 +6,13 @@
 /*   By: osse <osse@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:48:13 by osse              #+#    #+#             */
-/*   Updated: 2024/09/26 09:57:05 by osse             ###   ########.fr       */
+/*   Updated: 2024/09/26 10:17:07 by osse             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "../../libs/mlx_linux/mlx.h"
-#include "../../libs/mlx_linux/mlx_int.h"
+#include "mlx.h"
+#include "mlx_int.h"
 
 int main(int argc, char **argv)
 {
