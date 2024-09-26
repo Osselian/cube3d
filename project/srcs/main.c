@@ -6,18 +6,24 @@
 /*   By: osse <osse@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:48:13 by osse              #+#    #+#             */
-/*   Updated: 2024/09/25 11:28:08 by osse             ###   ########.fr       */
+/*   Updated: 2024/09/26 09:57:05 by osse             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "../../libs/mlx_linux/mlx.h"
+#include "../../libs/mlx_linux/mlx_int.h"
 
 int main(int argc, char **argv)
 {
+    void *mlx;
+    void *mlx_win;
+
     (void)argc;
     (void)argv;
-
+    mlx = mlx_init();
+    mlx_win = mlx_new_window(mlx, 800, 600, "Hello, World!");
+    mlx_loop(mlx);
     write(1, "Hello\n", 6);
-
     return (0);
 }
