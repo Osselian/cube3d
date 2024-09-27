@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osse <osse@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sosokin <sosokin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 09:48:13 by osse              #+#    #+#             */
-/*   Updated: 2024/09/26 10:17:07 by osse             ###   ########.fr       */
+/*   Updated: 2024/09/27 10:02:11 by sosokin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "mlx.h"
-#include "mlx_int.h"
+//#include "mlx_int.h"
 
 int main(int argc, char **argv)
 {
