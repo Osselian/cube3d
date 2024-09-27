@@ -2,19 +2,28 @@ NAME = cub3D
 CC = cc
 SRC = srcs/main.c
 OBJ = ${patsubst srcs/%.c, obj/%.o, $(SRC)} #patsubst - функция подстановки строки
+	
+FLAGS = -Wall -Wextra #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
 
-MLXPATH = ../libs/mlx_linux
-MINILIBX = $(MLXPATH)/libmlx_Linux.a 
-FLAGS = -I$(MLXPATH) -Wall -Wextra #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
-LIBS = -L$(MLXPATH) -lmlx_Linux -L/usr/lib -lXext -lX11 #-lm -lz
+ifeq ($(shell uname), Darwin) #проверяем имя системы, Darwin - имя системы на школьных компах
+	MLXPATH = /usr/local/lib
+	MINILIBX =  
+	LIBS = -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit
+else
+	MLXPATH = ../libs/mlx_linux
+	MINILIBX = $(MLXPATH)/libmlx_Linux.a 
+	LIBS = -L$(MLXPATH) -lmlx_Linux -L/usr/lib/x86_64-linux-gnu -lXext -lX11 -lm #-lz #//usr/lib/x86_64-linux-gnu - папка в которой лежит libm.a - математическая библиотека
+endif
+
+INCS = -I$(MLXPATH)
 
 all: $(NAME)
 
 $(NAME): $(MINILIBX) $(OBJ)
-	$(CC) $(OBJ) $(LIBS) -o $@
+	$(CC) $(OBJ) $(LIBS) -o $(NAME)
 
 $(OBJ): $(SRC)
-	$(CC) $(FLAGS) $(SRC) -c -o $@ 
+	$(CC) $(FLAGS) $(INCS) $(SRC) -c -o $@ 
 
 $(MINILIBX):
 	cd $(MLXPATH) && ./configure
@@ -23,9 +32,14 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean 
+	rm -f $(NAME)
+
+fclean_linux: clean 
 	make clean -C $(MLXPATH)
 	rm -f $(NAME)
 	
 re: fclean all 
 
-PHONY: all clean fclean re
+re_linux: fclean_linux all 
+
+PHONY: all clean fclean re fclean_linux, re_linux
