@@ -1,6 +1,8 @@
 NAME = cub3D
 CC = cc
-SRC = srcs/main.c
+SRC = srcs/main.c \
+	  srcs/print_error.c
+
 OBJ = ${patsubst srcs/%.c, obj/%.o, $(SRC)} #patsubst - функция подстановки строки
 	
 FLAGS = -Wall -Wextra #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
@@ -15,15 +17,15 @@ else
 	LIBS = -L$(MLXPATH) -lmlx_Linux -L/usr/lib/x86_64-linux-gnu -lXext -lX11 -lm #-lz #//usr/lib/x86_64-linux-gnu - папка в которой лежит libm.a - математическая библиотека
 endif
 
-INCS = -I$(MLXPATH)
+INCS = -I$(MLXPATH) -Iincs/
 
 all: $(NAME)
 
 $(NAME): $(MINILIBX) $(OBJ)
 	$(CC) $(OBJ) $(LIBS) -o $(NAME)
 
-$(OBJ): $(SRC)
-	$(CC) $(FLAGS) $(INCS) $(SRC) -c -o $@ 
+obj/%.o: srcs/%.c
+	$(CC) $(FLAGS) $(INCS) -c $< -o $@   
 
 $(MINILIBX):
 	cd $(MLXPATH) && ./configure
