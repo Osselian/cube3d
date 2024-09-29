@@ -2,9 +2,13 @@
 
 int		ext_check(char *file)
 {
-	while (*file != '.')
-		*file++;
-	if (ft_strncmp(*file, "cub", 4))
+	int i;
+
+	i = 0;
+	while (file[i] != '.')
+		i++;
+	if (file[i + 1] != 'c' || file[i + 2] != 'u' || file[i + 3] != 'b'
+		|| file[i + 4] != '\0')
 	{
 		print_error("Incorrect file type\n");
 		return (-1);
@@ -31,19 +35,8 @@ int		parse_input(char **argv, t_meta *metadata)
 
 	if ((fd = ext_check(argv[1])) < 0)
 		return (0);
-	// while (get_next_line(fd, &line) && metadata->valid == 1)
-	// {
-	// 	if (!parse_infos(metadata, line))
-	// 		return (0);
-	// 	free(line);
-	// }
-	// if (!(parse_infos(metadata, line)))
-	// 	return (0);
-	// free(line);
-	// if (!check_info(metadata))
-	// 	return (0);
-	// if (argv[2] && ft_strncmp(av[2], "--save", 6) == 0 && ft_strlen(argv[2]) == 6)
-	// 	metadata->save = 1;
+	parse_txtrs(argv, metadata);
+
 	print_error("DEBUG\n");
 	return (1);
 }
