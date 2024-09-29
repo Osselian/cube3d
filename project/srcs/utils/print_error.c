@@ -1,5 +1,5 @@
 
-#include "../incs/cub3D.h"
+#include "../../incs/cub3D.h"
 
 int getstrlen(char *str){
     int i;
