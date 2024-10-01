@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: osse <osse@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 09:48:13 by osse              #+#    #+#             */
-/*   Updated: 2024/09/27 11:30:47 by osse             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../incs/cub3D.h"
 
 // int get_options(char *path)
@@ -24,12 +12,14 @@ int main(int argc, char **argv)
 {
     // void *mlx;
     // void *mlx_win;
-    t_grid *grid;
+    t_grid *grid; 
+  t_meta  *metadata;
 
     if (argc < 2)
         return (print_error("No .cub file provided!\n"));
 
-    (void)argv;
+    if (!meta_init(argv, metadata))
+        return (1);  
     
     char *map[] = 
     {
@@ -45,6 +35,7 @@ int main(int argc, char **argv)
 
     grid = get_grid(map);
     print_grid_lines(grid);
+
     // mlx = mlx_init();
     // mlx_win = mlx_new_window(mlx, 800, 600, "Hello, World!");
     // mlx_loop(mlx);
