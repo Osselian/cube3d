@@ -1,6 +1,6 @@
 #include "../../incs/cub3D.h"
 
-int		ext_check(char *file)
+static int		ext_check(char *file)
 {
 	int i;
 
@@ -10,10 +10,34 @@ int		ext_check(char *file)
 	if (file[i + 1] != 'c' || file[i + 2] != 'u' || file[i + 3] != 'b'
 		|| file[i + 4] != '\0')
 	{
-		print_error("Incorrect file type\n");
+		print_error(INCORRECT_FILE);
 		return (-1);
 	}
 	return (open(file, O_RDONLY));
+}
+
+static int	parse_line(int fd, t_meta *metadata)
+{
+	char	*ln;
+	int		ln_nbr;
+
+	ln_nbr = 0;
+	ln = get_next_line(fd);
+	while (ln)
+	{
+		// printf("DEBUG %s %d\n", __FILE__, __LINE__);
+		if (ln_nbr <= 6)
+		{
+			if (parse_dir(metadata, ln, ln_nbr++))
+				return (1);
+		}
+		//else
+		//	return (parse_map());
+		// printf("DEBUG %s %d\n", __FILE__, __LINE__);
+		ln = get_next_line(fd);
+	}
+	free(ln);
+	return (0);
 }
 
 /*
@@ -31,12 +55,11 @@ int		ext_check(char *file)
 int		parse_input(char **argv, t_meta *metadata)
 {
 	int		fd;
-	char	*line;
 
 	if ((fd = ext_check(argv[1])) < 0)
 		return (0);
-	parse_txtrs(argv, metadata);
-
-	print_error("DEBUG\n");
+	if (parse_line(fd, metadata))
+		return (0);
+	// print_error("DEBUG\n");
 	return (1);
 }

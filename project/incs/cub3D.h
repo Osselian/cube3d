@@ -24,11 +24,18 @@ typedef struct s_meta
 	t_txtr	*fl_txtr;
 	t_txtr	*ce_txtr;
 	char	**map;
+	bool	ok_flg;
 }	t_meta;
+
+# define INCORRECT_COORDS	"Incorrect textures in .cub - check coords\n"
+# define INCORRECT_FORMAT	"Incorrect .cub format - leave empty line before FLOOR texture\n"
+# define INCORRECT_FILE		"Incorrect file type. Shall be .cub\n"
 
 int		print_error(char *mes);
 int		parse_input(char **argv, t_meta *metadata);
 int		meta_init(char **argv, t_meta *metadata);
 void	*safe_malloc(size_t str);
+bool	ft_isspace(const char a);
+int		parse_dir(t_meta *meta, char *ln, int ln_nbr);
 
 #endif

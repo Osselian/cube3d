@@ -4,7 +4,9 @@ GNL = libs/get_next_line/
 SRC = srcs/main.c \
 	srcs/parser/meta_init.c \
 	srcs/parser/parser.c \
+	srcs/parser/parse_dir.c \
 	srcs/utils/print_error.c \
+	srcs/utils/ft_isspace.c \
 	srcs/utils/safe_malloc.c \
 	$(GNL)get_next_line.c \
 	$(GNL)get_next_line_utils.c
