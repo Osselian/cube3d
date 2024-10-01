@@ -41,22 +41,26 @@ typedef struct s_meta
 	t_txtr	*fl_txtr;
 	t_txtr	*ce_txtr;
 	char	**map;
+	bool	ok_flg;
 }	t_meta;
 
-int     getstrlen(char *str);
+# define INCORRECT_COORDS	"Incorrect textures in .cub - check coords\n"
+# define INCORRECT_FORMAT	"Incorrect .cub format - leave empty line before FLOOR texture\n"
+# define INCORRECT_FILE		"Incorrect file type. Shall be .cub\n"
 
+int     getstrlen(char *str);
 t_grid  *get_grid(char **map);
 
 //free.c
 void    free_grid(t_grid *grid);
 void    free_line(void *line);
 void    *free_arr(void **arr, void (*free_func)(void *));
-
 void    print_grid_lines(t_grid *grid);
-
 int		print_error(char *mes);
 int		parse_input(char **argv, t_meta *metadata);
 int		meta_init(char **argv, t_meta *metadata);
 void	*safe_malloc(size_t str);
+bool	ft_isspace(const char a);
+int		parse_dir(t_meta *meta, char *ln, int ln_nbr);
 
 #endif
