@@ -2,9 +2,9 @@ NAME = cub3D
 CC = cc
 GNL = libs/get_next_line/
 SRC = srcs/main.c \
-	  srcs/map_converter.c \
-	  srcs/free_res.c \
-	  srcs/debug.c
+	srcs/map_converter.c \
+	srcs/free_res.c \
+	srcs/debug.c \
 	srcs/parser/meta_init.c \
 	srcs/parser/parser.c \
 	srcs/parser/parse_dir.c \
