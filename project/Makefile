@@ -2,12 +2,14 @@ NAME = cub3D
 CC = cc
 GNL = libs/get_next_line/
 SRC = srcs/main.c \
-	  srcs/map_converter.c \
-	  srcs/free_res.c \
-	  srcs/debug.c \
+	  srcs/debug/debug.c \
+	  srcs/free_res/free_arr.c \
+	  srcs/free_res/free_grid.c \
+	  srcs/free_res/free_line.c \
       srcs/parser/meta_init.c \
       srcs/parser/parser.c \
       srcs/parser/parse_dir.c \
+	  srcs/raycast/get_grid.c \
       srcs/utils/print_error.c \
       srcs/utils/ft_isspace.c \
       srcs/utils/safe_malloc.c \
