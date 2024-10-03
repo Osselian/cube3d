@@ -7,19 +7,14 @@ void    set_fov_bounds(t_dir *dir, t_fov *fov)
     double end_x;
     double end_y;
 
-    //implement new struct
-    start_x = fov->dir->y * -1;
-    start_y = fov->dir->x;
-    end_x = fov->dir->y;
-    end_y = fov->dir->x * -1;
-    fov->fov_start->x = 
-        (fov->dir->x * fov->dir_len) + (start_x * fov->fov_width);
-    fov->fov_start->y = 
-        (fov->dir->y * fov->dir_len) + (start_y * fov->fov_width);
-    fov->fov_end->x = 
-        (fov->dir->x * fov->dir_len) + (end_x * fov->fov_width);
-    fov->fov_end->y = 
-        (fov->dir->y * fov->dir_len) + (end_y * fov->fov_width);
+    start_x = dir->norm->y * -1;
+    start_y = dir->norm->x;
+    end_x = dir->norm->y;
+    end_y = dir->norm->x * -1;
+    fov->fov_start->x = dir->val->x + (start_x * fov->fov_width);
+    fov->fov_start->y = dir->val->y + (start_y * fov->fov_width);
+    fov->fov_end->x = dir->val->x + (end_x * fov->fov_width);
+    fov->fov_end->y = dir->val->y + (end_y * fov->fov_width);
 }
 
 t_point **get_ray_bounds(t_player *player)
