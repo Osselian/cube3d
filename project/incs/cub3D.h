@@ -51,31 +51,57 @@ typedef struct s_meta
 
 typedef struct s_wallhit
 {
-	int		wx;
-	int		wy;
-	t_point	*hitpoint;
+	double	distance;
+	double	texture_line;
+	char	orientation;
 }	t_wallhit;
 
-typedef struct s_dir
+typedef struct s_vector
 {
 	t_point	*norm;
 	t_point	*val;
 	double	len;
-}	t_dir;
+}	t_vector;
 
 typedef struct s_fov
 {
-	t_point	*fov_start;
-	t_point	*fov_end;
-	int		fov_width;
+	t_point	*start;
+	t_point	*end;
+	double	fov_width;
+	double	iter_x;
+	double	iter_y;
 }	t_fov;
 
 typedef struct s_player
 {
+	int		loc_x;
+	int		loc_y;
 	t_point	*location;
-	t_dir	*dir;
+	t_vector	*dir;
 	t_fov	*fov;
 }	t_player;
+
+//создать структуру для расчета проекций и сторон
+typedef struct s_calc
+{
+	int		grid_line_ind;
+	bool	is_vert;
+	double	len_delta;
+	double	ray_hit_len;
+	double	proj_loc_val;
+	double	hit_dir_loc_val;
+	double	dir_val;
+	double	wall_face_dir;
+	char	orients[2];
+	double	target_norm_val;
+}	t_calc;
+
+typedef struct	s_ray
+{
+	double	x;
+	double	y;
+	double	len;
+}	t_ray;
 
 //debug.c
 void    print_grid_lines(t_grid *grid);
