@@ -9,7 +9,14 @@ SRC = srcs/main.c \
       srcs/parser/meta_init.c \
       srcs/parser/parser.c \
       srcs/parser/parse_dir.c \
+	  srcs/raycast/delta_len.c \
+	  srcs/raycast/find_wall.c \
 	  srcs/raycast/get_grid.c \
+	  srcs/raycast/get_line_inds.c \
+	  srcs/raycast/get_vectors_cos_angle.c \
+	  srcs/raycast/ray_hit_len.c \
+	  srcs/raycast/raycast.c \
+	  srcs/raycast/set_fov_bounds.c \
       srcs/utils/print_error.c \
       srcs/utils/ft_isspace.c \
       srcs/utils/safe_malloc.c \

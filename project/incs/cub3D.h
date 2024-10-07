@@ -81,7 +81,6 @@ typedef struct s_player
 	t_fov	*fov;
 }	t_player;
 
-//создать структуру для расчета проекций и сторон
 typedef struct s_calc
 {
 	int		grid_line_ind;
@@ -114,7 +113,16 @@ int		meta_init(char **argv, t_meta *metadata);
 int		parse_dir(t_meta *meta, char *ln, int ln_nbr);
 int		parse_input(char **argv, t_meta *metadata);
 //raycast
-t_grid  *get_grid(char **map);
+double	delta_len(int index, t_point *ray);
+double	find_wall(
+			t_calc **calc_data, t_vector *ray, t_player *player, char **map);
+t_grid  *get_grid(char **map); //возможно, не понадобиться
+int		*get_line_inds(t_point *location, t_point *dir);
+double  get_vectors_cos_angle(
+			double proj_x, double proj_y, double raydir_x, double raydir_y);
+double	ray_hit_len(int *line_inds, int index, t_player *player, t_point *ray);
+int		raycast(t_player *player, t_wallhit *hits, int scr_width, char **map);
+void    set_fov_bounds(t_vector *dir, t_fov *fov, int screen_width);
 //utils
 bool	ft_isspace(const char a);
 int		print_error(char *mes);

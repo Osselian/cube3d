@@ -25,31 +25,6 @@ void    update_ray(t_vector *ray)
     ray->norm->y = ray->val->y / ray->len;
 }
 
-int    *get_line_inds(t_point *location, t_point *dir)
-{
-    int loc_cell_x;
-    int loc_cell_y;
-    int indexes[2];
-
-    loc_cell_x = location->x / 1;
-    loc_cell_y = location->y / 1;
-    if (dir->x == 0 && dir->y == 0)
-        return (NULL);
-    if (dir->x == 0)
-        indexes[1] = -1;
-    if (dir->y == 0)
-        indexes[0] = -1;
-    if (dir->x > 0)
-        indexes[1] = loc_cell_x + 1;
-    else if (dir->x < 0)
-        indexes[1] = loc_cell_x - 1;
-    if (dir->y > 0)
-        indexes[0] = loc_cell_y + 1;
-    else if (dir->y < 0)
-        indexes[0] = loc_cell_y - 1;
-    return (indexes);
-}
-
 void    fill_calc_data(t_calc **calc_data, t_vector *ray, t_player *player)
 {
     calc_data[0]->is_vert = 1;
@@ -86,8 +61,7 @@ void    fill_wallhit(
     hit->texture_line = screen_width * rel_hit;
 }
 
-t_point **raycast(
-    t_player *player, t_wallhit *hits, int screen_width, char **map)
+int raycast(t_player *player, t_wallhit *hits, int scr_width, char **map)
 {
     int          i;
     t_vector    *ray;
@@ -97,22 +71,24 @@ t_point **raycast(
 
     ray = set_ray(player->fov->start->x, player->fov->start->y, player);
     if (!ray)
-        return (NULL);
+        return (0);
     i = 0;
-    while (i < screen_width)
+    while (i < scr_width)
     {
         update_ray(ray);
         line_inds = get_line_inds(player->location, ray);
-        calc_data[0].ray_hit_len = ray_hit_len(line_inds, 1, player, ray);
-        calc_data[1].ray_hit_len = ray_hit_len(line_inds, 0, player, ray);
-        //сделать расчет len_delta
+        calc_data[0].ray_hit_len = ray_hit_len(line_inds, 1, player, ray->val);
+        calc_data[1].ray_hit_len = ray_hit_len(line_inds, 0, player, ray->val);
+        calc_data[0].len_delta = delta_len(1, ray->val);
+        calc_data[1].len_delta = delta_len(0, ray->val);
         fill_calc_data(&calc_data, ray, player);
         hit_val_on_line = find_wall(&calc_data, ray, player, map);
-        fill_wallhit(&(hits[i]), calc_data, hit_val_on_line, screen_width);
+        fill_wallhit(&(hits[i]), calc_data, hit_val_on_line, scr_width);
         ray->val->x += player->fov->iter_x;
         ray->val->y += player->fov->iter_y;
         i++;
     }
+    return (1);
 }
 
 // double  cathetus_len(double hip_len, double cathetus_len)
