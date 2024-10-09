@@ -3,8 +3,10 @@
 static int		ext_check(char *file)
 {
 	int i;
+	int fd;
 
 	i = 0;
+	fd = 0;
 	while (file[i] != '.')
 		i++;
 	if (file[i + 1] != 'c' || file[i + 2] != 'u' || file[i + 3] != 'b'
@@ -13,7 +15,10 @@ static int		ext_check(char *file)
 		print_error(INCORRECT_FILE);
 		return (-1);
 	}
-	return (open(file, O_RDONLY));
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		print_error(NO_FILE);
+	return (fd);
 }
 
 static int	parse_line(int fd, t_meta *metadata)
@@ -25,15 +30,13 @@ static int	parse_line(int fd, t_meta *metadata)
 	ln = get_next_line(fd);
 	while (ln)
 	{
-		// printf("DEBUG %s %d\n", __FILE__, __LINE__);
 		if (ln_nbr <= 6)
 		{
 			if (parse_dir(metadata, ln, ln_nbr++))
 				return (1);
 		}
-		//else
-		//	return (parse_map());
-		// printf("DEBUG %s %d\n", __FILE__, __LINE__);
+		// else
+		// 	return (parse_map());
 		ln = get_next_line(fd);
 	}
 	free(ln);
@@ -41,15 +44,6 @@ static int	parse_line(int fd, t_meta *metadata)
 }
 
 /*
-- проверить экст
-- NO (./path_to_the_north_texture или цвет)
-- SO (./path_to_the_south_texture или цвет)
-- WE (./path_to_the_west_texture или цвет)
-- EA (./path_to_the_east_texture или цвет)
-
-- F 220,100,0 (./path_to_the_floor_texture или цвет)
-- C 225,30,0 (./path_to_the_ceiling_texture или цвет)
-
 сама карта - проверить заливку, символы, N,S,E or W для игрока
 */
 int		parse_input(char **argv, t_meta *metadata)
@@ -57,9 +51,8 @@ int		parse_input(char **argv, t_meta *metadata)
 	int		fd;
 
 	if ((fd = ext_check(argv[1])) < 0)
-		return (0);
+		return (1);
 	if (parse_line(fd, metadata))
-		return (0);
-	// print_error("DEBUG\n");
-	return (1);
+		return (1);
+	return (0);
 }
