@@ -26,10 +26,17 @@ typedef struct s_grid
     t_line  **hor;
 }   t_grid;
 
+typedef union u_color
+{
+  int i;
+  char c[4];
+}  t_color;
+
 typedef struct s_txtr
 {
 	bool	is_txtr; //FALSE for color, TRUE for texture
-	char	*txtr_val;
+	int		file_val;
+	t_color	color; //FALSE int и массив из 4х чар UNION
 }	t_txtr;
 
 typedef struct s_meta
@@ -47,6 +54,11 @@ typedef struct s_meta
 # define INCORRECT_COORDS	"Incorrect textures in .cub - check coords\n"
 # define INCORRECT_FORMAT	"Incorrect .cub format - leave empty line before FLOOR texture\n"
 # define INCORRECT_FILE		"Incorrect file type. Shall be .cub\n"
+# define INCORRECT_COLOR	"Incorrect color input. Check is it a correct RGB format\n"
+# define NO_FILE			"File passed as map or texture doesn't exist\n"
+
+# define R		"\033[0m"
+# define RED	"\033[1;31m"
 
 int     getstrlen(char *str);
 t_grid  *get_grid(char **map);
@@ -62,5 +74,6 @@ int		meta_init(char **argv, t_meta *metadata);
 void	*safe_malloc(size_t str);
 bool	ft_isspace(const char a);
 int		parse_dir(t_meta *meta, char *ln, int ln_nbr);
+bool	check_color(char *ln);
 
 #endif

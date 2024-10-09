@@ -11,6 +11,7 @@ SRC = srcs/main.c \
 	srcs/utils/print_error.c \
 	srcs/utils/ft_isspace.c \
 	srcs/utils/safe_malloc.c \
+	srcs/utils/check_color.c \
 	$(GNL)get_next_line.c \
 	$(GNL)get_next_line_utils.c
 
