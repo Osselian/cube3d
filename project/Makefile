@@ -58,7 +58,7 @@ ${LIBFT_PATH}/${LIBFT_NAME}:
 $(MINILIBX):
 	cd $(MLXPATH) && ./configure
 
-obj/%.o: srcs/%.c
+%.o: %.c
 	$(CC) $(FLAGS) $(INCS) -c $< -o $@   
 
 clean:

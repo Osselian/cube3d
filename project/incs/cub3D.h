@@ -83,7 +83,6 @@ typedef struct s_player
 
 typedef struct s_calc
 {
-	int		grid_line_ind;
 	bool	is_vert;
 	double	len_delta;
 	double	ray_hit_len;
@@ -114,12 +113,12 @@ int		parse_dir(t_meta *meta, char *ln, int ln_nbr);
 int		parse_input(char **argv, t_meta *metadata);
 //player
 void    init_player(t_player *player, int x, int y);
-void    set_direction(t_vector *dir, char dir_key, int len);
+void    set_direction(t_vector *dir, char dir_key, int len, t_player player);
 void    set_fov(t_vector *dir, t_fov *fov, int screen_width, double fov_width);
 //raycast
 double	delta_len(int index, t_point ray);
 double	find_wall(
-			t_calc **calc_data, t_vector *ray, t_player *player, char **map);
+			t_calc *calc_data, t_vector *ray, t_player *player, char **map);
 t_grid  *get_grid(char **map); //возможно, не понадобиться
 int		get_line_inds(int *indexes, t_point location, t_point dir);
 double  get_vectors_cos_angle(

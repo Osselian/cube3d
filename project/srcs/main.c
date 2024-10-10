@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../incs/cub3D.h"
 
 // int get_options(char *path)
 // {
@@ -20,8 +20,8 @@ int main(int argc, char **argv)
     if (argc < 2)
         return (print_error("No .cub file provided!\n"));
 
-    if (!meta_init(argv, metadata))
-        return (1);  
+    // if (!meta_init(argv, metadata))
+    //     return (1);  
     
     char *map[] = 
     {
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     int screen_width = 800;
     init_player(&player, 6, 3);
     wallhits = (t_wallhit *)safe_malloc(sizeof(t_wallhit) * (screen_width + 1));
-    set_direction(&(player.dir), 'N', 3);
+    set_direction(&(player.dir), 'N', 3, player);
     set_fov(&(player.dir), &(player.fov), screen_width, 5);
     int res = raycast(&player, wallhits, screen_width, map);
 

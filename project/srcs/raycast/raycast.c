@@ -4,18 +4,14 @@ static t_vector    set_ray(
     double raypoint_x, double raypoint_y, t_player *player)
 {
     t_vector    ray;
-    t_point     val;
-    t_point     norm;
 
     // ray = (t_vector *)safe_malloc(sizeof(t_vector));
     // val = (t_vector *)safe_malloc(sizeof(t_vector));
     // norm = (t_vector *)safe_malloc(sizeof(t_vector));
     // if (!ray || !val || !norm)
     //     return (NULL);
-    val.x = raypoint_x - player->location.x;
-    val.y = raypoint_y - player->location.y;
-    ray.val = val;
-    ray.norm = norm;
+    ray.val.x = raypoint_x - player->location.x;
+    ray.val.y = raypoint_y - player->location.y;
     return (ray);
 }
 
@@ -27,44 +23,45 @@ static void    update_ray(t_vector *ray)
 }
 
 static void    fill_calc_data(
-    t_calc **calc_data, t_vector *ray, t_player *player, int *line_inds)
+    t_calc *calc_data, t_vector *ray, t_player *player, int *line_inds)
 {
-    calc_data[0]->ray_hit_len = ray_hit_len(line_inds, 1, player, ray->val);
-    calc_data[1]->ray_hit_len = ray_hit_len(line_inds, 0, player, ray->val);
-    calc_data[0]->len_delta = delta_len(1, ray->val);
-    calc_data[1]->len_delta = delta_len(0, ray->val);
+    calc_data[0].ray_hit_len = ray_hit_len(line_inds, 1, player, ray->val);
+    calc_data[1].ray_hit_len = ray_hit_len(line_inds, 0, player, ray->val);
+    calc_data[0].len_delta = delta_len(1, ray->val);
+    calc_data[1].len_delta = delta_len(0, ray->val);
 
-    calc_data[0]->is_vert = 1;
-    calc_data[0]->wall_face_dir = ray->val.x;
-    calc_data[0]->orients[0] = 'e';
-    calc_data[0]->orients[1] = 'w';
-    calc_data[0]->dir_val = ray->val.y;
-    calc_data[0]->proj_loc_val = player->location.x;
-    calc_data[0]->hit_dir_loc_val = player->location.y;
-    calc_data[0]->target_norm_val = ray->norm.x; 
+    calc_data[0].is_vert = 1;
+    calc_data[0].wall_face_dir = ray->val.x;
+    calc_data[0].orients[0] = 'e';
+    calc_data[0].orients[1] = 'w';
+    calc_data[0].dir_val = ray->val.y;
+    calc_data[0].proj_loc_val = player->location.x;
+    calc_data[0].hit_dir_loc_val = player->location.y;
+    calc_data[0].target_norm_val = ray->norm.x; 
 
-    calc_data[1]->is_vert = 0;
-    calc_data[1]->wall_face_dir = ray->val.y;
-    calc_data[1]->orients[0] = 's';
-    calc_data[1]->orients[1] = 'n';
-    calc_data[1]->dir_val = ray->val.x;
-    calc_data[1]->proj_loc_val = player->location.y;
-    calc_data[1]->hit_dir_loc_val = player->location.x;
-    calc_data[1]->target_norm_val = ray->norm.y; 
+    calc_data[1].is_vert = 0;
+    calc_data[1].wall_face_dir = ray->val.y;
+    calc_data[1].orients[0] = 's';
+    calc_data[1].orients[1] = 'n';
+    calc_data[1].dir_val = ray->val.x;
+    calc_data[1].proj_loc_val = player->location.y;
+    calc_data[1].hit_dir_loc_val = player->location.x;
+    calc_data[1].target_norm_val = ray->norm.y; 
 }
 
 
 static void    fill_wallhit(
     t_wallhit *hit, t_calc *calc_data, double hit_on_line, int screen_width)
 {
-    double rel_hit;
+    double  rel_hit;
+    double  integral_part;
 
     hit->distance = calc_data->ray_hit_len;
     if (calc_data->wall_face_dir < 0)
         hit->orientation = calc_data->orients[0];
     else
         hit->orientation = calc_data->orients[1];
-    rel_hit = modf(hit_on_line, NULL);
+    rel_hit = modf(hit_on_line, &integral_part);
     hit->texture_line = screen_width * rel_hit;
 }
 
@@ -85,8 +82,8 @@ int raycast(t_player *player, t_wallhit *hits, int scr_width, char **map)
         update_ray(&ray);
         if (!get_line_inds(line_inds, player->location, ray.val))
             return (0);
-        fill_calc_data(&calc_data, &ray, player, line_inds);
-        hit_val_on_line = find_wall(&calc_data, &ray, player, map);
+        fill_calc_data(calc_data, &ray, player, line_inds);
+        hit_val_on_line = find_wall(calc_data, &ray, player, map);
         fill_wallhit(&(hits[i]), calc_data, hit_val_on_line, scr_width);
         ray.val.x += player->fov.iter_x;
         ray.val.y += player->fov.iter_y;
