@@ -1,6 +1,6 @@
 #include "../../incs/cub3D.h"
 
-int *is_wall(char **map, int *init_loc, double dir, int is_vert)
+static bool is_wall(char **map, int *init_loc, double dir, int is_vert)
 {
     int res[2];
 
@@ -20,12 +20,11 @@ int *is_wall(char **map, int *init_loc, double dir, int is_vert)
         else 
             res[1] = init_loc[1] - 1;
     }
-    if (map[res[1]][res[0]] == '1')
-        return (res);
-    return (NULL);
+    return (map[res[1]][res[0]] == '1');
 }
 
-void    set_init_loc(int i, int *init_loc, t_player *player, double cell_val)
+static void    set_init_loc(
+    int i, int *init_loc, t_player *player, double cell_val)
 {
     if (i == 0)
     {
@@ -56,8 +55,8 @@ double    find_wall(
     hit_val_on_line = target_data->target_norm_val * target_data->ray_hit_len;
     modf(hit_val_on_line, &cell_val);
     set_init_loc(i, init_loc, player, cell_val);
-    if (is_wall(map, init_loc, ray->val->x, 1))
+    if (is_wall(map, init_loc, ray->val.x, 1))
         return (hit_val_on_line);
     target_data->ray_hit_len += target_data->len_delta;
-    return find_wall(calc_data, ray, player, map);
+    return (find_wall(calc_data, ray, player, map));
 }

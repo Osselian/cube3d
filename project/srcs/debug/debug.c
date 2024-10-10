@@ -1,4 +1,4 @@
-#include "../incs/cub3D.h"
+#include "cub3D.h"
 
 void    print_grid_lines(t_grid *grid)
 {
