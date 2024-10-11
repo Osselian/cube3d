@@ -16,9 +16,9 @@ int    get_line_inds(int *indexes, t_point location, t_point dir)
     if (dir.x > 0)
         indexes[1] = loc_cell_x + 1;
     else if (dir.x < 0)
-        indexes[1] = loc_cell_x - 1;
+        indexes[1] = loc_cell_x;
     if (dir.y > 0)
-        indexes[0] = loc_cell_y + 1;
+        indexes[0] = loc_cell_y;
     else if (dir.y < 0)
         indexes[0] = loc_cell_y - 1;
     return (1);

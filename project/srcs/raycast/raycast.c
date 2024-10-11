@@ -37,7 +37,7 @@ static void    fill_calc_data(
     calc_data[0].dir_val = ray->val.y;
     calc_data[0].proj_loc_val = player->location.x;
     calc_data[0].hit_dir_loc_val = player->location.y;
-    calc_data[0].target_norm_val = ray->norm.x; 
+    calc_data[0].target_norm_val = ray->norm.y; 
 
     calc_data[1].is_vert = 0;
     calc_data[1].wall_face_dir = ray->val.y;
@@ -46,7 +46,7 @@ static void    fill_calc_data(
     calc_data[1].dir_val = ray->val.x;
     calc_data[1].proj_loc_val = player->location.y;
     calc_data[1].hit_dir_loc_val = player->location.x;
-    calc_data[1].target_norm_val = ray->norm.y; 
+    calc_data[1].target_norm_val = ray->norm.x; 
 }
 
 
@@ -62,7 +62,7 @@ static void    fill_wallhit(
     else
         hit->orientation = calc_data->orients[1];
     rel_hit = modf(hit_on_line, &integral_part);
-    hit->texture_line = screen_width * rel_hit;
+    hit->texture_line = fabs(screen_width * rel_hit);
 }
 
 int raycast(t_player *player, t_wallhit *hits, int scr_width, char **map)
@@ -83,7 +83,7 @@ int raycast(t_player *player, t_wallhit *hits, int scr_width, char **map)
         if (!get_line_inds(line_inds, player->location, ray.val))
             return (0);
         fill_calc_data(calc_data, &ray, player, line_inds);
-        hit_val_on_line = find_wall(calc_data, &ray, player, map);
+        hit_val_on_line = find_wall(calc_data, player->location, map);
         fill_wallhit(&(hits[i]), calc_data, hit_val_on_line, scr_width);
         ray.val.x += player->fov.iter_x;
         ray.val.y += player->fov.iter_y;

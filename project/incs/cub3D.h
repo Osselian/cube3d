@@ -117,8 +117,7 @@ void    set_direction(t_vector *dir, char dir_key, int len, t_player player);
 void    set_fov(t_vector *dir, t_fov *fov, int screen_width, double fov_width);
 //raycast
 double	delta_len(int index, t_point ray);
-double	find_wall(
-			t_calc *calc_data, t_vector *ray, t_player *player, char **map);
+double	find_wall(t_calc *calc_data, t_point loc, char **map);
 t_grid  *get_grid(char **map); //возможно, не понадобиться
 int		get_line_inds(int *indexes, t_point location, t_point dir);
 double  get_vectors_cos_angle(

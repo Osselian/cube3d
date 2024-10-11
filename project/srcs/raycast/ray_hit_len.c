@@ -9,6 +9,7 @@ double ray_hit_len(int *line_inds, int index, t_player *player, t_point ray)
 
     if (index)
     {
+        int ind = line_inds[index];
         proj_x = line_inds[index] - player->location.x;
         proj_y = 0;
         proj_len = fabs(proj_x);

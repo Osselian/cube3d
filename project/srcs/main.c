@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     // print_grid_lines(grid);
 
     int screen_width = 800;
-    init_player(&player, 6, 3);
+    init_player(&player, 6, -3);
     wallhits = (t_wallhit *)safe_malloc(sizeof(t_wallhit) * (screen_width + 1));
     set_direction(&(player.dir), 'N', 3, player);
     set_fov(&(player.dir), &(player.fov), screen_width, 5);
