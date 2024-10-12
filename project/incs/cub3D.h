@@ -92,6 +92,7 @@ typedef struct s_calc
 	double	wall_face_dir;
 	char	orients[2];
 	double	target_norm_val;
+	double	val_on_line;
 }	t_calc;
 
 typedef struct	s_ray
@@ -103,6 +104,7 @@ typedef struct	s_ray
 
 //debug.c
 void    print_grid_lines(t_grid *grid);
+void    print_wallhit(t_wallhit *wallhit, int screen_width);
 //free_res
 void    free_grid(t_grid *grid);
 void    free_line(void *line);
@@ -117,7 +119,7 @@ void    set_direction(t_vector *dir, char dir_key, int len, t_player player);
 void    set_fov(t_vector *dir, t_fov *fov, int screen_width, double fov_width);
 //raycast
 double	delta_len(int index, t_point ray);
-double	find_wall(t_calc *calc_data, t_point loc, char **map);
+t_calc	find_wall(t_calc *calc_data, t_point loc, char **map);
 t_grid  *get_grid(char **map); //возможно, не понадобиться
 int		get_line_inds(int *indexes, t_point location, t_point dir);
 double  get_vectors_cos_angle(

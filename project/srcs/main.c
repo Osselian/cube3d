@@ -45,10 +45,11 @@ int main(int argc, char **argv)
     set_fov(&(player.dir), &(player.fov), screen_width, 5);
     int res = raycast(&player, wallhits, screen_width, map);
 
+    
     // mlx = mlx_init();
     // mlx_win = mlx_new_window(mlx, 800, 600, "Hello, World!");
     // mlx_loop(mlx);
-
+    print_wallhit(wallhits,  screen_width);
     write(1, "Hello\n", 6);
     return (0);
 }

@@ -63,15 +63,14 @@ void    inc_loc(int is_hor, t_point *loc, double dir)
     else
     {
         if (dir > 0)
-            loc->y -= 1;
-        else 
             loc->y += 1;
+        else 
+            loc->y -= 1;
     }
 }
 
-double    find_wall(t_calc *calc_data, t_point loc, char **map)
+t_calc    find_wall(t_calc *calc_data, t_point loc, char **map)
 {
-    double  val_on_line;
     int     init_loc[2];
     double  cell_val;
     t_calc  *target;
@@ -84,11 +83,11 @@ double    find_wall(t_calc *calc_data, t_point loc, char **map)
     else
         i = 1;
     target = &calc_data[i];
-    val_on_line = get_val_on_line(*target);
-    modf(val_on_line, &cell_val);
+    target->val_on_line = get_val_on_line(*target);
+    modf(target->val_on_line, &cell_val);
     set_init_loc(i, init_loc, loc, cell_val);
     if (is_wall(map, init_loc, target->wall_face_dir, i))
-        return (val_on_line);
+        return (*target);
     target->ray_hit_len += target->len_delta;
     inc_loc(i, &loc, target->wall_face_dir);
     return (find_wall(calc_data, loc, map));
