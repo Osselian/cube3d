@@ -24,7 +24,6 @@ SRC = srcs/main.c \
     srcs/utils/print_error.c \
     srcs/utils/ft_isspace.c \
     srcs/utils/safe_malloc.c \
-    srcs/map_converter.c \
     srcs/utils/check_color.c \
     srcs/utils/ft_addline.c \
     $(GNL)get_next_line.c \
