@@ -59,7 +59,7 @@ int	parse_dir(t_meta *meta, char *ln, int ln_nbr)
 	len = ft_strlen(coords[ln_nbr]);
 	if (ft_strncmp(coords[ln_nbr], ln, len) || (ln_nbr != 4 && !ft_isspace(ln[len])))
 		return (print_error(INCORRECT_COORDS));
-	if (ln_nbr == 4 && ln[0] != '\n')
+	if ((ln_nbr == 4 || ln_nbr == 7) && ln[0] != '\n')
 		return (print_error(INCORRECT_FORMAT));
 	if (ln_nbr != 4)
 		return(fill_wall(ln + len + 1, ln_nbr, meta));

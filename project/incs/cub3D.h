@@ -51,13 +51,15 @@ typedef struct s_meta
 	bool	ok_flg;
 }	t_meta;
 
-# define INCORRECT_COORDS	"Incorrect textures in .cub - check coords\n"
-# define INCORRECT_FORMAT	"Incorrect .cub format - leave empty line before FLOOR texture\n"
-# define INCORRECT_FILE		"Incorrect file type. Shall be .cub\n"
-# define INCORRECT_COLOR	"Incorrect color input. Check is it a correct RGB format\n"
-# define NO_FILE			"File passed as map or texture doesn't exist\n"
+# define INCORRECT_COORDS		"Incorrect textures in .cub - check coords\n"
+# define INCORRECT_FORMAT		"Incorrect .cub format - leave empty line before FLOOR texture\n"
+# define INCORRECT_FILE			"Incorrect file type. Shall be .cub\n"
+# define INCORRECT_COLOR		"Incorrect color input. Check is it a correct RGB format\n"
+# define NO_FILE				"File passed as map or texture doesn't exist\n"
+# define INCORRECT_MAP_SYMBOL	"Incorrect symbol passed in map scratch. Shall be in [0, 1, W, E, S, N, SPACE]\n"
+# define MULTIPLE_PLAYERS		"There can not be more than 1 player in the Game, check input file!\n"
 
-# define R		"\033[0m"
+# define RESET		"\033[0m"
 # define RED	"\033[1;31m"
 
 int     getstrlen(char *str);
@@ -75,5 +77,8 @@ void	*safe_malloc(size_t str);
 bool	ft_isspace(const char a);
 int		parse_dir(t_meta *meta, char *ln, int ln_nbr);
 bool	check_color(char *ln);
+int		parse_map(t_meta *meta, char *ln);
+int		ft_addline(char **arr, char *ln);
+int		check_map(char **map);
 
 #endif
