@@ -1,10 +1,16 @@
 #ifndef CUB3D
 # define CUB3D
 
-# define INCORRECT_COORDS	"Incorrect textures in .cub - check coords\n"
-# define INCORRECT_FORMAT	"Incorrect .cub format - leave empty line before FLOOR texture\n"
-# define INCORRECT_FILE		"Incorrect file type. Shall be .cub\n"
+# define INCORRECT_COORDS		"Incorrect textures in .cub - check coords\n"
+# define INCORRECT_FORMAT		"Incorrect .cub format - leave empty line before FLOOR texture\n"
+# define INCORRECT_FILE			"Incorrect file type. Shall be .cub\n"
+# define INCORRECT_COLOR		"Incorrect color input. Check is it a correct RGB format\n"
+# define NO_FILE				"File passed as map or texture doesn't exist\n"
+# define INCORRECT_MAP_SYMBOL	"Incorrect symbol passed in map scratch. Shall be in [0, 1, W, E, S, N, SPACE]\n"
+# define MULTIPLE_PLAYERS		"There can not be more than 1 player in the Game, check input file!\n"
 
+# define RESET		"\033[0m"
+# define RED	"\033[1;31m"
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -31,10 +37,17 @@ typedef struct s_grid
     t_line  **hor;
 }   t_grid;
 
+typedef union u_color
+{
+  int i;
+  char c[4];
+}  t_color;
+
 typedef struct s_txtr
 {
 	bool	is_txtr; //FALSE for color, TRUE for texture
-	char	*txtr_val;
+	int		file_val;
+	t_color	color; //FALSE int и массив из 4х чар UNION
 }	t_txtr;
 
 typedef struct s_meta
@@ -112,6 +125,7 @@ void    *free_arr(void **arr, void (*free_func)(void *));
 //parser
 int		meta_init(char **argv, t_meta *metadata);
 int		parse_dir(t_meta *meta, char *ln, int ln_nbr);
+
 int		parse_input(char **argv, t_meta *metadata);
 //player
 void    init_player(t_player *player, int x, int y);
@@ -130,5 +144,10 @@ int		raycast(t_player *player, t_wallhit *hits, int scr_width, char **map);
 bool	ft_isspace(const char a);
 int		print_error(char *mes);
 void	*safe_malloc(size_t str);
+
+bool	check_color(char *ln);
+int		parse_map(t_meta *meta, char *ln);
+int		ft_addline(char **arr, char *ln);
+int		check_map(char **map);
 
 #endif
