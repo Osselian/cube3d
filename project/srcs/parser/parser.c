@@ -30,13 +30,16 @@ static int	parse_line(int fd, t_meta *metadata)
 	ln = get_next_line(fd);
 	while (ln)
 	{
-		if (ln_nbr <= 6)
+		if (ln_nbr <= 7)
 		{
 			if (parse_dir(metadata, ln, ln_nbr++))
 				return (1);
 		}
-		// else
-		// 	return (parse_map());
+		else
+		{
+			if (parse_map(metadata, ln))
+				return (1);
+		}
 		ln = get_next_line(fd);
 	}
 	free(ln);
@@ -54,5 +57,8 @@ int		parse_input(char **argv, t_meta *metadata)
 		return (1);
 	if (parse_line(fd, metadata))
 		return (1);
+	printf("DEBUG %s %d\n", __FILE__, __LINE__);
+	// if (check_map(metadata->map))
+	// 	return (1);
 	return (0);
 }
