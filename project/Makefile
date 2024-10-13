@@ -2,21 +2,33 @@ NAME = cub3D
 CC = cc
 GNL = libs/get_next_line/
 SRC = srcs/main.c \
-	srcs/map_converter.c \
-	srcs/free_res.c \
-	srcs/debug.c \
-	srcs/parser/meta_init.c \
-	srcs/parser/parser.c \
-	srcs/parser/parse_dir.c \
-	srcs/parser/parse_map.c \
-	srcs/parser/check_map.c \
-	srcs/utils/print_error.c \
-	srcs/utils/ft_isspace.c \
-	srcs/utils/safe_malloc.c \
-	srcs/utils/check_color.c \
-	srcs/utils/ft_addline.c \
-	$(GNL)get_next_line.c \
-	$(GNL)get_next_line_utils.c
+    srcs/debug/debug.c \
+    srcs/free_res/free_arr.c \
+    srcs/free_res/free_grid.c \
+    srcs/free_res/free_line.c \
+    srcs/player/init_player.c \
+    srcs/player/set_fov.c \
+    srcs/player/set_direction.c \
+    srcs/parser/meta_init.c \
+    srcs/parser/parser.c \
+    srcs/parser/parse_dir.c \
+    srcs/parser/parse_map.c \
+    srcs/parser/check_map.c \
+    srcs/raycast/delta_len.c \
+    srcs/raycast/find_wall.c \
+    srcs/raycast/get_grid.c \
+    srcs/raycast/get_line_inds.c \
+    srcs/raycast/get_vectors_cos_angle.c \
+    srcs/raycast/ray_hit_len.c \
+    srcs/raycast/raycast.c \
+    srcs/utils/print_error.c \
+    srcs/utils/ft_isspace.c \
+    srcs/utils/safe_malloc.c \
+    srcs/map_converter.c \
+    srcs/utils/check_color.c \
+    srcs/utils/ft_addline.c \
+    $(GNL)get_next_line.c \
+    $(GNL)get_next_line_utils.c
 
 OBJ = ${SRC:.c=.o}
 
@@ -36,7 +48,7 @@ else
 	LIBS += -L$(MLXPATH) -lmlx_Linux -L/usr/lib/x86_64-linux-gnu -lXext -lX11 -lm #-lz #//usr/lib/x86_64-linux-gnu - папка в которой лежит libm.a - математическая библиотека
 endif
 
-INCS = -I$(MLXPATH) -Iincs/
+INCS = -I$(MLXPATH) -I./incs/
 
 all: $(NAME)
 
@@ -51,7 +63,7 @@ ${LIBFT_PATH}/${LIBFT_NAME}:
 $(MINILIBX):
 	cd $(MLXPATH) && ./configure
 
-obj/%.o: srcs/%.c
+%.o: %.c
 	$(CC) $(FLAGS) $(INCS) -c $< -o $@   
 
 clean:
