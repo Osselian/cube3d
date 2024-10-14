@@ -28,6 +28,7 @@ t_img	new_img(void *mlx, int w, int h)
 	if (!i.data_addr)
 	{
 		mlx_destroy_image(mlx, i.data);
+		printf("mlx_get_data_addr: error\n");
 		i.data = NULL;
 	}
 	return (i);

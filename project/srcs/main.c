@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 	game.main_img = new_img(game.win_mng.mlx, WIN_WIDTH, WIN_HEIGHT);
     game.m = metadata;
     game.wall.img.data = mlx_xpm_file_to_image(game.win_mng.mlx,
-                                                  "data/testures/greystone.xpm",
+                                                  "data/textures/greystone.xpm",
                                                   &game.wall.width,
                                                   &game.wall.height);
     game.wall.img.data_addr = mlx_get_data_addr(game.wall.img.data,

@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include "mlx.h"
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1400
+# define WIN_HEIGHT 900
 # define GRAY	0x808080
 # define RED	0xFF0000
 # define BLUE	0x87CEEB

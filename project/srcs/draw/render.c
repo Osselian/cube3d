@@ -7,6 +7,7 @@ void	draw_frame(t_wallhit *w, t_mlx *wm, t_img *img, t_text *t)
 	i = -1;
 	while (++i < WIN_WIDTH)
 	{
+		//printf("distance = %f\n", w[i].distance);
 		draw_vertical_line(t, img, w[i].distance, i);
 	}
 	mlx_put_image_to_window(wm->mlx, wm->win, img->data, 0, 0);
