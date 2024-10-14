@@ -10,19 +10,14 @@
 
 int main(int argc, char **argv)
 {
-    // void *mlx;
-    // void *mlx_win;
     t_grid *grid; 
-  t_meta  *metadata;
+    t_meta  *metadata;
     t_player player;
-    t_wallhit   *wallhits;
+    t_data  game;
 
-    if (argc < 2)
-        return (print_error("No .cub file provided!\n"));
+    //if (argc < 2)
+    //   return (print_error("No .cub file provided!\n"));
 
-    // if (!meta_init(argv, metadata))
-    //     return (1);  
-    
     char *map[] = 
     {
         "11111111111",
@@ -35,21 +30,29 @@ int main(int argc, char **argv)
         NULL
     };
 
-    // grid = get_grid(map);
-    // print_grid_lines(grid);
-
-    int screen_width = 800;
-    init_player(&player, 6, -3);
-    wallhits = (t_wallhit *)safe_malloc(sizeof(t_wallhit) * (screen_width + 1));
+    init_player(&game.p, 6, -3);
+    game.w = (t_wallhit *)safe_malloc(sizeof(t_wallhit) * (WIN_WIDTH + 1));
     set_direction(&(player.dir), 'N', 3, player);
-    set_fov(&(player.dir), &(player.fov), screen_width, 5);
-    int res = raycast(&player, wallhits, screen_width, map);
+    set_fov(&(player.dir), &(player.fov), WIN_WIDTH, 5);
+    int res = raycast(&player, game.w, WIN_WIDTH, map);
 
-    
-    // mlx = mlx_init();
-    // mlx_win = mlx_new_window(mlx, 800, 600, "Hello, World!");
-    // mlx_loop(mlx);
-    print_wallhit(wallhits,  screen_width);
-    write(1, "Hello\n", 6);
+    /* start init main data */
+    game.win_mng = new_mlx();
+	game.main_img = new_img(game.win_mng.mlx, WIN_WIDTH, WIN_HEIGHT);
+    game.m = metadata;
+    game.wall.img.data = mlx_xpm_file_to_image(game.win_mng.mlx,
+                                                  "data/testures/greystone.xpm",
+                                                  &game.wall.width,
+                                                  &game.wall.height);
+    game.wall.img.data_addr = mlx_get_data_addr(game.wall.img.data,
+                                                    &game.wall.img.bits_per_pixel,
+                                                    &game.wall.img.size_line,
+                                                    &game.wall.img.endian);
+    /* end init main data */
+
+    draw_frame(game.w, &game.win_mng, &game.main_img, &game.wall);
+	hooks_init(&game.win_mng, &game);
+	mlx_loop(game.win_mng.mlx);
+	mlx_loop_hook(game.win_mng.mlx, buttons, &game);
     return (0);
 }

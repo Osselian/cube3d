@@ -1,6 +1,7 @@
 NAME = cub3D
 CC = cc
 GNL = libs/get_next_line/
+DRAW = buttons.c hooks.c mlx.c render.c t_pos.c
 SRC = srcs/main.c \
     srcs/debug/debug.c \
     srcs/free_res/free_arr.c \
@@ -24,11 +25,11 @@ SRC = srcs/main.c \
     srcs/utils/print_error.c \
     srcs/utils/ft_isspace.c \
     srcs/utils/safe_malloc.c \
-    srcs/map_converter.c \
     srcs/utils/check_color.c \
     srcs/utils/ft_addline.c \
     $(GNL)get_next_line.c \
-    $(GNL)get_next_line_utils.c
+    $(GNL)get_next_line_utils.c \
+    $(addprefix srcs/draw/, $(DRAW))
 
 OBJ = ${SRC:.c=.o}
 
@@ -36,10 +37,10 @@ LIBFT_PATH	= libs/libft
 LIBFT_NAME	= libft.a
 LIBS = -L$(LIBFT_PATH) -lft
 
-FLAGS = -Wall -Wextra -g #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
+FLAGS = -Wall -Wextra -g -fsanitize=address #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
 
 ifeq ($(shell uname), Darwin) #проверяем имя системы, Darwin - имя системы на школьных компах
-	MLXPATH = libs/mlx_linux
+	MLXPATH = libs/mlx_mac
 	MINILIBX = $(MLXPATH)/libmlx.a 
 	LIBS += -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit
 else
@@ -53,7 +54,7 @@ INCS = -I$(MLXPATH) -I./incs/
 all: $(NAME)
 
 $(NAME): ${LIBFT_PATH}/${LIBFT_NAME} $(MINILIBX) $(OBJ)
-	$(CC) $(OBJ) $(LIBS) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(LIBS) -o $(NAME)
 # $(NAME): ${LIBFT_PATH}/${LIBFT_NAME} $(OBJ)
 # 	$(CC) ${LIBFT_PATH}/${LIBFT_NAME} $(OBJ) $(LIBS) -o $(NAME)
 
@@ -61,7 +62,7 @@ ${LIBFT_PATH}/${LIBFT_NAME}:
 	make -C ${LIBFT_PATH}
 
 $(MINILIBX):
-	cd $(MLXPATH) && ./configure
+	make -C $(MLXPATH)
 
 %.o: %.c
 	$(CC) $(FLAGS) $(INCS) -c $< -o $@   
