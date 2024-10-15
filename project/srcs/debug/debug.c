@@ -24,3 +24,16 @@ void    print_wallhit(t_wallhit *wallhit, int screen_width)
         i++;
     }
 }
+
+// void    print_metadata(t_meta *meta)
+// {
+//     printf(Y"METADATA STORED IN STRUCTURE t_meta\n"RESET);
+//     // printf(G"no_txtr: "RESET" %s\n", meta->no_txtr);
+// //     printf(G"so_txtr: "RESET" %s\n", meta->no_txtr);
+// //     printf(G"we_txtr: "RESET" %s\n", meta->no_txtr);
+//     printf(G"fl_txtr: "RESET" %s\n", meta->fl_txtr->c);
+// //     printf(G"ce_txtr: "RESET" %s\n", meta->ce_txtr->c);
+// //     printf(G"map: "RESET"\n");
+// //     while (*(meta->map))
+// //         printf("%s\n", *(meta->map++));
+// }
