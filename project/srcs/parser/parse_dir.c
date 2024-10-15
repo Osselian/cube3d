@@ -1,6 +1,6 @@
 #include "../../incs/cub3D.h"
 
-static int parse_color(t_txtr *txtr, char *ln)
+static int parse_color(t_color *txtr, char *ln)
 {
 	char	**rgb;
 	int		i;
@@ -11,26 +11,43 @@ static int parse_color(t_txtr *txtr, char *ln)
 	{
 		if (check_color(ft_strtrim(rgb[i], "\n")))
 			return (1);
-		txtr->is_txtr = false;
-		txtr->color.c[i] = *ft_strtrim(rgb[i], "\n");
+		txtr->c[i] = *ft_strtrim(rgb[i], "\n");
 		i++;
 	}
 	free(rgb);
 	return (0);
 }
 
-static int parse_tfile(t_txtr *txtr, char *ln)
+static int	check_texture_ext(char *txtr)
+{
+	int len;
+
+	len = ft_strlen(txtr);
+
+	if (len < 5 || ft_strncmp((txtr + len - 4), ".png", 4))
+	{
+		printf(RED"DEBUG: CHECKED TEXTURE EXT <%s>"RESET" %s %d\n", txtr, __FILE__, __LINE__);
+		print_error(BAD_TXTR_EXT);
+		return (1);
+	}
+	printf(BLUE"DEBUG: CHECKED TEXTURE EXT <%s>"RESET" %s %d\n", txtr, __FILE__, __LINE__);
+	return (0);
+}
+
+static int	parse_tfile(char *txtr, char *ln)
 {
 	int	fd;
 
-	fd = open(ft_strtrim(ln, "\n"), O_RDONLY);
+	txtr = ft_strdup(ft_strtrim(ln, "\n"));
+	if (check_texture_ext(txtr))
+		return (1);
+	fd = open(txtr, O_RDONLY);
 	if (fd == -1)
 	{
 		print_error(NO_FILE);
 		return (1);
 	}
-	txtr->is_txtr = true;
-	txtr->file_val = fd;
+	// printf("%s\n", txtr);
 	return (0);
 }
 
@@ -51,7 +68,7 @@ static int fill_wall(char *ln, int ln_nbr, t_meta *meta)
 	return (0);
 }
 
-int	parse_dir(t_meta *meta, char *ln, int ln_nbr)
+int	parse_dir(t_meta *meta, char *ln, long ln_nbr)
 {
 	char	coords[7][3] = {"NO", "SO", "WE", "EA", "", "F", "C"};
 	int		len;

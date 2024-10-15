@@ -8,15 +8,24 @@
 # define NO_FILE				"File passed as map or texture doesn't exist\n"
 # define INCORRECT_MAP_SYMBOL	"Incorrect symbol passed in map scratch. Shall be in [0, 1, W, E, S, N, SPACE]\n"
 # define MULTIPLE_PLAYERS		"There can not be more than 1 player in the Game, check input file!\n"
+# define ZERO_PLAYERS			"There can't be zero players, check input file!\n"
+# define BADMAP					"Incorrect map, shall be framed with walls!\n"
+# define BAD_TXTR_EXT			"Incorrect texture extention, shall be .png\n"
+# define LONGMAP				"Map is too big, maximum is MAXINTxMAXINT!\n"
 
-# define RESET		"\033[0m"
+# define RESET	"\033[0m"
 # define RED	"\033[1;31m"
+# define BLUE	"\033[1;34m"
+# define G		"\033[1;32m"
+# define Y		"\033[1;33m"
+
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <math.h>
+# include <limits.h>
 # include "../libs/libft/libft.h"
 # include "../libs/get_next_line/get_next_line.h"
 //#include "mlx_int.h"
@@ -43,23 +52,24 @@ typedef union u_color
   char c[4];
 }  t_color;
 
-typedef struct s_txtr
-{
-	bool	is_txtr; //FALSE for color, TRUE for texture
-	int		file_val;
-	t_color	color; //FALSE int и массив из 4х чар UNION
-}	t_txtr;
-
+/*
+MAP documentetion
+	- N, S, W, E: изначальная координата игрока
+	- 1: стена, которую игрок никода не увидит
+	- 0: пустое пространство, которое игрок никода не увидит
+	- s: пустое пространство
+	- D: дверь, которую игрок никогда не увидит
+	- d:дверь
+*/
 typedef struct s_meta
 {
-	t_txtr	*no_txtr;
-	t_txtr	*so_txtr;
-	t_txtr	*we_txtr;
-	t_txtr	*ea_txtr;
-	t_txtr	*fl_txtr;
-	t_txtr	*ce_txtr;
+	char	*no_txtr;
+	char	*so_txtr;
+	char	*we_txtr;
+	char	*ea_txtr;
+	t_color	*fl_txtr;
+	t_color	*ce_txtr;
 	char	**map;
-	bool	ok_flg;
 }	t_meta;
 
 typedef struct s_wallhit
@@ -118,13 +128,14 @@ typedef struct	s_ray
 //debug.c
 void    print_grid_lines(t_grid *grid);
 void    print_wallhit(t_wallhit *wallhit, int screen_width);
+void    print_metadata(t_meta  *meta);
 //free_res
 void    free_grid(t_grid *grid);
 void    free_line(void *line);
 void    *free_arr(void **arr, void (*free_func)(void *));
 //parser
 int		meta_init(char **argv, t_meta *metadata);
-int		parse_dir(t_meta *meta, char *ln, int ln_nbr);
+int		parse_dir(t_meta *meta, char *ln, long ln_nbr);
 
 int		parse_input(char **argv, t_meta *metadata);
 //player
@@ -144,6 +155,7 @@ int		raycast(t_player *player, t_wallhit *hits, int scr_width, char **map);
 bool	ft_isspace(const char a);
 int		print_error(char *mes);
 void	*safe_malloc(size_t str);
+void	ft_straddchar(char **str, char c);
 
 bool	check_color(char *ln);
 int		parse_map(t_meta *meta, char *ln);
