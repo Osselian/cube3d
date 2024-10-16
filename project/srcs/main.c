@@ -13,16 +13,17 @@ int main(int argc, char **argv)
     // void *mlx;
     // void *mlx_win;
     t_grid *grid; 
-  t_meta  *metadata;
+    t_meta  *metadata;
     t_player player;
     t_wallhit   *wallhits;
 
+    metadata = NULL;
     if (argc < 2)
         return (print_error("No .cub file provided!\n"));
 
-    // if (!meta_init(argv, metadata))
-    //     return (1);  
-    
+    if (meta_init(argv, metadata))
+        return (1);  
+    // print_metadata(metadata);
     char *map[] = 
     {
         "11111111111",
@@ -49,7 +50,7 @@ int main(int argc, char **argv)
     // mlx = mlx_init();
     // mlx_win = mlx_new_window(mlx, 800, 600, "Hello, World!");
     // mlx_loop(mlx);
-    print_wallhit(wallhits,  screen_width);
+    //print_wallhit(wallhits,  screen_width);
     write(1, "Hello\n", 6);
     return (0);
 }

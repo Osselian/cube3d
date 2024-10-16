@@ -26,6 +26,7 @@ SRC = srcs/main.c \
     srcs/utils/safe_malloc.c \
     srcs/utils/check_color.c \
     srcs/utils/ft_addline.c \
+	srcs/utils/ft_straddchar.c \
     $(GNL)get_next_line.c \
     $(GNL)get_next_line_utils.c
 
