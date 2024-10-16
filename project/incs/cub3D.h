@@ -133,11 +133,12 @@ void    print_metadata(t_meta  *meta);
 void    free_grid(t_grid *grid);
 void    free_line(void *line);
 void    *free_arr(void **arr, void (*free_func)(void *));
+void	free_meta(t_meta *meta);
 //parser
 int		meta_init(char **argv, t_meta *metadata);
 int		parse_dir(t_meta *meta, char *ln, long ln_nbr);
-
-int		parse_input(char **argv, t_meta *metadata);
+int 	fill_wall(char *ln, int ln_nbr, t_meta *meta);
+int		parser(char **argv, t_meta *metadata);
 //player
 void    init_player(t_player *player, int x, int y);
 void    set_direction(t_vector *dir, char dir_key, int len, t_player player);

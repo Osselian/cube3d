@@ -10,10 +10,10 @@ int	meta_init(char **argv, t_meta *metadata)
 	metadata->fl_txtr = (t_color *)safe_malloc(sizeof(t_color));
 	metadata->ce_txtr = (t_color *)safe_malloc(sizeof(t_color));
 	metadata->map = (char **)safe_malloc(sizeof(char *));
-	if (parse_input(argv, metadata))
+	if (parser(argv, metadata))
 	{
-		free(metadata); //TODO заменить free на метод очистки метадаты вместе с содержимым, поместить в папку free_res
-		return (1); //TODO тут 1 должна возвращаться
+		free_meta(metadata);
+		return (1);
 	}
 	return (0);
 }
