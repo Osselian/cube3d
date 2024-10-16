@@ -70,7 +70,7 @@ static int fill_wall(char *ln, int ln_nbr, t_meta *meta)
 
 int	parse_dir(t_meta *meta, char *ln, long ln_nbr)
 {
-	char	coords[7][3] = {"NO", "SO", "WE", "EA", "", "F", "C"};
+	char	coords[7][3] = {"NO", "SO", "WE", "EA", "", "F", "C"};//TODO проверить на соответствие norminette, так нельзя вроде писать.
 	int		len;
 
 	len = ft_strlen(coords[ln_nbr]);

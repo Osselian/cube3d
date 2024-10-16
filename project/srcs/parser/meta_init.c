@@ -12,8 +12,8 @@ int	meta_init(char **argv, t_meta *metadata)
 	metadata->map = (char **)safe_malloc(sizeof(char *));
 	if (parse_input(argv, metadata))
 	{
-		free(metadata);
-		return (0);
+		free(metadata); //TODO заменить free на метод очистки метадаты вместе с содержимым, поместить в папку free_res
+		return (1); //TODO тут 1 должна возвращаться
 	}
 	return (0);
 }

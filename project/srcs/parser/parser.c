@@ -55,7 +55,7 @@ static int	parse_line(int fd, t_meta *metadata)
 /*
 сама карта - проверить заливку, символы, N,S,E or W для игрока
 */
-int		parse_input(char **argv, t_meta *metadata)
+int		parse_input(char **argv, t_meta *metadata) //TODO привести имя метода в соответствие с именем файла
 {
 	int		fd;
 
