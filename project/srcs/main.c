@@ -1,20 +1,10 @@
 #include "../incs/cub3D.h"
 
-// int get_options(char *path)
-// {
-//     // int fd;
-
-//     // fd = open(path, );
-//     return (0);
-// }
-
 int main(int argc, char **argv)
 {
-    // void *mlx;
-    // void *mlx_win;
-    t_grid *grid; 
-    t_meta  *metadata;
-    t_player player;
+    t_data  *game;
+  
+    t_meta      *metadata;
     t_wallhit   *wallhits;
 
     metadata = NULL;
@@ -27,30 +17,21 @@ int main(int argc, char **argv)
     char *map[] = 
     {
         "11111111111",
+        "10000100001",
         "10000000001",
+        "11000000011",
         "10000000001",
-        "10000000001",
-        "10000000001",
-        "10000000001",
+        "10000100001",
         "11111111111",
         NULL
     };
-
-    // grid = get_grid(map);
-    // print_grid_lines(grid);
-
-    int screen_width = 800;
-    init_player(&player, 6, -3);
-    wallhits = (t_wallhit *)safe_malloc(sizeof(t_wallhit) * (screen_width + 1));
-    set_direction(&(player.dir), 'N', 3, player);
-    set_fov(&(player.dir), &(player.fov), screen_width, 5);
-    int res = raycast(&player, wallhits, screen_width, map);
-
-    
-    // mlx = mlx_init();
-    // mlx_win = mlx_new_window(mlx, 800, 600, "Hello, World!");
-    // mlx_loop(mlx);
-    //print_wallhit(wallhits,  screen_width);
-    write(1, "Hello\n", 6);
+    metadata.map = map;
+    game = new_data(metadata);
+    if (!game)
+        return (1);
+	  hooks_init(&game->win_mng, game);
+    draw_frame(game->wh, &game->win_mng, &game->main_img, &game->wall);
+  	mlx_loop(&game->win_mng.mlx);
+	  mlx_loop_hook(game->win_mng.mlx, buttons, game);
     return (0);
 }
