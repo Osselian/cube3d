@@ -9,6 +9,6 @@ int	ft_addline(char **arr, char *ln)
 		i++;
 	arr[i] = ft_strdup(ft_strtrim(ln, "\n"));
 	ft_straddchar(&arr[i], '\0');
-	arr[i + 1] = ft_strdup("\0");
+	arr[i + 1] = ft_strdup("");
 	return (0);
 }

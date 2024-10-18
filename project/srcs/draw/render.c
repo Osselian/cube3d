@@ -32,7 +32,7 @@ void draw_vertical_line(t_text *t, t_img *img, double dist, int x)
     for (int y = 0; y < WIN_HEIGHT; y++)
     {
         if (y < wall)
-            c = BLUE; 
+            c = W_BLUE; 
         else if (y >= wall && y < floor)
         {
 			lineH = floor - y;
@@ -56,7 +56,7 @@ void draw_vertical_line(t_text *t, t_img *img, double dist, int x)
 			continue ;
         }
 		else
-            c = GREEN;
+            c = W_GREEN;
         put_pixel(x, y, img, c);
 	}
 }

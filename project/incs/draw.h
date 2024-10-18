@@ -4,9 +4,9 @@
 # define WIN_WIDTH 1400
 # define WIN_HEIGHT 900
 # define GRAY	0x808080
-# define RED	0xFF0000
-# define BLUE	0x87CEEB
-# define GREEN	0x228B22
+# define W_RED	0xFF0000
+# define W_BLUE	0x87CEEB
+# define W_GREEN	0x228B22
 
 /*** player ***/
 # define P_ANGLE_DEFAULT 6.28319

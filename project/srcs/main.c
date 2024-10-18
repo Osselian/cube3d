@@ -3,17 +3,16 @@
 int main(int argc, char **argv)
 {
     t_data  *game;
-  
-    t_meta      *metadata;
-    t_wallhit   *wallhits;
+    t_meta  metadata;
 
-    metadata = NULL;
+    /* закомментил из-за SEGFAULT */
+    /*  metadata = NULL;
     if (argc < 2)
-        return (print_error("No .cub file provided!\n"));
+       return (print_error("No .cub file provided!\n"));
 
     if (meta_init(argv, metadata))
-        return (1);  
-    // print_metadata(metadata);
+         return (1);  
+    print_metadata(metadata); */
     char *map[] = 
     {
         "11111111111",
@@ -26,7 +25,7 @@ int main(int argc, char **argv)
         NULL
     };
     metadata.map = map;
-    game = new_data(metadata);
+    game = new_data(&metadata);
     if (!game)
         return (1);
 	  hooks_init(&game->win_mng, game);
