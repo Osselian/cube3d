@@ -1,7 +1,8 @@
 NAME = cub3D
 CC = cc
 GNL = libs/get_next_line/
-DRAW = buttons.c hooks.c mlx.c render.c t_pos.c
+DRAW =  buttons.c hooks.c mlx.c render.c \
+        t_point.c time.c t_data.c
 SRC = srcs/main.c \
     srcs/debug/debug.c \
     srcs/free_res/free_arr.c \

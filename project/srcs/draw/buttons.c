@@ -1,65 +1,78 @@
 #include "cub3D.h"
-#include <sys/time.h>
 
 static t_point	get_new_pos(const t_player *p, int keysym, double delta, double ang);
 static t_point	calc_new_pos(double dir, double factor);
-
-double get_current_time() 
-{
-	struct timeval time;
-	gettimeofday(&time, NULL);
-	return (time.tv_sec + (time.tv_usec / 1000000.0));
-}
-
-double	get_delta_time()
-{
-	static double	prev_time = 0;
-	double			delta;
-	double			cur_time;
-
-	cur_time = get_current_time();
-	if (prev_time == 0)
-        prev_time = cur_time;
-	delta = cur_time - prev_time;
-	if (delta > 1.0 / FPS)
-		delta = 1.0 / FPS;
-	prev_time = cur_time;
-	return (delta);
-}
+static t_point	calc_direction(const t_player *p);
 
 int	exit_game(t_data *data)
 {
-	//free_game_data(data);
+	free_data(data);
 	exit(0);
+}
+
+static t_point	calc_direction(const t_player *p)
+{
+	t_point	new_pos;
+	
+	new_pos.x = p->location.x + p->dir.len * cos(p->ang);
+	new_pos.y = p->location.y + p->dir.len * sin(p->ang);
+	return (new_pos);
 }
 
 int	buttons(int keysym, t_data *g)
 {
 	double	delta;
-	double	ang = 0;
 	t_point	new_pos;
 	t_player *p;
 
 	if (keysym < 0 || !g)
 		return (1);
 	delta = get_delta_time();
-	p = &g->p;
-	ft_memset(&new_pos, 0, sizeof(t_point));
+	p = &g->player;
 	if (keysym == KEY_ESC)
 		exit_game(g);
-	else if (keysym == KEY_ARROW_LEFT)
-		ang += P_ROTATE_SPEED * delta;
-	else if (keysym == KEY_ARROW_RIGHT)
-		ang -= P_ROTATE_SPEED * delta;
+	else if (keysym == KEY_ARROW_LEFT){
+		p->ang += P_ROTATE_SPEED * delta;
+		//new_pos.x = fabs(p->dir.val.x * cos(r) - p->dir.val.y * sin(r));
+		//new_pos.y = p->dir.val.x * sin(r) + p->dir.val.y * cos(r);
+		new_pos = calc_direction(p);
+		printf("old dir: x: %f y: %f\nnew dir = x: %f y: %f\n", p->dir.val.x, p->dir.val.y, new_pos.x, new_pos.y);
+		p->dir.val = new_pos;
+ 		set_fov(&p->dir, &p->fov, WIN_WIDTH, 5);
+		printf("FOV: start.x=%f start.y=%f end.x=%f end.y=%f\n", p->fov.start.x, p->fov.start.y, p->fov.end.x, p->fov.end.y);
+	}
+	else if (keysym == KEY_ARROW_RIGHT){
+		p->ang -= P_ROTATE_SPEED * delta;
+
+		/*	new_pos.x = fabs(p->dir.val.x * cos(r) - p->dir.val.y * sin(r));
+			new_pos.y = -(p->dir.val.x * sin(r)) + p->dir.val.y * cos(r);	
+			эквивалентно расчету calc_direction: */
+		new_pos = calc_direction(p);
+		printf("old dir = x: %f y: %f\nnew dir = x: %f y: %f\n", p->dir.val.x, p->dir.val.y, new_pos.x, new_pos.y);
+
+		p->dir.val = new_pos;
+ 		set_fov(&p->dir, &p->fov, WIN_WIDTH, 5);
+		printf("FOV: start.x = %f start.y = %f end.x=%f end.y=%f\n", p->fov.start.x, p->fov.start.y, p->fov.end.x, p->fov.end.y);
+	}
 	else
-		new_pos = get_new_pos(p, keysym, delta, ang);
-	if (g->m->map[(int)new_pos.x][(int)new_pos.y] != '1')
-		p->location = new_pos;
-	if (ang < 0)
-		ang += 2 * PI;
-	if (ang >= 2 * PI)
-		ang -= 2 * PI;
-	draw_frame(g->w, &g->win_mng, &g->main_img, &g->wall);
+	{
+		new_pos = get_new_pos(p, keysym, delta, p->ang);
+		if (g->m_data->map[(int)fabs(new_pos.y)][(int)fabs(new_pos.x)] != '1'){
+			p->location = new_pos;
+			p->loc_x = new_pos.x;
+			p->loc_y = new_pos.y;
+			/* пересчет положения вектора направления */
+			new_pos = calc_direction(p);
+			p->dir.val= new_pos;
+ 			set_fov(&p->dir, &p->fov, WIN_WIDTH, 5);
+		}
+	}
+	if (p->ang < 0)
+		p->ang += 2 * PI;
+	if (p->ang >= 2 * PI)
+		p->ang -= 2 * PI;
+	raycast(p, g->wh, WIN_WIDTH, g->m_data->map);
+	draw_frame(g->wh, &g->win_mng, &g->main_img, &g->wall);
 	return (0);
 }
 
@@ -71,13 +84,13 @@ static t_point	get_new_pos(const t_player *p, int keysym, double delta, double a
 	factor = P_MOVE_SPEED * delta;
 	ft_memset(&new_pos, 0, sizeof(t_point));
 	if (keysym == KEY_W)
-		new_pos = pos_sum(p->location, calc_new_pos(ang, factor));
-	else if (keysym == KEY_D)
 		new_pos = pos_sub(p->location, calc_new_pos(ang + PI / 2, factor));
+	else if (keysym == KEY_D)
+		new_pos = pos_sum(p->location, calc_new_pos(ang, factor));
 	else if (keysym == KEY_S)
-		new_pos = (pos_sub(p->location, calc_new_pos(ang, factor)));
-	else if (keysym == KEY_A)
 		new_pos = (pos_sum(p->location, calc_new_pos(ang + PI / 2, factor)));
+	else if (keysym == KEY_A)
+		new_pos = (pos_sub(p->location, calc_new_pos(ang, factor)));
 	return(new_pos);	
 }
 
@@ -87,5 +100,7 @@ static t_point	calc_new_pos(double dir, double factor)
 
 	new_pos.x = sin(dir) * factor;
 	new_pos.y = cos(dir) * factor;
+	if (new_pos.y > 0)
+		new_pos.y = -new_pos.y;
 	return (new_pos);
 }

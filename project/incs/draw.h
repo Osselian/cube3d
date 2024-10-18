@@ -1,9 +1,6 @@
 #ifndef DRAW_H
 #define DRAW_H
 
-#include <stdlib.h>
-#include "mlx.h"
-
 # define WIN_WIDTH 1400
 # define WIN_HEIGHT 900
 # define GRAY	0x808080
@@ -13,7 +10,7 @@
 
 /*** player ***/
 # define P_ANGLE_DEFAULT 6.28319
-# define P_ROTATE_SPEED 6
+# define P_ROTATE_SPEED 0.2
 # define P_MOUSE_SENSITIVITY 0.008
 # define P_MOVE_SPEED 15
 # define P_START_POSITION 5.0
