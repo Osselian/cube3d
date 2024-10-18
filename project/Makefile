@@ -8,6 +8,7 @@ SRC = srcs/main.c \
     srcs/free_res/free_arr.c \
     srcs/free_res/free_grid.c \
     srcs/free_res/free_line.c \
+	srcs/free_res/free_meta.c \
     srcs/player/init_player.c \
     srcs/player/set_fov.c \
     srcs/player/set_direction.c \
@@ -16,6 +17,7 @@ SRC = srcs/main.c \
     srcs/parser/parse_dir.c \
     srcs/parser/parse_map.c \
     srcs/parser/check_map.c \
+	srcs/parser/fill_wall.c \
     srcs/raycast/delta_len.c \
     srcs/raycast/find_wall.c \
     srcs/raycast/get_grid.c \
@@ -28,6 +30,7 @@ SRC = srcs/main.c \
     srcs/utils/safe_malloc.c \
     srcs/utils/check_color.c \
     srcs/utils/ft_addline.c \
+	srcs/utils/ft_straddchar.c \
     $(GNL)get_next_line.c \
     $(GNL)get_next_line_utils.c \
     $(addprefix srcs/draw/, $(DRAW))

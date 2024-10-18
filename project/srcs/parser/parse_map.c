@@ -2,14 +2,19 @@
 
 static int	check_map_row(char *ln)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	// printf("DEBUG %s %d\n", __FILE__, __LINE__);
-	while (!(ln[i] == '\0' || ln[i] == '\n'))
+	while ((ln[i] != '\0' && ln[i] != '\n'))
 	{
+		if (i == INT_MAX)
+		{
+			print_error(LONGMAP);
+			return (1);
+		}
 		if (!(ln[i] == '0' || ln[i] == '1' || ln[i] == 'N' ||
-			ln[i] == 'W' || ln[i] == 'E' || ln[i] == 'S' || ln[i] == ' '))
+			ln[i] == 'W' || ln[i] == 'E' || ln[i] == 'S' || ln[i] == ' ' || ln[i] == 'D'))
 		{
 			print_error(INCORRECT_MAP_SYMBOL);
 			return (1);

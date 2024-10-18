@@ -1,0 +1,13 @@
+NO data/textures/Dungeon_brick_wall_blue.png
+SO ../project/data/textures/Dungeon_brick_wall_blue.png
+WE data/textures/Dungeon_brick_wall_blue.png
+EA data/textures/badtxtr.pny
+
+F 255,30,4
+C 200,30,4
+
+11111
+10001
+10001
+100N1
+11111
