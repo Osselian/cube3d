@@ -179,7 +179,7 @@ int		check_map(char **map);
 t_data	*new_data(t_meta *metadata);
 t_mlx	new_mlx(void);
 t_img	new_img(void *mlx, int w, int h);
-void	free_mlx(t_mlx *wm);
+void	free_mlx(t_mlx *wm, void *main_img, void *text);
 
 void	draw_frame(t_wallhit *w, t_mlx *wm, t_img *img, t_text *t);
 void	draw_vertical_line(t_text *t, t_img *img, double dist, int x);

@@ -54,8 +54,6 @@
 	# define NO_EVENT_MASK		NoEventMask
 #endif
 
-
-
 typedef struct	s_img
 {
 	void	*data;
