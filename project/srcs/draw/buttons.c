@@ -1,8 +1,8 @@
-#include "cub3D.h"
+#include "../../incs/cub3D.h"
 
 static t_point	get_new_pos(const t_player *p, int keysym, double delta, double ang);
 static t_point	calc_new_pos(double dir, double factor);
-static t_point	calc_direction(const t_player *p);
+static t_point	calc_direction( t_player *p);
 
 int	exit_game(t_data *data)
 {
@@ -10,13 +10,15 @@ int	exit_game(t_data *data)
 	exit(0);
 }
 
-static t_point	calc_direction(const t_player *p)
+static t_point	calc_direction( t_player *p)
 {
 	t_point	new_pos;
 	
-	new_pos.x = p->location.x + p->dir.len * cos(p->ang);
-	new_pos.y = p->location.y + p->dir.len * sin(p->ang);
-	return (new_pos);
+	// new_pos.x = p->location.x + p->dir.len * cos(p->ang);
+	// new_pos.y = p->location.y + p->dir.len * sin(p->ang);
+    p->dir.val.x = p->location.x + p->dir.norm.x * p->dir.len;
+    p->dir.val.y = p->location.y + p->dir.norm.y * p->dir.len;
+    return (new_pos);
 }
 
 int	buttons(int keysym, t_data *g)
@@ -33,11 +35,15 @@ int	buttons(int keysym, t_data *g)
 		exit_game(g);
 	else if (keysym == KEY_ARROW_LEFT){
 		p->ang += P_ROTATE_SPEED * delta;
+		double r = P_ROTATE_SPEED * delta;
 		//new_pos.x = fabs(p->dir.val.x * cos(r) - p->dir.val.y * sin(r));
 		//new_pos.y = p->dir.val.x * sin(r) + p->dir.val.y * cos(r);
-		new_pos = calc_direction(p);
+		new_pos.x = p->dir.norm.x * cos(r) - p->dir.norm.y * sin(r);
+		new_pos.y = p->dir.norm.x * sin(r) + p->dir.norm.y * cos(r);
+		p->dir.norm = new_pos;
+		calc_direction(p);
 		printf("old dir: x: %f y: %f\nnew dir = x: %f y: %f\n", p->dir.val.x, p->dir.val.y, new_pos.x, new_pos.y);
-		p->dir.val = new_pos;
+		// p->dir.val = new_pos;
  		set_fov(&p->dir, &p->fov, WIN_WIDTH, 5);
 		printf("FOV: start.x=%f start.y=%f end.x=%f end.y=%f\n", p->fov.start.x, p->fov.start.y, p->fov.end.x, p->fov.end.y);
 	}
