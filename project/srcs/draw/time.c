@@ -1,4 +1,5 @@
 #include <sys/time.h>
+#include <stdlib.h>
 #define FPS 60
 
 double get_current_time()

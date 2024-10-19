@@ -28,9 +28,9 @@ int main(int argc, char **argv)
     game = new_data(&metadata);
     if (!game)
         return (1);
-	  hooks_init(&game->win_mng, game);
+	hooks_init(&game->win_mng, game);
     draw_frame(game->wh, &game->win_mng, &game->main_img, &game->wall);
-  	mlx_loop(&game->win_mng.mlx);
-	  mlx_loop_hook(game->win_mng.mlx, buttons, game);
+  	mlx_loop(game->win_mng.mlx);
+	mlx_loop_hook(game->win_mng.mlx, buttons, game);
     return (0);
 }

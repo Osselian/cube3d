@@ -21,24 +21,40 @@
 # define RAY_SPEED 0.01
 # define FPS 90
 
-/*** keycodes ***/
-# define KEY_ESC			53
-# define KEY_W				13
-# define KEY_A				0
-# define KEY_S				1
-# define KEY_D				2
-# define KEY_ARROW_LEFT		123
-# define KEY_ARROW_RIGHT	124
+/*** keycodes, events and masks ***/
+#ifdef __APPLE__
+	# define KEY_ESC			53
+	# define KEY_W				13
+	# define KEY_A				0
+	# define KEY_S				1
+	# define KEY_D				2
+	# define KEY_ARROW_LEFT		123
+	# define KEY_ARROW_RIGHT	124
+	# define ON_KEYDOWN			2
+	# define ON_DESTROY			17
+	# define KEY_PRESS_MASK		1	
+	# define DESTROY_MASK		0
+	# define NO_EVENT_MASK		0
+#else
+	# include <X11/keysym.h>
+	# include <X11/X.h>
 
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
+	# define KEY_ESC			XK_Escape
+	# define KEY_W				XK_w
+	# define KEY_A				XK_a
+	# define KEY_S				XK_s
+	# define KEY_D				XK_d
+	# define KEY_ARROW_LEFT		XK_Left
+	# define KEY_ARROW_RIGHT	XK_Right
+
+	# define ON_KEYDOWN			KeyPress
+	# define ON_DESTROY			DestroyNotify
+	# define KEY_PRESS_MASK		KeyPressMask
+	# define DESTROY_MASK		StructureNotifyMask	
+	# define NO_EVENT_MASK		NoEventMask
+#endif
+
+
 
 typedef struct	s_img
 {
