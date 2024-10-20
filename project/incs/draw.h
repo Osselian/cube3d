@@ -10,7 +10,7 @@
 
 /*** player ***/
 # define P_ANGLE_DEFAULT 6.28319
-# define P_ROTATE_SPEED 0.2
+# define P_ROTATE_SPEED 0.5
 # define P_MOUSE_SENSITIVITY 0.008
 # define P_MOVE_SPEED 15
 # define P_START_POSITION 5.0
