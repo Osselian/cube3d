@@ -108,16 +108,11 @@ typedef struct s_player
 
 typedef struct s_calc
 {
-	bool	is_vert;
-	double	len_delta;
-	double	ray_hit_len;
-	double	proj_loc_val;
-	double	hit_dir_loc_val;
-	double	dir_val;
-	double	wall_face_dir;
-	char	orients[2];
-	double	target_norm_val;
-	double	val_on_line;
+	bool		is_vert;
+	char		orients[2];
+	double		len_delta;
+	double		wall_face_dir;
+	t_vector	ray_hit;
 }	t_calc;
 
 typedef struct	s_ray
@@ -138,62 +133,65 @@ typedef struct	s_data
 }	t_data;
 
 //debug.c
-void    print_grid_lines(t_grid *grid);
-void    print_wallhit(t_wallhit *wallhit, int screen_width);
-void    print_metadata(t_meta  *meta);
+void	    print_grid_lines(t_grid *grid);
+void	    print_wallhit(t_wallhit *wallhit, int screen_width);
+void	    print_metadata(t_meta  *meta);
 //free_res
-void    free_grid(t_grid *grid);
-void    free_line(void *line);
-void    *free_arr(void **arr, void (*free_func)(void *));
-void	free_meta(t_meta *meta);
+void	    free_grid(t_grid *grid);
+void	    free_line(void *line);
+void	    *free_arr(void **arr, void (*free_func)(void *));
+void		free_meta(t_meta *meta);
 //parser
-int		meta_init(char **argv, t_meta *metadata);
-int		parse_dir(t_meta *meta, char *ln, long ln_nbr);
-int 	fill_wall(char *ln, int ln_nbr, t_meta *meta);
-int		parser(char **argv, t_meta *metadata);
+int			meta_init(char **argv, t_meta *metadata);
+int			parse_dir(t_meta *meta, char *ln, long ln_nbr);
+int			fill_wall(char *ln, int ln_nbr, t_meta *meta);
+int			parser(char **argv, t_meta *metadata);
 //player
-void    init_player(t_player *player, int x, int y);
-void    set_direction(t_vector *dir, char dir_key, int len, t_player player);
-void    set_fov(t_vector *dir, t_fov *fov, int screen_width, double fov_width);
+void	    init_player(t_player *player, int x, int y);
+void	    set_direction(t_vector *dir, char dir_key, int len, 
+				t_player player);
+void	    set_fov(t_vector *dir, t_fov *fov, int screen_width, 
+				double fov_width);
 //raycast
-double	delta_len(int index, t_point ray);
-t_calc	find_wall(t_calc *calc_data, t_point loc, char **map);
-t_grid  *get_grid(char **map); //возможно, не понадобиться
-int		get_line_inds(int *indexes, t_point location, t_point dir);
-double  get_vectors_cos_angle(
-			double proj_x, double proj_y, double raydir_x, double raydir_y);
-double	ray_hit_len(int *line_inds, int index, t_player *player, t_point ray);
-int		raycast(t_player *player, t_wallhit *hits, int scr_width, char **map);
+double		delta_len(int index, t_point ray);
+t_calc		find_wall(t_calc *calc_data, t_point loc, char **map);
+t_grid		*get_grid(char **map); //возможно, не понадобиться
+int			get_line_inds(int *indexes, t_point location, t_point dir);
+double		get_vectors_cos_angle(double proj_x, double proj_y, double raydir_x,
+				double raydir_y);
+t_vector	ray_hit_len(
+				int *line_inds, int index, t_player *player, t_vector *ray);
+int			raycast(t_player *player, t_wallhit *hits, int scr_width, char **map);
 //utils
-bool	ft_isspace(const char a);
-int		print_error(char *mes);
-void	*safe_malloc(size_t str);
-void	ft_straddchar(char **str, char c);
+bool		ft_isspace(const char a);
+int			print_error(char *mes);
+void		*safe_malloc(size_t str);
+void		ft_straddchar(char **str, char c);
 
-bool	check_color(char *ln);
-int		parse_map(t_meta *meta, char *ln);
-int		ft_addline(char **arr, char *ln);
-int		check_map(char **map);
+bool		check_color(char *ln);
+int			parse_map(t_meta *meta, char *ln);
+int			ft_addline(char **arr, char *ln);
+int			check_map(char **map);
 
 // draw
-t_data	*new_data(t_meta *metadata);
-t_mlx	new_mlx(void);
-t_img	new_img(void *mlx, int w, int h);
-void	free_mlx(t_mlx *wm, void *main_img, void *text);
+t_data		*new_data(t_meta *metadata);
+t_mlx		new_mlx(void);
+t_img		new_img(void *mlx, int w, int h);
+void		free_mlx(t_mlx *wm, void *main_img, void *text);
 
-void	draw_frame(t_wallhit *w, t_mlx *wm, t_img *img, t_text *t);
-void	draw_vertical_line(t_text *t, t_img *img, double dist, int x);
-void	put_pixel(int x, int y, t_img *img, int color);
+void		draw_frame(t_wallhit *w, t_mlx *wm, t_img *img, t_text *t);
+void		draw_vertical_line(t_text *t, t_img *img, double dist, int x);
+void		put_pixel(int x, int y, t_img *img, int color);
 
-int		hooks_init(t_mlx *wm, t_data *g);
-int		buttons(int keysym, t_data *g);
+int			hooks_init(t_mlx *wm, t_data *g);
+int			buttons(int keysym, t_data *g);
 
-t_point	pos_sub(const t_point a, const t_point b);
-t_point	pos_sum(const t_point a, const t_point b);
+t_point		pos_sub(const t_point a, const t_point b);
+t_point		pos_sum(const t_point a, const t_point b);
 
-t_data	*free_data(t_data *g);
-int		exit_game(t_data *data);
+t_data		*free_data(t_data *g);
+int			exit_game(t_data *data);
 
-double	get_delta_time();
-double	get_current_time();
+double		get_delta_time();
+double		get_current_time();
 #endif

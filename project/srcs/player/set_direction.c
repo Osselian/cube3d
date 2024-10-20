@@ -19,7 +19,7 @@ void    set_direction(t_vector *dir, char dir_key, int len, t_player player)
     }
     else if (dir_key == 'W')
     {
-        dir->norm.x = 1;
+        dir->norm.x = -1;
         dir->norm.y = 0;
     }
     dir->len = len;
