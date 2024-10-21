@@ -3,14 +3,14 @@
 
 # define WIN_WIDTH 1400
 # define WIN_HEIGHT 900
-# define GRAY	0x808080
-# define W_RED	0xFF0000
-# define W_BLUE	0x87CEEB
+# define GRAY		0x808080
+# define W_RED		0xFF0000
+# define W_BLUE		0x87CEEB
 # define W_GREEN	0x228B22
 
 /*** player ***/
 # define P_ANGLE_DEFAULT 6.28319
-# define P_ROTATE_SPEED 0.5
+# define P_ROTATE_SPEED 2
 # define P_MOUSE_SENSITIVITY 0.008
 # define P_MOVE_SPEED 15
 # define P_START_POSITION 5.0

@@ -42,14 +42,22 @@ static void    fill_wallhit(t_wallhit *hit, t_calc calc_data, int screen_width)
     double  integral_part;
 
     hit->distance = calc_data.ray_hit.len;
+    
+    hit->hit = calc_data.ray_hit.norm;
     if (calc_data.wall_face_dir < 0)
         hit->orientation = calc_data.orients[0];
     else
         hit->orientation = calc_data.orients[1];
-    if (calc_data.is_vert)
+    if (calc_data.is_vert){
         rel_hit = modf(calc_data.ray_hit.val.y, &integral_part);
-    else
+        hit->offset = fabs(calc_data.ray_hit.val.y);
+        hit->is_vert = 1;
+    }
+    else{
         rel_hit = modf(calc_data.ray_hit.val.x, &integral_part);
+        hit->offset = fabs(calc_data.ray_hit.val.x);
+        hit->is_vert = 0;
+    }
     hit->texture_line = round(fabs(screen_width * rel_hit));
 }
 

@@ -76,6 +76,9 @@ typedef struct s_meta
 typedef struct s_wallhit
 {
 	double	distance;
+	t_point	hit;
+	double	offset;
+	int		is_vert;
 	double	texture_line;
 	char	orientation;
 }	t_wallhit;
@@ -100,7 +103,6 @@ typedef struct s_player
 {
 	int			loc_x;
 	int			loc_y;
-	double		ang;
 	t_point		location;
 	t_vector	dir;
 	t_fov		fov;
@@ -127,7 +129,7 @@ typedef struct	s_data
 	t_meta		*m_data;
 	t_mlx		win_mng;
 	t_img		main_img;
-	t_text		wall;
+	t_text		*wall;
 	t_player	player;
 	t_wallhit	*wh;
 }	t_data;
@@ -179,8 +181,8 @@ t_mlx		new_mlx(void);
 t_img		new_img(void *mlx, int w, int h);
 void		free_mlx(t_mlx *wm, void *main_img, void *text);
 
-void		draw_frame(t_wallhit *w, t_mlx *wm, t_img *img, t_text *t);
-void		draw_vertical_line(t_text *t, t_img *img, double dist, int x);
+void		draw_frame(t_wallhit *w, t_mlx *wm, t_img *img, t_text *t, t_player *p);
+void draw_vertical_line(t_text *t, t_img *img, double dist, int x, double off);
 void		put_pixel(int x, int y, t_img *img, int color);
 
 int			hooks_init(t_mlx *wm, t_data *g);
