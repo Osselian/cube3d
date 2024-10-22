@@ -181,9 +181,8 @@ t_mlx		new_mlx(void);
 t_img		new_img(void *mlx, int w, int h);
 void		free_mlx(t_mlx *wm, void *main_img, void *text);
 
-void		draw_frame(t_wallhit *w, t_mlx *wm, t_img *img, t_text *t, t_player *p);
-void draw_vertical_line(t_text *t, t_img *img, double dist, int x, double off);
-void		put_pixel(int x, int y, t_img *img, int color);
+void		draw_frame(const t_data *g);
+void draw_vertical_line(t_render_info *i, int x);
 
 int			hooks_init(t_mlx *wm, t_data *g);
 int			buttons(int keysym, t_data *g);

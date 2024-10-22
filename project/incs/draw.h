@@ -16,7 +16,7 @@
 # define P_START_POSITION 5.0
 
 /*** game ***/
-# define FOV 1.0472
+# define FOV 0.785398
 # define PI 3.1415926
 # define RAY_SPEED 0.01
 # define FPS 90
@@ -76,5 +76,17 @@ typedef struct s_text
 	t_img	img;
 }	t_text;
 
+typedef struct	s_render_info
+{
+	t_text	*t;
+	t_img	*img;
+	double	ty;
+	double	tx;
+	double	ty_off;
+	double	ty_step;
+	int		wall_height;
+	int		wall_offset;
+	int		floor_offset;
+}	t_render_info;
 
 #endif

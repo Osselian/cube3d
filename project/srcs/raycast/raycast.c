@@ -48,12 +48,14 @@ static void    fill_wallhit(t_wallhit *hit, t_calc calc_data, int screen_width)
         hit->orientation = calc_data.orients[0];
     else
         hit->orientation = calc_data.orients[1];
-    if (calc_data.is_vert){
+    if (calc_data.is_vert)
+    {
         rel_hit = modf(calc_data.ray_hit.val.y, &integral_part);
         hit->offset = fabs(calc_data.ray_hit.val.y);
         hit->is_vert = 1;
     }
-    else{
+    else
+    {
         rel_hit = modf(calc_data.ray_hit.val.x, &integral_part);
         hit->offset = fabs(calc_data.ray_hit.val.x);
         hit->is_vert = 0;

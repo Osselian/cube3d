@@ -59,7 +59,7 @@ int	buttons(int keysym, t_data *g)
 		}
 	}
 	raycast(p, g->wh, WIN_WIDTH, g->m_data->map);
-	draw_frame(g->wh, &g->win_mng, &g->main_img, g->wall, &g->player);
+	draw_frame(g);
 	return (0);
 }
 
