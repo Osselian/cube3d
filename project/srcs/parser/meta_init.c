@@ -10,6 +10,8 @@ int	meta_init(char **argv, t_meta *metadata)
 	metadata->fl_txtr = (t_color *)safe_malloc(sizeof(t_color));
 	metadata->ce_txtr = (t_color *)safe_malloc(sizeof(t_color));
 	metadata->map = (char **)safe_malloc(sizeof(char *));
+	metadata->map_str = (char *)safe_malloc(sizeof(char *));
+	metadata->maplen = 0;
 	if (parser(argv, metadata))
 	{
 		free_meta(metadata);

@@ -27,25 +27,39 @@ static int	parse_line(int fd, t_meta *metadata)
 	long	ln_nbr;
 
 	ln_nbr = 0;
+	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 	ln = get_next_line(fd);
-	while (ln)
+	while (ln && *ln)
 	{
 		if (ln_nbr <= 7)
 		{
 			if (parse_dir(metadata, ln, ln_nbr))
+			{
+				printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 				return (1);
+			}
+			printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 		}
 		else
 		{
+			printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 			if (ln_nbr - 7 == INT_MAX)
 			{
+				printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 				print_error(LONGMAP);
+				printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 				return (1);
 			}
 			if (parse_map(metadata, ln))
+			{
+				printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 				return (1);
+			}
+			printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 		}
+		printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 		ln_nbr++;
+		printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 		ln = get_next_line(fd);
 	}
 	free(ln);

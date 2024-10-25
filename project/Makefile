@@ -31,6 +31,8 @@ SRC = srcs/main.c \
     srcs/utils/check_color.c \
     srcs/utils/ft_addline.c \
 	srcs/utils/ft_straddchar.c \
+	srcs/utils/ft_arrmemcpy.c \
+	srcs/utils/ft_realloc.c \
     $(GNL)get_next_line.c \
     $(GNL)get_next_line_utils.c \
     $(addprefix srcs/draw/, $(DRAW))
@@ -42,6 +44,7 @@ LIBFT_NAME	= libft.a
 LIBS = -L$(LIBFT_PATH) -lft
 
 FLAGS = -Wall -Wextra -g -fsanitize=address #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
+# FLAGS = -Wall -Wextra #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
 
 ifeq ($(shell uname), Darwin) #проверяем имя системы, Darwin - имя системы на школьных компах
 	MLXPATH = libs/mlx_mac

@@ -1,14 +1,16 @@
 #include "../../incs/cub3D.h"
 
-int	ft_addline(char **arr, char *ln)
+int	ft_addline(char **arr, char *ln, unsigned int *maplen)
 {
-	int	i;
-
-	i = 0;
-	while (arr[i] && arr[i][0] != '\0')
-		i++;
-	arr[i] = ft_strdup(ft_strtrim(ln, "\n"));
-	ft_straddchar(&arr[i], '\0');
-	arr[i + 1] = ft_strdup("");
+	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
+	arr = ft_realloc(arr, *maplen + 1);
+	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
+	arr[*maplen] = ft_strdup(ft_strtrim(ln, "\n"));
+	printf("DEBUG arr=<%s>\n", arr[0]);
+	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
+	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
+	arr[*maplen] = ft_strdup("\0");
+	(*maplen)++;
+	// printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 	return (0);
 }

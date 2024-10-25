@@ -6,13 +6,12 @@ int main(int argc, char **argv)
     t_meta  metadata;
 
     /* закомментил из-за SEGFAULT */
-    /*  metadata = NULL;
     if (argc < 2)
        return (print_error("No .cub file provided!\n"));
 
-    if (meta_init(argv, metadata))
+    if (meta_init(argv, &metadata))
          return (1);  
-    print_metadata(metadata); */
+    // print_metadata(metadata);
     char *map[] = 
     {
         "11111111111",

@@ -26,8 +26,12 @@ static int	check_map_row(char *ln)
 
 int	parse_map(t_meta *meta, char *ln)
 {
+	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 	if (check_map_row(ln))
 		return (1);
-	ft_addline(meta->map, ln);
+	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
+	meta->map_str = ft_strjoin(meta->map_str, ln); //TODO в лист
+	// ft_addline(meta->map, ln, &(meta->maplen));
+	printf(G"DEBUG %s %d\n%s\n"RESET"\n", __FILE__, __LINE__, meta->map_str);
 	return (0);
 }
