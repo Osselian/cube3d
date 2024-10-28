@@ -30,12 +30,9 @@ int	parse_dir(t_meta *meta, char *ln, long ln_nbr)
 	//free_arr((void **)coords, free_line);
 	if ((ln_nbr == 4 || ln_nbr == 7) && ln[0] != '\n')
 		return (print_error(INCORRECT_FORMAT));
-	printf(G"DEBUG %s %d %ld"RESET"\n", __FILE__, __LINE__, ln_nbr);
 	if (!(ln_nbr == 4 || ln_nbr == 7))
 	{
-		printf(G"DEBUG %s %d %s"RESET"\n", __FILE__, __LINE__, ln + len + 1);
 		return(fill_wall(ln + len + 1, ln_nbr, meta));
 	}
-	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 	return (0);
 }

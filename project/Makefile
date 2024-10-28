@@ -29,10 +29,6 @@ SRC = srcs/main.c \
     srcs/utils/ft_isspace.c \
     srcs/utils/safe_malloc.c \
     srcs/utils/check_color.c \
-    srcs/utils/ft_addline.c \
-	srcs/utils/ft_straddchar.c \
-	srcs/utils/ft_arrmemcpy.c \
-	srcs/utils/ft_realloc.c \
     $(GNL)get_next_line.c \
     $(GNL)get_next_line_utils.c \
     $(addprefix srcs/draw/, $(DRAW))

@@ -41,17 +41,12 @@ static int	parse_tfile(char *txtr, char *ln)
 	txtr = ft_strdup(ft_strtrim(ln, "\n"));
 	if (check_texture_ext(txtr))
 		return (1);
-	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 	fd = open(txtr, O_RDONLY);
-	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 	if (fd == -1)
 	{
-		printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 		print_error(NO_FILE);
 		return (1);
 	}
-	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
-	// printf("%s\n", txtr);
 	return (0);
 }
 

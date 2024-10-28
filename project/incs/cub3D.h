@@ -168,13 +168,9 @@ int			raycast(t_player *player, t_wallhit *hits, int scr_width, char **map);
 bool		ft_isspace(const char a);
 int			print_error(char *mes);
 void		*safe_malloc(size_t str);
-void		ft_straddchar(char **str, char c);
-char		**ft_realloc(char **ptr, size_t size);
-char		**ft_arrmemcpy(void **dst, const void **src, size_t size);
 
 bool		check_color(char *ln);
 int			parse_map(t_meta *meta, char *ln);
-int			ft_addline(char **arr, char *ln, unsigned int *maplen);
 int			check_map(char **map);
 
 // draw

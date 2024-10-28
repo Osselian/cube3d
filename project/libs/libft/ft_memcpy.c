@@ -19,14 +19,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned char	*nsrc;
 
 	i = 0;
-	printf("DEBUG %s %d\n", __FILE__, __LINE__);
 	if (!src && !dst)
 		return (dst);
-	printf("DEBUG %s %d\n", __FILE__, __LINE__);
 	ndst = (unsigned char *)dst;
-	printf("DEBUG %s %d\n", __FILE__, __LINE__);
 	nsrc = (unsigned char *)src;
-	printf("DEBUG %s %d\n", __FILE__, __LINE__);
 	while (i < n)
 	{
 		ndst[i] = nsrc[i];

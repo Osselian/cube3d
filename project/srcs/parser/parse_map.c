@@ -5,7 +5,6 @@ static int	check_map_row(char *ln)
 	unsigned int	i;
 
 	i = 0;
-	// printf("DEBUG %s %d\n", __FILE__, __LINE__);
 	while ((ln[i] != '\0' && ln[i] != '\n'))
 	{
 		if (i == INT_MAX)
@@ -26,12 +25,8 @@ static int	check_map_row(char *ln)
 
 int	parse_map(t_meta *meta, char *ln)
 {
-	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
 	if (check_map_row(ln))
 		return (1);
-	printf(G"DEBUG %s %d"RESET"\n", __FILE__, __LINE__);
-	meta->map_str = ft_strjoin(meta->map_str, ln); //TODO в лист
-	// ft_addline(meta->map, ln, &(meta->maplen));
-	printf(G"DEBUG %s %d\n%s\n"RESET"\n", __FILE__, __LINE__, meta->map_str);
+	meta->map_str = ft_strjoin(meta->map_str, ln);
 	return (0);
 }
