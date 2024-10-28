@@ -64,13 +64,15 @@ MAP documentetion
 */
 typedef struct s_meta
 {
-	char	*no_txtr;
-	char	*so_txtr;
-	char	*we_txtr;
-	char	*ea_txtr;
-	t_color	*fl_txtr;
-	t_color	*ce_txtr;
-	char	**map;
+	char			*no_txtr;
+	char			*so_txtr;
+	char			*we_txtr;
+	char			*ea_txtr;
+	t_color			*fl_txtr;
+	t_color			*ce_txtr;
+	char			**map;
+	char			*map_str;
+	unsigned int	maplen;
 }	t_meta;
 
 typedef struct s_wallhit
@@ -168,11 +170,9 @@ int			raycast(t_player *player, t_wallhit *hits, int scr_width, char **map);
 bool		ft_isspace(const char a);
 int			print_error(char *mes);
 void		*safe_malloc(size_t str);
-void		ft_straddchar(char **str, char c);
 
 bool		check_color(char *ln);
 int			parse_map(t_meta *meta, char *ln);
-int			ft_addline(char **arr, char *ln);
 int			check_map(char **map);
 
 // draw

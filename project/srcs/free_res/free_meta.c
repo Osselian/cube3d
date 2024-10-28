@@ -9,5 +9,6 @@ void	free_meta(t_meta *meta)
 	free(meta->fl_txtr);
 	free(meta->ce_txtr);
 	free_arr((void **)meta->map, free_line);
+	free(meta->map_str);
 	free(meta);
 }

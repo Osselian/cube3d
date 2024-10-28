@@ -5,7 +5,6 @@ static int	check_map_row(char *ln)
 	unsigned int	i;
 
 	i = 0;
-	// printf("DEBUG %s %d\n", __FILE__, __LINE__);
 	while ((ln[i] != '\0' && ln[i] != '\n'))
 	{
 		if (i == INT_MAX)
@@ -28,6 +27,6 @@ int	parse_map(t_meta *meta, char *ln)
 {
 	if (check_map_row(ln))
 		return (1);
-	ft_addline(meta->map, ln);
+	meta->map_str = ft_strjoin(meta->map_str, ln);
 	return (0);
 }

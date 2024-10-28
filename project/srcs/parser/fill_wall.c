@@ -47,7 +47,6 @@ static int	parse_tfile(char *txtr, char *ln)
 		print_error(NO_FILE);
 		return (1);
 	}
-	// printf("%s\n", txtr);
 	return (0);
 }
 
