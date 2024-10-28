@@ -8,14 +8,12 @@ static int	flood_fill_helper(char **map, int x, int y)
 	{
 		return (print_error(BADMAP));
 	}
-	else if (map[x][y] == 's' || map[x][y] == 'd')
+	else if (map[x][y] == 's')
 		return (0);
 	else if (map[x][y] != '1')
 	{
 		if (map[x][y] == '0')
 			map[x][y] = 's';
-		if (map[x][y] == 'D')
-			map[x][y] = 'd';
 		return(flood_fill(map, x, y));
 	}
 	return (0);

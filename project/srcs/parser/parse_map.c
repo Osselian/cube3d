@@ -13,7 +13,7 @@ static int	check_map_row(char *ln)
 			return (1);
 		}
 		if (!(ln[i] == '0' || ln[i] == '1' || ln[i] == 'N' ||
-			ln[i] == 'W' || ln[i] == 'E' || ln[i] == 'S' || ln[i] == ' ' || ln[i] == 'D'))
+			ln[i] == 'W' || ln[i] == 'E' || ln[i] == 'S' || ln[i] == ' '))
 		{
 			print_error(INCORRECT_MAP_SYMBOL);
 			return (1);
