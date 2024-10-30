@@ -2,11 +2,11 @@ NAME = cub3D
 CC = cc
 GNL = libs/get_next_line/
 
-DRAW = draw_frame.c draw_vertical_line.c exit_game.c game_init.c \
-        get_delta_time.c hooks_init.c on_key_pressed.c  
-
 FREE_RES = free_arr.c free_data.c free_grid.c free_line.c free_meta.c \
             free_mlx.c
+
+LOOP = draw_frame.c draw_vertical_line.c exit_game.c game_init.c \
+        get_delta_time.c hooks_init.c on_key_pressed.c  
             
 PARSER = check_map.c fill_wall.c meta_init.c parse_dir.c parse_map.c \
             parser.c 
@@ -21,8 +21,8 @@ UTILS = print_error.c ft_isspace.c safe_malloc.c check_color.c
 
 SRC = srcs/main.c \
     srcs/debug/debug.c \
-    $(addprefix srcs/draw/, $(DRAW)) \
     $(addprefix srcs/free_res/, $(FREE_RES)) \
+    $(addprefix srcs/loop/, $(LOOP)) \
     $(addprefix srcs/parser/, $(PARSER)) \
     $(addprefix srcs/player/, $(PLAYER)) \
     $(addprefix srcs/raycast/, $(RAYCAST)) \
