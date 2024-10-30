@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define FPS 60
 
-double get_current_time()
+static double get_current_time()
 {
 	struct timeval time;
 	gettimeofday(&time, NULL);
