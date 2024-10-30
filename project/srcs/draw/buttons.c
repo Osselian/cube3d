@@ -4,7 +4,8 @@
 static t_point	calc_new_pos(double dir, double factor);
 static t_point	calc_direction( t_player *p);
 static t_point	get_new_pos(t_player *p, int keysym, double delta);
-static bool		check_new_pos(char **map, t_point new_pos, t_vector dir);
+static bool		check_new_pos(char **map, t_point new_pos, t_point dir);
+static t_point	get_mov_dir(t_player *p, int keysym);
 
 int	exit_game(t_data *data)
 {
@@ -48,8 +49,9 @@ int	buttons(int keysym, t_data *g)
 	}
 	else
 	{
-		new_pos = get_new_pos(p, keysym, delta);
-		if(check_new_pos(g->m_data->map, new_pos, p->dir))
+		t_point mov_dir = get_mov_dir(p, keysym);
+		new_pos = get_new_pos(p, keysym, delta); // применить mov_dir
+		if(check_new_pos(g->m_data->map, new_pos, mov_dir))
 		{
 			p->location = new_pos;
 			p->loc_x = new_pos.x;
@@ -63,24 +65,52 @@ int	buttons(int keysym, t_data *g)
 	return (0);
 }
 
-static bool	check_new_pos(char **map, t_point new_pos, t_vector dir)
+static bool	check_new_pos(char **map, t_point new_pos, t_point dir)
 {
 	double new_x;
 	double new_y;
 
 	new_x = new_pos.x;
 	new_y = new_pos.y;
-	//добавляю еще к значению, что бы исключить полложение игрока на границе стены
-	if (dir.norm.x > 0)
+	//добавляю еще к значению, что бы исключить положение игрока на границе стены
+	if (dir.x > 0)
 		new_x += 0.1;
-	else if (dir.norm.x < 0)
+	else if (dir.x < 0)
 		new_x -= 0.1;
-	if (dir.norm.y > 0)
+	if (dir.y > 0)
 		new_y += 0.1;
-	else if (dir.norm.y < 0)
+	else if (dir.y < 0)
 		new_y -= 0.1;
 	return (map[(int)fabs(new_y)][(int)fabs(new_x)] != '1');
 }
+
+static t_point get_mov_dir(t_player *p, int keysym)
+{
+	t_point	mov_dir;
+	
+	ft_memset(&mov_dir, 0, sizeof(t_point));
+	if (keysym == KEY_W)
+	{
+		mov_dir.x = p->dir.norm.x;
+		mov_dir.y = p->dir.norm.y;
+	}
+	else if (keysym == KEY_D)
+	{
+		mov_dir.x = p->dir.norm.y;
+		mov_dir.y = p->dir.norm.x * -1;
+	}
+	else if (keysym == KEY_S)
+	{
+		mov_dir.x = -p->dir.norm.x;
+		mov_dir.y = -p->dir.norm.y;
+	}
+	else if (keysym == KEY_A)
+	{
+		mov_dir.x = p->dir.norm.y * -1;
+		mov_dir.y = p->dir.norm.x;
+	}
+	return(mov_dir);	
+} 
 
 static t_point	get_new_pos(t_player *p, int keysym, double delta)
 {
