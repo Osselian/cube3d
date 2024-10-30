@@ -1,12 +1,10 @@
-#include "cub3D.h"
+#include "../../incs/cub3D.h"
 
 # define P1 M_PI_2
 # define P3 4.71239
 
 static double	fix_ang(double a);
 static t_text	*select_texture(double r_ang, t_text *t, int is_vert);
-static void		put_pixel(int x, int y, t_img *img, int color);
-static void		draw_wall(t_render_info *i, int x, int y);
 static void		wall_setup(t_render_info *s, const t_text *t, double dist, double off);
 
 void draw_frame(const t_data *g)
@@ -81,40 +79,4 @@ static void	wall_setup(t_render_info *s, const t_text *t, double dist, double of
 		s->wall_height = WIN_HEIGHT;
 	}
 	s->ty = s->ty_off * s->ty_step;
-}
-
-void draw_vertical_line(t_render_info *i, int x)
-{
-	int	y;
-
-	y = -1;
-	while (++y < i->wall_offset)
-		put_pixel(x, y, i->img, W_BLUE);
-	draw_wall(i, x, y);
-	y += i->floor_offset - y;
-	while (++y < WIN_HEIGHT)
-		put_pixel(x, y, i->img, W_GREEN);
-}
-
-static void	draw_wall(t_render_info *i, int x, int y)
-{
-	int 	index;
-
-	while (y < i->floor_offset && y < WIN_HEIGHT)
-	{
-		index = (int)(i->ty) * i->t->width + (int)(i->tx);
-  		put_pixel(x, y, i->img, ((int *)i->t->img.data_addr)[index]); 
-		i->ty += i->ty_step;
-		y++;
-	}
-}
-
-static void	put_pixel(int x, int y, t_img *img, int color)
-{
-	int	offset;
-
-	if (x < 0 || y < 0 || !img || color < 0)
-		return ;
-	offset = (y * img->size_line) + (x * (img->bits_per_pixel / 8));
-	*(int *)(img->data_addr + offset) = color;
 }

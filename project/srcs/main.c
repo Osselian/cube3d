@@ -24,12 +24,12 @@ int main(int argc, char **argv)
         NULL
     };
     metadata.map = map;
-    game = new_data(&metadata);
+    game = game_init(&metadata);
     if (!game)
         return (1);
 	hooks_init(&game->win_mng, game);
     draw_frame(game);
   	mlx_loop(game->win_mng.mlx);
-	mlx_loop_hook(game->win_mng.mlx, buttons, game);
+	mlx_loop_hook(game->win_mng.mlx, on_key_pressed, game);
     return (0);
 }

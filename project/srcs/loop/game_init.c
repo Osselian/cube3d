@@ -9,7 +9,12 @@ char *text[] =
     NULL
 };
 
-t_data *new_data(t_meta *metadata)
+static t_mlx   	new_mlx(void);
+static t_img   	new_img(void *mlx, int w, int h);
+static void init_img(t_data *game);
+
+
+t_data *game_init(t_meta *metadata)
 {
     t_data *game;
     int i = -1;
@@ -21,12 +26,55 @@ t_data *new_data(t_meta *metadata)
     if (!game->wh)
         return (free_data(game));
     init_player(&game->player, 6, -3);
-    set_direction(&game->player.dir, 'W', 3, game->player);
+    set_direction(&game->player, 'W', 3);
     set_fov(&game->player.dir, &game->player.fov, WIN_WIDTH, 5);
     game->win_mng = new_mlx();
 	game->main_img = new_img(game->win_mng.mlx, WIN_WIDTH, WIN_HEIGHT);
     game->wall = malloc(sizeof(t_text) * 4);
     game->m_data = metadata;
+    init_img(game);
+    raycast(&game->player, game->wh, WIN_WIDTH, game->m_data->map);
+    return (game);
+}
+
+static t_mlx	new_mlx(void)
+{
+	t_mlx	wm;
+
+	ft_memset(&wm, 0, sizeof(t_mlx));
+	wm.mlx = mlx_init();
+	if (!wm.mlx)
+		return (wm);
+	wm.win = mlx_new_window(wm.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	return (wm);
+}
+
+static t_img	new_img(void *mlx, int w, int h)
+{
+	t_img	i;
+
+	ft_memset(&i, 0, sizeof(t_img));
+	i.data = mlx_new_image(mlx, w, h);
+	if (!i.data)
+		return (i);
+	i.data_addr = mlx_get_data_addr(
+			i.data,
+			&i.bits_per_pixel,
+			&i.size_line,
+			&i.endian);
+	if (!i.data_addr)
+	{
+		mlx_destroy_image(mlx, i.data);
+		printf("mlx_get_data_addr: error\n");
+		i.data = NULL;
+	}
+	return (i);
+}
+
+static void init_img(t_data *game)
+{
+    int i = -1;
+
     while (++i < 4)
     {
         game->wall[i].img.data = mlx_xpm_file_to_image(game->win_mng.mlx,
@@ -38,15 +86,4 @@ t_data *new_data(t_meta *metadata)
                                                     &game->wall[i].img.size_line,
                                                     &game->wall[i].img.endian);
     }
-    raycast(&game->player, game->wh, WIN_WIDTH, game->m_data->map);
-    return (game);
-}
-
-t_data  *free_data(t_data *g)
-{
-    free(g->wh);
-    /* free_meta(g->m_data) */ // TODO
-    free_mlx(&g->win_mng, g->main_img.data, g->wall[0].img.data);
-    free(g);
-    return (NULL);
 }
