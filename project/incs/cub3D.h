@@ -159,7 +159,7 @@ void		free_mlx(t_mlx *wm, void *main_img, void *text);
 //parser
 int			check_map(char **map);
 int			fill_wall(char *ln, int ln_nbr, t_meta *meta);
-int			meta_init(char **argv, t_meta *metadata);
+t_meta		*meta_init(char **argv);
 int			parse_dir(t_meta *meta, char *ln, long ln_nbr);
 int			parse_map(t_meta *meta, char *ln);
 int			parser(char **argv, t_meta *metadata);

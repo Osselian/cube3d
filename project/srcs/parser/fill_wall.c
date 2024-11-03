@@ -20,6 +20,7 @@ static int parse_color(t_color *txtr, char *ln)
 {
 	char	**rgb;
 	int		i;
+	char	*tmp;
 
 	rgb = ft_split(ln, ',');
 	i = 0;
@@ -27,21 +28,23 @@ static int parse_color(t_color *txtr, char *ln)
 	{
 		if (check_color(ft_strtrim(rgb[i], "\n")))
 			return (1);
-		txtr->c[i] = *ft_strtrim(rgb[i], "\n");
+		tmp = ft_strtrim(rgb[i], "\n");
+		txtr->c[i] = *tmp;
+		free(tmp);
 		i++;
 	}
-	free(rgb);
+	free_arr((void **)rgb, free);
 	return (0);
 }
 
-static int	parse_tfile(char *txtr, char *ln)
+static int	parse_tfile(char **txtr, char *ln)
 {
 	int	fd;
 
-	txtr = ft_strdup(ft_strtrim(ln, "\n"));
-	if (check_texture_ext(txtr))
+	*txtr= ft_strtrim(ln, "\n");
+	if (check_texture_ext(*txtr))
 		return (1);
-	fd = open(txtr, O_RDONLY);
+	fd = open(*txtr, O_RDONLY);
 	if (fd == -1)
 	{
 		print_error(NO_FILE);
@@ -53,13 +56,13 @@ static int	parse_tfile(char *txtr, char *ln)
 int fill_wall(char *ln, int ln_nbr, t_meta *meta)
 {
 	if (ln_nbr == 0)
-		return(parse_tfile(meta->no_txtr, ln));
+		return(parse_tfile(&(meta->no_txtr), ln));
 	else if (ln_nbr == 1)
-		return(parse_tfile(meta->so_txtr, ln));
+		return(parse_tfile(&(meta->so_txtr), ln));
 	else if (ln_nbr == 2)
-		return(parse_tfile(meta->we_txtr, ln));
+		return(parse_tfile(&(meta->we_txtr), ln));
 	else if (ln_nbr == 3)
-		return(parse_tfile(meta->ea_txtr, ln));
+		return(parse_tfile(&(meta->ea_txtr), ln));
 	if (ln_nbr == 5)
 		return(parse_color(meta->fl_txtr, ln));
 	else if (ln_nbr == 6)
