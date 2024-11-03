@@ -19,6 +19,5 @@ t_meta	*meta_init(char **argv)
 		free_meta(metadata);
 		return (NULL);
 	}
-	print_metadata(metadata);
 	return (metadata);
 }
