@@ -10,6 +10,7 @@ bool	check_color(char *ln)
 		if (!ft_isdigit(ln[i]))
 		{
 			print_error(INCORRECT_COLOR);
+			free(ln);
 			return (true);
 		}
 		i++;
@@ -17,7 +18,9 @@ bool	check_color(char *ln)
 	if (ft_atoi(ln) < 0 || ft_atoi(ln) > 255)
 	{
 		print_error(INCORRECT_COLOR);
+		free(ln);
 		return (true);
 	}
+	free(ln);
 	return (false);
 }

@@ -47,6 +47,7 @@ static int	parse_line(int fd, t_meta *metadata)
 				return (1);
 			}
 		}
+		free(ln);
 		ln_nbr++;
 		ln = get_next_line(fd);
 	}
@@ -57,6 +58,7 @@ static int	parse_line(int fd, t_meta *metadata)
 int	fill_map_arr(t_meta *metadata)
 {
 	metadata->map = ft_split(metadata->map_str, '\n');
+	//TODO - if (!metadata->map) сделать проверку на NULL 
 	return (0);
 }
 

@@ -25,8 +25,12 @@ static int	check_map_row(char *ln)
 
 int	parse_map(t_meta *meta, char *ln)
 {
+	char *tmp;
+
 	if (check_map_row(ln))
 		return (1);
+	tmp = meta->map_str;
 	meta->map_str = ft_strjoin(meta->map_str, ln);
+	free(tmp);
 	return (0);
 }
