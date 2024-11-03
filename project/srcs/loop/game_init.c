@@ -1,13 +1,13 @@
 #include "../../incs/cub3D.h"
 
-char *text[] =
-{
-    "./data/textures/greystone.xpm", 
-    "./data/textures/redbrick.xpm",
-    "./data/textures/bluestone.xpm",
-    "./data/textures/colorstone.xpm",
-    NULL
-};
+// char *text[] =
+// {
+//     "./data/textures/greystone.xpm", 
+//     "./data/textures/redbrick.xpm",
+//     "./data/textures/bluestone.xpm",
+//     "./data/textures/colorstone.xpm",
+//     NULL
+// };
 
 static t_mlx   	new_mlx(void);
 static t_img   	new_img(void *mlx, int w, int h);
@@ -74,11 +74,17 @@ static t_img	new_img(void *mlx, int w, int h)
 static void init_img(t_data *game)
 {
     int i = -1;
+    char **paths;
 
+    paths = (char **)malloc(sizeof(char *) * 4);
+    paths[0] = game->m_data->no_txtr;
+    paths[1] = game->m_data->so_txtr;
+    paths[2] = game->m_data->we_txtr;
+    paths[3] = game->m_data->ea_txtr;
     while (++i < 4)
     {
         game->wall[i].img.data = mlx_xpm_file_to_image(game->win_mng.mlx,
-                                                  text[i],
+                                                  paths[i],
                                                   &game->wall[i].width,
                                                   &game->wall[i].height);
         game->wall[i].img.data_addr = mlx_get_data_addr(game->wall[i].img.data,
