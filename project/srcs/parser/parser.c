@@ -43,9 +43,7 @@ static int	parse_line(int fd, t_meta *metadata)
 				return (1);
 			}
 			if (parse_map(metadata, ln))
-			{
 				return (1);
-			}
 		}
 		free(ln);
 		ln_nbr++;
@@ -62,7 +60,7 @@ int	fill_map_arr(t_meta *metadata)
 	return (0);
 }
 
-int		parser(char **argv, t_meta *metadata)
+int	parser(char **argv, t_meta *metadata)
 {
 	int		fd;
 
@@ -70,14 +68,10 @@ int		parser(char **argv, t_meta *metadata)
 		return (1);
 	printf(BLUE"DEBUG: CHECKED EXTENTION"RESET" %s %d\n", __FILE__, __LINE__);
 	if (parse_line(fd, metadata))
-	{
 		return (1);
-	}
 	fill_map_arr(metadata);
-	if (check_map(metadata->map))
-	{
+	if (check_map(metadata, metadata->map))
 		return (1);
-	}
 	printf(BLUE"DEBUG: CHECKED MAP"RESET" %s %d\n", __FILE__, __LINE__);
 	return (0);
 }
