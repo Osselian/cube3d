@@ -1,7 +1,7 @@
-NO data/textures/Dungeon_brick_wall_blue.png
-SO ../project/data/textures/Dungeon_brick_wall_blue.png
-WE data/textures/Dungeon_brick_wall_blue.png
-EA data/textures/Dungeon_brick_wall_blue.png
+NO data/textures/greystone.xpm
+SO data/textures/redbrick.xpm
+WE data/textures/bluestone.xpm
+EA data/textures/colorstone.xpm
 
 F 255,30,4
 C 200,30,4

@@ -14,6 +14,7 @@ t_meta	*meta_init(char **argv)
 	// metadata->map = (char **)safe_malloc(sizeof(char *));
 	metadata->map_str = (char *)safe_malloc(sizeof(char *));
 	metadata->maplen = 0;
+	metadata->player_pos[0] = -1;
 	if (parser(argv, metadata))
 	{
 		free_meta(metadata);
