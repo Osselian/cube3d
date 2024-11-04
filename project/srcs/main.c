@@ -18,7 +18,6 @@ int main(int argc, char **argv)
     draw_frame(game);
   	mlx_loop(game->win_mng.mlx);
 	mlx_loop_hook(game->win_mng.mlx, on_key_pressed, game);
-    free_meta(metadata);
     free_data(game);
     return (0);
 }

@@ -8,7 +8,7 @@ Bad
 	bad5.cub: File passed as map or texture doesn't exist
 	bad6.cub: There can not be more than 1 player in the Game, check input file!
 	bad7.cub: INTMAX
-	bad8.cub: Incorrect texture extention, shall be .xpm
+	bad8.cub: There can't be zero players, check input file!
 
 Good
 	good1.cub: a small map

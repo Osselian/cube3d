@@ -41,7 +41,7 @@ static int	*check_player(char **map, t_meta *meta)
 		x = 0;
 		y++;
 	}
-	if (!(*meta->player_pos))
+	if (meta->player_pos[0] == -1)
 	{
 		print_error(ZERO_PLAYERS);
 		return (NULL);
