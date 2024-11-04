@@ -20,21 +20,25 @@ static int parse_color(t_color *txtr, char *ln)
 {
 	char	**rgb;
 	int		i;
+	int		j;
 	char	*tmp;
 
 	rgb = ft_split(ln, ',');
+    txtr->c[3] = 0;
 	i = 0;
+	j = 2;	
 	while (i != 3)
 	{
 		if (check_color(ft_strtrim(rgb[i], "\n")))
 			return (1);
 		tmp = ft_strtrim(rgb[i], "\n");
-		txtr->c[i] = *tmp;
+		txtr->c[j] = ft_atoi(tmp);
 		free(tmp);
+		j--;
 		i++;
 	}
-	free_arr((void **)rgb, free);
-	return (0);
+    free_arr((void **)rgb, free);
+    return (0);
 }
 
 static int	parse_tfile(char **txtr, char *ln)
