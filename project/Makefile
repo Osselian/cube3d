@@ -9,7 +9,7 @@ LOOP = draw_frame.c draw_vertical_line.c exit_game.c game_init.c \
         get_delta_time.c hooks_init.c on_key_pressed.c  
             
 PARSER = check_map.c fill_wall.c meta_init.c parse_dir.c parse_map.c \
-            parser.c 
+            parser.c flood_fill.c
 
 PLAYER = init_player.c move.c rotate.c set_direction.c set_fov.c \
         update_direction.c

@@ -10,7 +10,7 @@
 # define MULTIPLE_PLAYERS		"There can not be more than 1 player in the Game, check input file!\n"
 # define ZERO_PLAYERS			"There can't be zero players, check input file!\n"
 # define BADMAP					"Incorrect map, shall be framed with walls!\n"
-# define BAD_TXTR_EXT			"Incorrect texture extention, shall be .png\n"
+# define BAD_TXTR_EXT			"Incorrect texture extention, shall be .xpm\n"
 # define LONGMAP				"Map is too big, maximum is MAXINTxMAXINT!\n"
 
 # define RESET	"\033[0m"
@@ -59,6 +59,14 @@ MAP documentetion
 	- 1: стена, которую игрок никода не увидит
 	- 0: пустое пространство, которое игрок никода не увидит
 	- s: пустое пространство
+player_pos:
+	- player_pos[0]: строка, где находится игрок
+	- player_pos[1]: колонка, где находится игрок
+	- player_pos[2]: изначальное направление взгляда игрока
+		- 0: N
+		- 1: S
+		- 2: W
+		- 3: E
 */
 typedef struct s_meta
 {
@@ -71,6 +79,7 @@ typedef struct s_meta
 	char			**map;
 	char			*map_str;
 	unsigned int	maplen;
+	int				player_pos[3];
 }	t_meta;
 
 typedef struct s_wallhit
@@ -157,12 +166,13 @@ void	    free_line(void *line);
 void		free_meta(t_meta *meta);
 void		free_mlx(t_mlx *wm, void *main_img, void *text);
 //parser
-int			check_map(char **map);
+int			check_map(t_meta *meta, char **map);
 int			fill_wall(char *ln, int ln_nbr, t_meta *meta);
 t_meta		*meta_init(char **argv);
 int			parse_dir(t_meta *meta, char *ln, long ln_nbr);
 int			parse_map(t_meta *meta, char *ln);
 int			parser(char **argv, t_meta *metadata);
+int			flood_fill(char **map, int x, int y);
 //player
 void	    init_player(t_player *player, int x, int y);
 void		move(int keysym, t_data *g, double delta);
