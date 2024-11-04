@@ -25,7 +25,7 @@ t_data *game_init(t_meta *metadata)
     game->wh = (t_wallhit *)safe_malloc(sizeof(t_wallhit) * (WIN_WIDTH + 1));
     if (!game->wh)
         return (free_data(game));
-    init_player(&game->player, 6, -3);
+    init_player(&game->player, 6, -3);//TODO - заменить на значения из метадаты
     set_direction(&game->player, 'W', 3);
     set_fov(&game->player.dir, &game->player.fov, WIN_WIDTH, 5);
     game->win_mng = new_mlx();
