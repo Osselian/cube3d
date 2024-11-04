@@ -17,12 +17,12 @@ void    print_wallhit(t_wallhit *wallhit, int screen_width)
 {
     int i = 0;
 
-    while (i < screen_width)
-    {
-        printf("texture line - %f, orientation - %c, distance - %f\n", 
-        wallhit[i].texture_line, wallhit[i].orientation, wallhit[i].distance);
-        i++;
-    }
+    // while (i < screen_width)
+    // {
+    //     printf("texture line - %f, orientation - %c, distance - %f\n", 
+    //     wallhit[i].texture_line, wallhit[i].orientation, wallhit[i].distance);
+    //     i++;
+    // }
 }
 
 void    print_metadata(t_meta *meta)

@@ -4,17 +4,19 @@
 static void		put_pixel(int x, int y, t_img *img, int color);
 static void		draw_wall(t_render_info *i, int x, int y);
 
-void draw_vertical_line(t_render_info *i, int x)
+void draw_vertical_line(t_render_info *i, int x, t_meta *metadata)
 {
 	int	y;
 
 	y = -1;
 	while (++y < i->wall_offset)
-		put_pixel(x, y, i->img, W_BLUE);
+		// put_pixel(x, y, i->img, W_BLUE);
+		put_pixel(x, y, i->img, *(metadata->ce_txtr->c));
 	draw_wall(i, x, y);
 	y += i->floor_offset - y;
 	while (++y < WIN_HEIGHT)
-		put_pixel(x, y, i->img, W_GREEN);
+		// put_pixel(x, y, i->img, W_GREEN);
+		put_pixel(x, y, i->img, *(metadata->fl_txtr->c));
 }
 
 static void	draw_wall(t_render_info *i, int x, int y)
