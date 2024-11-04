@@ -17,7 +17,7 @@
 
 /*** game ***/
 // # define FOV 0.785398
-# define FOV 0.685398
+# define FOV 0.585398
 # define PI 3.1415926
 // # define RAY_SPEED 0.01
 # define FPS 90
