@@ -12,6 +12,7 @@
 # define BADMAP					"Incorrect map, shall be framed with walls!\n"
 # define BAD_TXTR_EXT			"Incorrect texture extention, shall be .xpm\n"
 # define LONGMAP				"Map is too big, maximum is MAXINTxMAXINT!\n"
+# define FATAL					"Error: fatal\n"
 
 # define RESET	"\033[0m"
 # define RED	"\033[1;31m"

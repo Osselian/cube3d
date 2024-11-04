@@ -56,7 +56,11 @@ static int	parse_line(int fd, t_meta *metadata)
 int	fill_map_arr(t_meta *metadata)
 {
 	metadata->map = ft_split(metadata->map_str, '\n');
-	//TODO - if (!metadata->map) сделать проверку на NULL 
+	if (!metadata->map)
+	{
+		print_error(FATAL);
+		return (1);
+	}
 	return (0);
 }
 
@@ -66,12 +70,13 @@ int	parser(char **argv, t_meta *metadata)
 
 	if ((fd = ext_check(argv[1])) < 0)
 		return (1);
-	printf(BLUE"DEBUG: CHECKED EXTENTION"RESET" %s %d\n", __FILE__, __LINE__);
+	// printf(BLUE"DEBUG: CHECKED EXTENTION"RESET" %s %d\n", __FILE__, __LINE__);
 	if (parse_line(fd, metadata))
 		return (1);
-	fill_map_arr(metadata);
+	if (fill_map_arr(metadata))
+		return (1);
 	if (check_map(metadata, metadata->map))
 		return (1);
-	printf(BLUE"DEBUG: CHECKED MAP"RESET" %s %d\n", __FILE__, __LINE__);
+	// printf(BLUE"DEBUG: CHECKED MAP"RESET" %s %d\n", __FILE__, __LINE__);
 	return (0);
 }

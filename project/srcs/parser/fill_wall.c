@@ -8,11 +8,11 @@ static int	check_texture_ext(char *txtr)
 
 	if (len < 5 || ft_strncmp((txtr + len - 4), ".xpm", 4))
 	{
-		printf(RED"DEBUG: CHECKED TEXTURE EXT <%s>"RESET" %s %d\n", txtr, __FILE__, __LINE__);
+		// printf(RED"DEBUG: CHECKED TEXTURE EXT <%s>"RESET" %s %d\n", txtr, __FILE__, __LINE__);
 		print_error(BAD_TXTR_EXT);
 		return (1);
 	}
-	printf(BLUE"DEBUG: CHECKED TEXTURE EXT <%s>"RESET" %s %d\n", txtr, __FILE__, __LINE__);
+	// printf(BLUE"DEBUG: CHECKED TEXTURE EXT <%s>"RESET" %s %d\n", txtr, __FILE__, __LINE__);
 	return (0);
 }
 
