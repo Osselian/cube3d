@@ -41,7 +41,7 @@ static int	*check_player(char **map, t_meta *meta)
 		x = 0;
 		y++;
 	}
-	if (!meta->player_pos)
+	if (!(*meta->player_pos))
 	{
 		print_error(ZERO_PLAYERS);
 		return (NULL);
@@ -53,9 +53,9 @@ int	check_map(t_meta *meta, char **map)
 {
 	if (check_player(map, meta) == NULL)
 		return (1);
-	printf(BLUE"DEBUG: CHECKED PLAYER"RESET" %s %d\n", __FILE__, __LINE__);
+	// printf(BLUE"DEBUG: CHECKED PLAYER"RESET" %s %d\n", __FILE__, __LINE__);
 	if (flood_fill(map, meta->player_pos[0], meta->player_pos[1]))
 		return (1);
-	printf(BLUE"DEBUG: FLOODFILLED"RESET" %s %d\n", __FILE__, __LINE__);
+	// printf(BLUE"DEBUG: FLOODFILLED"RESET" %s %d\n", __FILE__, __LINE__);
 	return (0);
 }

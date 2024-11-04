@@ -2,13 +2,20 @@
 
 void	free_meta(t_meta *meta)
 {
-	free(meta->no_txtr);
-	free(meta->so_txtr);
-	free(meta->ea_txtr);
-	free(meta->we_txtr);
-	free(meta->fl_txtr);
-	free(meta->ce_txtr);
-	free_arr((void **)meta->map, free);
+	if (meta->no_txtr)
+		free(meta->no_txtr);
+	if (meta->so_txtr)
+		free(meta->so_txtr);
+	if (meta->ea_txtr)
+		free(meta->ea_txtr);
+	if (meta->we_txtr)
+		free(meta->we_txtr);
+	if (meta->fl_txtr)
+		free(meta->fl_txtr);
+	if (meta->ce_txtr)
+		free(meta->ce_txtr);
+	if (meta->map)
+		free_arr((void **)meta->map, free);
 	free(meta->map_str);
 	free(meta);
 }
