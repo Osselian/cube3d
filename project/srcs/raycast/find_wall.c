@@ -1,6 +1,4 @@
 #include "../../incs/cub3D.h"
-#include <math.h>
-#include <stdbool.h>
 
 bool    is_wall2(int is_hor, t_calc calc_data, char **map)
 {

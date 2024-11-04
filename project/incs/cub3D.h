@@ -89,7 +89,6 @@ typedef struct s_wallhit
 	t_point	hit;
 	double	offset;
 	int		is_vert;
-	double	texture_line;
 	char	orientation;
 }	t_wallhit;
 
@@ -150,7 +149,7 @@ void	    print_wallhit(t_wallhit *wallhit, int screen_width);
 void	    print_metadata(t_meta  *meta);
 // draw
 void		draw_frame(const t_data *g);
-void		draw_vertical_line(t_render_info *i, int x);
+void		draw_vertical_line(t_render_info *i, int x, t_meta *metadata);
 int			exit_game(t_data *data);
 t_data		*game_init(t_meta *metadata);
 double		get_delta_time();
@@ -175,10 +174,10 @@ int			parse_map(t_meta *meta, char *ln);
 int			parser(char **argv, t_meta *metadata);
 int			flood_fill(char **map, int x, int y);
 //player
-void	    init_player(t_player *player, int x, int y);
+void	    init_player(t_player *player, t_meta *metadata);
 void		move(int keysym, t_data *g, double delta);
 void		rotate(int keysym, t_player *player, double delta);
-void	    set_direction(t_player *player, char dir_key, int len);
+void	    set_direction(t_player *player, int dir_key, int len);
 void	    set_fov(t_vector *dir, t_fov *fov, int screen_width, 
 				double fov_width);
 void		update_direction( t_player *p);
