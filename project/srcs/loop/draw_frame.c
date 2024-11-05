@@ -23,7 +23,7 @@ void draw_frame(const t_data *g)
 		wall = select_texture(g->wall, g->wh[i].orientation);
 		dist = fabs(g->wh[i].distance * cos(fabs(p_ang - r_ang)));
 		wall_setup(&render_info, wall, dist, g->wh[i].offset);
-		render_info.img = (t_img *)&g->main_img;
+		render_info.img = (t_img *)&g->main_img;//TODO - обработать зануление структуры
 		draw_vertical_line(&render_info, i, g->m_data);
 	}
 	mlx_put_image_to_window(g->win_mng.mlx, g->win_mng.win, g->main_img.data, 0, 0);
@@ -61,7 +61,7 @@ static void	wall_setup(
 	r_info->wall_offset = (int)(WIN_HEIGHT / 2 - WIN_HEIGHT * FOV / dist);
 	r_info->floor_offset = WIN_HEIGHT - r_info->wall_offset;
 	r_info->wall_height = r_info->floor_offset - r_info->wall_offset;
-	r_info->tx = (int)(off * t->width) % t->width;
+	r_info->tx = (int)fabs((off * t->width));
 	r_info->ty_step = (double)t->height / r_info->wall_height;
 	if (r_info->wall_height > WIN_HEIGHT)
 	{
