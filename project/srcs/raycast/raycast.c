@@ -38,6 +38,8 @@ static void    fill_calc_data(
 
 static void    fill_wallhit(t_wallhit *hit, t_calc calc_data, int screen_width)
 {
+    double i;
+
     hit->distance = calc_data.ray_hit.len;
     hit->hit = calc_data.ray_hit.norm;
     if (calc_data.wall_face_dir < 0)
@@ -45,9 +47,9 @@ static void    fill_wallhit(t_wallhit *hit, t_calc calc_data, int screen_width)
     else
         hit->orientation = calc_data.orients[1];
     if (calc_data.is_vert)
-        hit->offset = fabs(calc_data.ray_hit.val.y);
+        hit->offset = modf(calc_data.ray_hit.val.y, &i);
     else
-        hit->offset = fabs(calc_data.ray_hit.val.x);
+        hit->offset = modf(calc_data.ray_hit.val.x, &i);
     hit->is_vert = calc_data.is_vert;
 }
 
