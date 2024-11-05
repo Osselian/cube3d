@@ -1,5 +1,4 @@
 #include "../../incs/cub3D.h"
-#define FPS 60
 
 static double	get_current_time(void)
 {

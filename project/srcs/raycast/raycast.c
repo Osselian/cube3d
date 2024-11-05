@@ -35,7 +35,7 @@ static void	fill_calc_data(
 }
 
 
-static void	fill_wallhit(t_wallhit *hit, t_calc calc_data, int screen_width)
+static void	fill_wallhit(t_wallhit *hit, t_calc calc_data)
 {
 	double	i;
 
@@ -69,7 +69,7 @@ int	raycast(t_player *player, t_wallhit *hits, int scr_width, char **map)
 			return (0);
 		fill_calc_data(calc_data, &ray, player, line_inds);
 		target = find_wall(calc_data, player->location, map);
-		fill_wallhit(&(hits[i]), target, scr_width);
+		fill_wallhit(&(hits[i]), target);
 		ray.val.x += player->fov.iter_x;
 		ray.val.y += player->fov.iter_y;
 		i++;

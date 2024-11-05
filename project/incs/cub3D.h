@@ -34,13 +34,14 @@
 # define G		"\033[1;32m"
 # define Y		"\033[1;33m"
 
-# include <unistd.h>
 # include <fcntl.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <math.h>
 # include <limits.h>
+# include <math.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 # include "../libs/libft/libft.h"
 # include "../libs/get_next_line/get_next_line.h"
 # include "draw.h"

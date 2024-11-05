@@ -35,27 +35,26 @@ LIBFT_PATH	= libs/libft
 LIBFT_NAME	= libft.a
 LIBS = -L$(LIBFT_PATH) -lft
 
-FLAGS = -Wall -Wextra -g -fsanitize=address #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
-# FLAGS = -Wall -Wextra #-Werror - на Ubuntu  -Werror кидает ошибку, если переменная нигде не используется
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address 
 
-ifeq ($(shell uname), Darwin) #проверяем имя системы, Darwin - имя системы на школьных компах
+ifeq ($(shell uname), Darwin) 
 	MLXPATH = libs/mlx_mac
 	MINILIBX = $(MLXPATH)/libmlx.a 
 	LIBS += -L$(MLXPATH) -lmlx -framework OpenGL -framework AppKit
 else
 	MLXPATH = libs/mlx_linux
 	MINILIBX = $(MLXPATH)/libmlx_Linux.a 
-	LIBS += -L$(MLXPATH) -lmlx_Linux -L/usr/lib/x86_64-linux-gnu -lXext -lX11 -lm #-lz #//usr/lib/x86_64-linux-gnu - папка в которой лежит libm.a - математическая библиотека
+	LIBS += -L$(MLXPATH) -lmlx_Linux -L/usr/lib/x86_64-linux-gnu -lXext -lX11 -lm 
 endif
 
 INCS = -I$(MLXPATH) -I./incs/
 
 all: $(NAME)
 
+bonus: $(NAME)
+
 $(NAME): ${LIBFT_PATH}/${LIBFT_NAME} $(MINILIBX) $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) $(LIBS) -o $(NAME)
-# $(NAME): ${LIBFT_PATH}/${LIBFT_NAME} $(OBJ)
-# 	$(CC) ${LIBFT_PATH}/${LIBFT_NAME} $(OBJ) $(LIBS) -o $(NAME)
 
 ${LIBFT_PATH}/${LIBFT_NAME}:
 	make -C ${LIBFT_PATH}
@@ -76,8 +75,5 @@ fclean: clean
 	make clean -C $(MLXPATH)
 
 re: fclean all 
-
-# fclean_linux: clean fclean
-# re_linux: fclean_linux all 
 
 PHONY: all clean fclean re fclean_linux, re_linux

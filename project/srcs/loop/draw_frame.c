@@ -3,7 +3,7 @@
 static double	fix_ang(double a);
 static t_text	*select_texture(t_text *t, char orient);
 static void		wall_setup(
-					t_render_info *s, double p_ang, t_data *game, int i);
+					t_render_info *s, double p_ang, const t_data *game, int i);
 
 void	draw_frame(const t_data *g)
 {
@@ -50,7 +50,7 @@ static t_text	*select_texture(t_text *t, char orient)
 }
 
 static void	wall_setup(
-	t_render_info *r_info, double p_ang, t_data *g, int i)
+	t_render_info *r_info, double p_ang, const t_data *g, int i)
 {
 	double				r_ang;
 	t_text				*wall;
