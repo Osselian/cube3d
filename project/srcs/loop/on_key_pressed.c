@@ -2,8 +2,8 @@
 
 int	on_key_pressed(int keysym, t_data *g)
 {
-	double	delta;
-	t_player *p;
+	double		delta;
+	t_player	*p;
 
 	if (keysym < 0 || !g)
 		return (1);

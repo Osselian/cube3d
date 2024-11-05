@@ -9,24 +9,24 @@ void	move(int keysym, t_data *g, double delta)
 	t_player	*player;
 	t_point		mov_dir;
 	t_point		new_pos;
-	
+
 	player = &g->player;
 	mov_dir = get_mov_dir(player, keysym);
 	new_pos = get_new_pos(player, mov_dir, delta);
-	if (check_new_pos(g->m_data->map, new_pos, mov_dir)) 
+	if (check_new_pos(g->m_data->map, new_pos, mov_dir))
 	{
-	  player->location = new_pos;
-	  player->loc_x = new_pos.x;
-	  player->loc_y = new_pos.y;
-	  update_direction(player);
-	  set_fov(&player->dir, &player->fov, WIN_WIDTH, 5);
+		player->location = new_pos;
+		player->loc_x = new_pos.x;
+		player->loc_y = new_pos.y;
+		update_direction(player);
+		set_fov(&player->dir, &player->fov, WIN_WIDTH, 5);
 	}
 }
 
-static t_point get_mov_dir(t_player *p, int keysym)
+static t_point	get_mov_dir(t_player *p, int keysym)
 {
 	t_point	mov_dir;
-	
+
 	ft_memset(&mov_dir, 0, sizeof(t_point));
 	if (keysym == KEY_W)
 	{
@@ -48,8 +48,8 @@ static t_point get_mov_dir(t_player *p, int keysym)
 		mov_dir.x = p->dir.norm.y * -1;
 		mov_dir.y = p->dir.norm.x;
 	}
-	return(mov_dir);	
-} 
+	return (mov_dir);
+}
 
 static t_point	get_new_pos(t_player *p, t_point mov_dir, double delta)
 {
@@ -60,17 +60,16 @@ static t_point	get_new_pos(t_player *p, t_point mov_dir, double delta)
 	ft_memset(&new_pos, 0, sizeof(t_point));
 	new_pos.x = p->location.x + mov_dir.x * factor;
 	new_pos.y = p->location.y + mov_dir.y * factor;
-	return(new_pos);	
+	return (new_pos);
 }
 
 static bool	check_new_pos(char **map, t_point new_pos, t_point dir)
 {
-	double new_x;
-	double new_y;
+	double	new_x;
+	double	new_y;
 
 	new_x = new_pos.x;
 	new_y = new_pos.y;
-	//добавляю еще к значению, что бы исключить положение игрока на границе стены
 	if (dir.x > 0)
 		new_x += 0.1;
 	else if (dir.x < 0)

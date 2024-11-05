@@ -12,8 +12,9 @@ static int	check_map_row(char *ln)
 			print_error(LONGMAP);
 			return (1);
 		}
-		if (!(ln[i] == '0' || ln[i] == '1' || ln[i] == 'N' ||
-			ln[i] == 'W' || ln[i] == 'E' || ln[i] == 'S' || ln[i] == ' '))
+		if (!(ln[i] == '0' || ln[i] == '1' || ln[i] == 'N'
+				|| ln[i] == 'W' || ln[i] == 'E' || ln[i] == 'S'
+				|| ln[i] == ' '))
 		{
 			print_error(INCORRECT_MAP_SYMBOL);
 			return (1);
@@ -25,7 +26,7 @@ static int	check_map_row(char *ln)
 
 int	parse_map(t_meta *meta, char *ln)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (check_map_row(ln))
 		return (1);

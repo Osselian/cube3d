@@ -2,8 +2,7 @@ NAME = cub3D
 CC = cc
 GNL = libs/get_next_line/
 
-FREE_RES = free_arr.c free_data.c free_grid.c free_line.c free_meta.c \
-            free_mlx.c
+FREE_RES = free_arr.c free_data.c free_meta.c free_mlx.c
 
 LOOP = draw_frame.c draw_vertical_line.c exit_game.c game_init.c \
         get_delta_time.c hooks_init.c on_key_pressed.c  
@@ -14,8 +13,8 @@ PARSER = check_map.c fill_wall.c meta_init.c parse_dir.c parse_map.c \
 PLAYER = init_player.c move.c rotate.c set_direction.c set_fov.c \
         update_direction.c
 
-RAYCAST = delta_len.c find_wall.c get_grid.c get_line_inds.c \
-            get_vectors_cos_angle.c ray_hit_len.c raycast.c 
+RAYCAST = delta_len.c find_wall.c get_line_inds.c get_vectors_cos_angle.c \
+		ray_hit_len.c raycast.c 
 
 UTILS = print_error.c ft_isspace.c safe_malloc.c check_color.c 
 

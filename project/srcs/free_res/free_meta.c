@@ -1,4 +1,4 @@
-#include "../incs/cub3D.h"
+#include "../../incs/cub3D.h"
 
 void	free_meta(t_meta *meta)
 {

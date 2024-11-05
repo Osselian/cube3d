@@ -1,18 +1,32 @@
+
 #ifndef CUB3D
 # define CUB3D
 
-# define INCORRECT_COORDS		"Incorrect textures in .cub - check coords\n"
-# define INCORRECT_FORMAT		"Incorrect .cub format - leave empty line before FLOOR texture\n"
-# define INCORRECT_FILE			"Incorrect file type. Shall be .cub\n"
-# define INCORRECT_COLOR		"Incorrect color input. Check is it a correct RGB format\n"
-# define NO_FILE				"File passed as map or texture doesn't exist\n"
-# define INCORRECT_MAP_SYMBOL	"Incorrect symbol passed in map scratch. Shall be in [0, 1, W, E, S, N, SPACE]\n"
-# define MULTIPLE_PLAYERS		"There can not be more than 1 player in the Game, check input file!\n"
-# define ZERO_PLAYERS			"There can't be zero players, check input file!\n"
-# define BADMAP					"Incorrect map, shall be framed with walls!\n"
-# define BAD_TXTR_EXT			"Incorrect texture extention, shall be .xpm\n"
-# define LONGMAP				"Map is too big, maximum is MAXINTxMAXINT!\n"
-# define FATAL					"Error: fatal\n"
+# ifdef __linux__
+#  define IS_LINUX 1	
+# else
+#  define IS_LINUX 0	
+# endif
+
+# define INCORRECT_COORDS \
+	"Incorrect textures in .cub - check coords\n"
+# define INCORRECT_FORMAT \
+	"Incorrect .cub format - leave empty line before FLOOR texture\n"
+# define INCORRECT_FILE \
+	"Incorrect file type. Shall be .cub\n"
+# define INCORRECT_COLOR \
+	"Incorrect color input. Check is it a correct RGB format\n"
+# define INCORRECT_MAP_SYMBOL \
+"Incorrect symbol passed in map scratch. Valid are [0, 1, W, E, S, N, SPACE]\n"
+# define MULTIPLE_PLAYERS \
+	"There can not be more than 1 player in the Game, check input file!\n"
+
+# define ZERO_PLAYERS	"There can't be zero players, check input file!\n"
+# define BADMAP			"Incorrect map, shall be framed with walls!\n"
+# define BAD_TXTR_EXT	"Incorrect texture extention, shall be .xpm\n"
+# define LONGMAP		"Map is too big, maximum is MAXINTxMAXINT!\n"
+# define FATAL			"Error: fatal\n"
+# define NO_FILE		"File passed as map or texture doesn't exist\n"
 
 # define RESET	"\033[0m"
 # define RED	"\033[1;31m"
@@ -32,27 +46,29 @@
 # include "draw.h"
 # include "mlx.h"
 
-typedef struct s_point{
-    double x;
-    double y; 
-}   t_point;
+typedef struct s_point
+{
+	double	x;
+	double	y;
+}	t_point;
 
-typedef struct s_line{
-    t_point start;
-    t_point end;
-}   t_line;
+typedef struct s_line
+{
+	t_point	start;
+	t_point	end;
+}	t_line;
 
 typedef struct s_grid
 {
-    t_line  **vert;
-    t_line  **hor;
-}   t_grid;
+	t_line	**vert;
+	t_line	**hor;
+}	t_grid;
 
 typedef union u_color
 {
-  int i;
-  char c[4];
-}  t_color;
+	int		i;
+	char	c[4];
+}	t_color;
 
 /*
 MAP documentetion
@@ -126,14 +142,14 @@ typedef struct s_calc
 	t_vector	ray_hit;
 }	t_calc;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	double	x;
 	double	y;
 	double	len;
 }	t_ray;
 
-typedef struct	s_data
+typedef struct _data
 {
 	t_meta		*m_data;
 	t_mlx		win_mng;
@@ -144,27 +160,22 @@ typedef struct	s_data
 }	t_data;
 
 //debug.c
-void	    print_grid_lines(t_grid *grid);
-void	    print_wallhit(t_wallhit *wallhit, int screen_width);
-void	    print_metadata(t_meta  *meta);
-// draw
+void		print_grid_lines(t_grid *grid);
+void		print_wallhit(t_wallhit *wallhit, int screen_width);
+void		print_metadata(t_meta *meta);
+//free_res
+void		*free_arr(void **arr, void (*free_func)(void *));
+t_data		*free_data(t_data *g);
+void		free_meta(t_meta *meta);
+void		free_mlx(t_mlx *wm, void *main_img, void *text);
+// loop
 void		draw_frame(const t_data *g);
 void		draw_vertical_line(t_render_info *i, int x, t_meta *metadata);
 int			exit_game(t_data *data);
 t_data		*game_init(t_meta *metadata);
-double		get_delta_time();
+double		get_delta_time(void);
 int			hooks_init(t_mlx *wm, t_data *g);
 int			on_key_pressed(int keysym, t_data *g);
-// t_point		pos_sub(const t_point a, const t_point b);
-// t_point		pos_sum(const t_point a, const t_point b);
-
-//free_res
-void	    *free_arr(void **arr, void (*free_func)(void *));
-t_data		*free_data(t_data *g);
-void	    free_grid(t_grid *grid);
-void	    free_line(void *line);
-void		free_meta(t_meta *meta);
-void		free_mlx(t_mlx *wm, void *main_img, void *text);
 //parser
 int			check_map(t_meta *meta, char **map);
 int			fill_wall(char *ln, int ln_nbr, t_meta *meta);
@@ -174,11 +185,11 @@ int			parse_map(t_meta *meta, char *ln);
 int			parser(char **argv, t_meta *metadata);
 int			flood_fill(char **map, int x, int y);
 //player
-void	    init_player(t_player *player, t_meta *metadata);
+void		init_player(t_player *player, t_meta *metadata);
 void		move(int keysym, t_data *g, double delta);
 void		rotate(int keysym, t_player *player, double delta);
-void	    set_direction(t_player *player, int dir_key, int len);
-void	    set_fov(t_vector *dir, t_fov *fov, int screen_width, 
+void		set_direction(t_player *player, int dir_key, int len);
+void		set_fov(t_vector *dir, t_fov *fov, int screen_width,
 				double fov_width);
 void		update_direction( t_player *p);
 //raycast
@@ -190,7 +201,8 @@ double		get_vectors_cos_angle(double proj_x, double proj_y, double raydir_x,
 				double raydir_y);
 t_vector	ray_hit_len(
 				int *line_inds, int index, t_player *player, t_vector *ray);
-int			raycast(t_player *player, t_wallhit *hits, int scr_width, char **map);
+int			raycast(t_player *player, t_wallhit *hits, int scr_width,
+				char **map);
 //utils
 bool		check_color(char *ln);
 bool		ft_isspace(const char a);
