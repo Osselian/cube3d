@@ -1,13 +1,13 @@
-NO ./fdsafdsasdfafds
-NO ./fdsafdsasdfafds
-SO ./fdsafdsasdfafds
-SO ./fdsafdsasdfafds
+NO data/textures/colorstone.xpm
+NO data/textures/colorstone.xpm
+SO data/textures/colorstone.xpm
+SO data/textures/colorstone.xpm
 
-WE ./fdsafdsasdfafds
-WE ./fdsafdsasdfafds
+WE data/textures/colorstone.xpm
+WE data/textures/colorstone.xpm
 
-EA ./fdsafdsasdfafds
-EA ./fdsafdsasdfafds
+EA data/textures/colorstone.xpm
+EA data/textures/colorstone.xpm
 F 0,32,32
 F 0,32,32
 
