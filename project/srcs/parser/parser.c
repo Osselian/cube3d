@@ -34,9 +34,9 @@ static int	ext_check(char *file)
 	return (fd);
 }
 
-static bool	try_parse_map(long ln_nbr, t_meta *metadata, char *ln)
+static bool	try_parse_map(long *ln_nbr, t_meta *metadata, char *ln)
 {
-	if (ln_nbr - 7 == INT_MAX)
+	if (*ln_nbr == INT_MAX)
 	{
 		print_error(LONGMAP);
 		return (false);
@@ -55,18 +55,21 @@ static int	parse_line(int fd, t_meta *metadata)
 	ln = get_next_line(fd);
 	while (ln && *ln)
 	{
-		if (ln_nbr <= 7)
+		if (!(ln_nbr <= 5 && ln[0] == '\n'))
 		{
-			if (parse_dir(metadata, ln, ln_nbr))
+			if (ln_nbr <= 5)
 			{
-				free(ln);
-				return (1);
+				if (parse_dir(metadata, ln, &ln_nbr))
+				{
+					free(ln);
+					return (1);
+				}
 			}
+			else if (!try_parse_map(&ln_nbr, metadata, ln))
+				return (1);
+			ln_nbr++;
 		}
-		else if (!try_parse_map(ln_nbr, metadata, ln))
-			return (1);
 		free(ln);
-		ln_nbr++;
 		ln = get_next_line(fd);
 	}
 	free(ln);

@@ -1,17 +1,10 @@
-NO ./fdsafdsasdfafds
-SO ./fdsafdsasdfafds
+NO data/textures/colorstone.xpm
+SO data/textures/colorstone.xpm
+WE data/textures/colorstone.xpm
+EA data/textures/colorstone.xpm
 
-WE ./fdsafdsasdfafds
-
-EA ./fdsafdsasdfafds
 F 0,32,32
-
-
-
-
-
 C 32,32,32
-
 
 1111111111111
 1N00000000001
