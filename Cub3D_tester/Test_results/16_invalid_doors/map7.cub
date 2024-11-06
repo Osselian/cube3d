@@ -1,15 +1,15 @@
 Error
 Incorrect texture extention, shall be .xpm
-Process:         cub3D [8255]
+Process:         cub3D [12442]
 Path:            /Volumes/VOLUME/*/cub3D
-Load Address:    0x10b716000
+Load Address:    0x109f22000
 Identifier:      cub3D
 Version:         ???
 Code Type:       X86-64
-Parent Process:  bash [7071]
+Parent Process:  bash [11273]
 
-Date/Time:       2024-11-06 21:34:15.435 +0400
-Launch Time:     2024-11-06 21:34:15.197 +0400
+Date/Time:       2024-11-06 21:50:09.662 +0400
+Launch Time:     2024-11-06 21:50:09.422 +0400
 OS Version:      Mac OS X 10.14.6 (18G9323)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
@@ -17,6 +17,6 @@ Analysis Tool Version:  Xcode 11.3.1 (11C505)
 ----
 
 leaks Report Version: 4.0
-Process 8255: 784 nodes malloced for 108 KB
-Process 8255: 0 leaks for 0 total leaked bytes.
+Process 12442: 784 nodes malloced for 108 KB
+Process 12442: 0 leaks for 0 total leaked bytes.
 

@@ -1,15 +1,15 @@
 Error
 Incorrect textures in .cub - check coords
-Process:         cub3D [7539]
+Process:         cub3D [11727]
 Path:            /Volumes/VOLUME/*/cub3D
-Load Address:    0x10dc73000
+Load Address:    0x103144000
 Identifier:      cub3D
 Version:         ???
 Code Type:       X86-64
-Parent Process:  bash [7071]
+Parent Process:  bash [11273]
 
-Date/Time:       2024-11-06 21:33:21.072 +0400
-Launch Time:     2024-11-06 21:33:20.832 +0400
+Date/Time:       2024-11-06 21:49:14.866 +0400
+Launch Time:     2024-11-06 21:49:14.621 +0400
 OS Version:      Mac OS X 10.14.6 (18G9323)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
@@ -17,6 +17,6 @@ Analysis Tool Version:  Xcode 11.3.1 (11C505)
 ----
 
 leaks Report Version: 4.0
-Process 7539: 784 nodes malloced for 108 KB
-Process 7539: 0 leaks for 0 total leaked bytes.
+Process 11727: 784 nodes malloced for 108 KB
+Process 11727: 0 leaks for 0 total leaked bytes.
 
