@@ -24,8 +24,7 @@ bool	check_color(char *ln)
 	int	i;
 
 	i = 0;
-	printf("Color: %s\n", ln);
-	if (ft_strlen(ln) == 0)
+	if (!ln || ft_strlen(ln) == 0)
 		return (return_err(ln));
 	while (ln[i] != '\0')
 	{
