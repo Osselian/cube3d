@@ -1,9 +1,10 @@
 #include "../../incs/cub3D.h"
+#include <stdbool.h>
 
 static int	ext_check(char *file)
 {
-	int i;
-	int fd;
+	int	i;
+	int	fd;
 
 	i = 0;
 	fd = 0;
@@ -21,6 +22,19 @@ static int	ext_check(char *file)
 	return (fd);
 }
 
+static bool	try_parse_map(long ln_nbr, t_meta *metadata, char *ln)
+{
+
+	if (ln_nbr - 7 == INT_MAX)
+	{
+		print_error(LONGMAP);
+		return (false);
+	}
+	if (parse_map(metadata, ln))
+		return (false);
+	return (true);
+}
+
 static int	parse_line(int fd, t_meta *metadata)
 {
 	char	*ln;
@@ -35,16 +49,8 @@ static int	parse_line(int fd, t_meta *metadata)
 			if (parse_dir(metadata, ln, ln_nbr))
 				return (1);
 		}
-		else
-		{
-			if (ln_nbr - 7 == INT_MAX)
-			{
-				print_error(LONGMAP);
-				return (1);
-			}
-			if (parse_map(metadata, ln))
-				return (1);
-		}
+		else if (!try_parse_map(ln_nbr, metadata, ln))
+			return (1);
 		free(ln);
 		ln_nbr++;
 		ln = get_next_line(fd);
@@ -66,17 +72,16 @@ int	fill_map_arr(t_meta *metadata)
 
 int	parser(char **argv, t_meta *metadata)
 {
-	int		fd;
+	int	fd;
 
-	if ((fd = ext_check(argv[1])) < 0)
+	fd = ext_check(argv[1]);
+	if (fd < 0)
 		return (1);
-	// printf(BLUE"DEBUG: CHECKED EXTENTION"RESET" %s %d\n", __FILE__, __LINE__);
 	if (parse_line(fd, metadata))
 		return (1);
 	if (fill_map_arr(metadata))
 		return (1);
 	if (check_map(metadata, metadata->map))
 		return (1);
-	// printf(BLUE"DEBUG: CHECKED MAP"RESET" %s %d\n", __FILE__, __LINE__);
 	return (0);
 }

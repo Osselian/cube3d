@@ -19,11 +19,12 @@ int	parse_dir(t_meta *meta, char *ln, long ln_nbr)
 {
 	char	**coords;
 	int		len;
-	
+
 	coords = NULL;
 	coords = init_coords(coords);
 	len = ft_strlen(coords[ln_nbr]);
-	if (ft_strncmp(coords[ln_nbr], ln, len) || (ln_nbr != 4 && !ft_isspace(ln[len])))
+	if (ft_strncmp(coords[ln_nbr], ln, len)
+		|| (ln_nbr != 4 && !ft_isspace(ln[len])))
 	{
 		free_arr((void **)coords, free);
 		return (print_error(INCORRECT_COORDS));
@@ -33,7 +34,7 @@ int	parse_dir(t_meta *meta, char *ln, long ln_nbr)
 		return (print_error(INCORRECT_FORMAT));
 	if (!(ln_nbr == 4 || ln_nbr == 7))
 	{
-		return(fill_wall(ln + len + 1, ln_nbr, meta));
+		return (fill_wall(ln + len + 1, ln_nbr, meta));
 	}
 	return (0);
 }

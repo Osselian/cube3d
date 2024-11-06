@@ -1,40 +1,29 @@
 #include "../../incs/cub3D.h"
 
-// char *text[] =
-// {
-//     "./data/textures/greystone.xpm", 
-//     "./data/textures/redbrick.xpm",
-//     "./data/textures/bluestone.xpm",
-//     "./data/textures/colorstone.xpm",
-//     NULL
-// };
+static t_mlx	new_mlx(void);
+static t_img	new_img(void *mlx, int w, int h);
+static void		init_img(t_data *game);
 
-static t_mlx   	new_mlx(void);
-static t_img   	new_img(void *mlx, int w, int h);
-static void init_img(t_data *game);
-
-
-t_data *game_init(t_meta *metadata)
+t_data	*game_init(t_meta *metadata)
 {
-    t_data *game;
-    int i = -1;
+	t_data	*game;
 
-    game = (t_data *)safe_malloc(sizeof(t_data));
-    if (!game)
-        return (NULL);
-    game->wh = (t_wallhit *)safe_malloc(sizeof(t_wallhit) * (WIN_WIDTH + 1));
-    if (!game->wh)
-        return (free_data(game));
-    init_player(&game->player, metadata);
-    set_direction(&game->player, metadata->player_pos[2], 3);
-    set_fov(&game->player.dir, &game->player.fov, WIN_WIDTH, 5);
-    game->win_mng = new_mlx();
+	game = (t_data *)safe_malloc(sizeof(t_data));
+	if (!game)
+		return (NULL);
+	game->wh = (t_wallhit *)safe_malloc(sizeof(t_wallhit) * (WIN_WIDTH + 1));
+	if (!game->wh)
+		return (free_data(game));
+	init_player(&game->player, metadata);
+	set_direction(&game->player, metadata->player_pos[2], 3);
+	set_fov(&game->player.dir, &game->player.fov, WIN_WIDTH, 5);
+	game->win_mng = new_mlx();
 	game->main_img = new_img(game->win_mng.mlx, WIN_WIDTH, WIN_HEIGHT);
-    game->wall = malloc(sizeof(t_text) * 4);
-    game->m_data = metadata;
-    init_img(game);
-    raycast(&game->player, game->wh, WIN_WIDTH, game->m_data->map);
-    return (game);
+	game->wall = malloc(sizeof(t_text) * 4);
+	game->m_data = metadata;
+	init_img(game);
+	raycast(&game->player, game->wh, WIN_WIDTH, game->m_data->map);
+	return (game);
 }
 
 static t_mlx	new_mlx(void)
@@ -71,26 +60,29 @@ static t_img	new_img(void *mlx, int w, int h)
 	return (i);
 }
 
-static void init_img(t_data *game)
+static void	init_img(t_data *game)
 {
-    int i = -1;
-    char **paths;
+	int		i;
+	char	**paths;
 
-    paths = (char **)malloc(sizeof(char *) * 4);
-    paths[0] = game->m_data->no_txtr;
-    paths[1] = game->m_data->so_txtr;
-    paths[2] = game->m_data->we_txtr;
-    paths[3] = game->m_data->ea_txtr;
-    while (++i < 4)
-    {
-        game->wall[i].img.data = mlx_xpm_file_to_image(game->win_mng.mlx,
-                                                  paths[i],
-                                                  &game->wall[i].width,
-                                                  &game->wall[i].height);
-        game->wall[i].img.data_addr = mlx_get_data_addr(game->wall[i].img.data,
-                                                    &game->wall[i].img.bits_per_pixel,
-                                                    &game->wall[i].img.size_line,
-                                                    &game->wall[i].img.endian);
-    }
-    free(paths);
+	paths = (char **)malloc(sizeof(char *) * 4);
+	paths[0] = game->m_data->no_txtr;
+	paths[1] = game->m_data->so_txtr;
+	paths[2] = game->m_data->we_txtr;
+	paths[3] = game->m_data->ea_txtr;
+	i = -1;
+	while (++i < 4)
+	{
+		game->wall[i].img.data = mlx_xpm_file_to_image(
+				game->win_mng.mlx,
+				paths[i],
+				&game->wall[i].width,
+				&game->wall[i].height);
+		game->wall[i].img.data_addr = mlx_get_data_addr(
+				game->wall[i].img.data,
+				&game->wall[i].img.bits_per_pixel,
+				&game->wall[i].img.size_line,
+				&game->wall[i].img.endian);
+	}
+	free(paths);
 }

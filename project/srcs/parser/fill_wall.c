@@ -8,15 +8,13 @@ static int	check_texture_ext(char *txtr)
 
 	if (len < 5 || ft_strncmp((txtr + len - 4), ".xpm", 4))
 	{
-		// printf(RED"DEBUG: CHECKED TEXTURE EXT <%s>"RESET" %s %d\n", txtr, __FILE__, __LINE__);
 		print_error(BAD_TXTR_EXT);
 		return (1);
 	}
-	// printf(BLUE"DEBUG: CHECKED TEXTURE EXT <%s>"RESET" %s %d\n", txtr, __FILE__, __LINE__);
 	return (0);
 }
 
-static int parse_color(t_color *txtr, char *ln)
+static int	parse_color(t_color *txtr, char *ln)
 {
 	char	**rgb;
 	int		i;
@@ -24,9 +22,9 @@ static int parse_color(t_color *txtr, char *ln)
 	char	*tmp;
 
 	rgb = ft_split(ln, ',');
-    txtr->c[3] = 0;
+	txtr->c[3] = 0;
 	i = 0;
-	j = 2;	
+	j = 2;
 	while (i != 3)
 	{
 		if (check_color(ft_strtrim(rgb[i], "\n")))
@@ -37,15 +35,15 @@ static int parse_color(t_color *txtr, char *ln)
 		j--;
 		i++;
 	}
-    free_arr((void **)rgb, free);
-    return (0);
+	free_arr((void **)rgb, free);
+	return (0);
 }
 
 static int	parse_tfile(char **txtr, char *ln)
 {
 	int	fd;
 
-	*txtr= ft_strtrim(ln, "\n");
+	*txtr = ft_strtrim(ln, "\n");
 	if (check_texture_ext(*txtr))
 		return (1);
 	fd = open(*txtr, O_RDONLY);
@@ -57,19 +55,19 @@ static int	parse_tfile(char **txtr, char *ln)
 	return (0);
 }
 
-int fill_wall(char *ln, int ln_nbr, t_meta *meta)
+int	fill_wall(char *ln, int ln_nbr, t_meta *meta)
 {
 	if (ln_nbr == 0)
-		return(parse_tfile(&(meta->no_txtr), ln));
+		return (parse_tfile(&(meta->no_txtr), ln));
 	else if (ln_nbr == 1)
-		return(parse_tfile(&(meta->so_txtr), ln));
+		return (parse_tfile(&(meta->so_txtr), ln));
 	else if (ln_nbr == 2)
-		return(parse_tfile(&(meta->we_txtr), ln));
+		return (parse_tfile(&(meta->we_txtr), ln));
 	else if (ln_nbr == 3)
-		return(parse_tfile(&(meta->ea_txtr), ln));
+		return (parse_tfile(&(meta->ea_txtr), ln));
 	if (ln_nbr == 5)
-		return(parse_color(meta->fl_txtr, ln));
+		return (parse_color(meta->fl_txtr, ln));
 	else if (ln_nbr == 6)
-		return(parse_color(meta->ce_txtr, ln));
+		return (parse_color(meta->ce_txtr, ln));
 	return (0);
 }

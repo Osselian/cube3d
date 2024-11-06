@@ -4,7 +4,7 @@
 static void		put_pixel(int x, int y, t_img *img, int color);
 static void		draw_wall(t_render_info *i, int x, int y);
 
-void draw_vertical_line(t_render_info *i, int x, t_meta *metadata)
+void	draw_vertical_line(t_render_info *i, int x, t_meta *metadata)
 {
 	int	y;
 
@@ -19,12 +19,12 @@ void draw_vertical_line(t_render_info *i, int x, t_meta *metadata)
 
 static void	draw_wall(t_render_info *i, int x, int y)
 {
-	int 	index;
+	int	index;
 
 	while (y < i->floor_offset && y < WIN_HEIGHT)
 	{
 		index = (int)(i->ty) * i->t->width + (int)(i->tx);
-  		put_pixel(x, y, i->img, ((int *)i->t->img.data_addr)[index]); 
+		put_pixel(x, y, i->img, ((int *)i->t->img.data_addr)[index]);
 		i->ty += i->ty_step;
 		y++;
 	}
