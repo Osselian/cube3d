@@ -1,9 +1,9 @@
-NO ./fdsafdsasdfafds
-./fdsafdsasdfafds SO
+NO data/textures/colorstone.xpm
+data/textures/colorstone.xpm SO
 
-WE ./fdsafdsasdfafds
+WE data/textures/colorstone.xpm
 
-EA ./fdsafdsasdfafds
+EA data/textures/colorstone.xpm
 F 0,32,32
 
 
