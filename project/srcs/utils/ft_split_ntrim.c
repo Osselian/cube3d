@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_ntrim.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sosokin <sosokin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:21:44 by defimova          #+#    #+#             */
-/*   Updated: 2024/11/06 17:21:46 by defimova         ###   ########.fr       */
+/*   Updated: 2024/11/06 21:07:17 by sosokin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static void	fill_arr(const char *str, char c, char **arr)
 		p2 = ft_strchr(p2, c);
 		if (p2)
 			fill_str(p1, p2, arr, count);
-		else 
+		else
 		{
 			fill_str(p1, (char *)str + ft_strlen(str), arr, count);
-			break;
+			break ;
 		}
 		count++;
 		p2++;
@@ -78,9 +78,9 @@ static size_t	count_words(const char *str, char c)
 
 char	**ft_split_ntrim(char const *s, char c)
 {
-	size_t count;
-	size_t len;
-	char **arr;
+	size_t	count;
+	size_t	len;
+	char	**arr;
 
 	if (!s)
 		return (NULL);
