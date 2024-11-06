@@ -47,7 +47,10 @@ static int	parse_line(int fd, t_meta *metadata)
 		if (ln_nbr <= 7)
 		{
 			if (parse_dir(metadata, ln, ln_nbr))
+			{
+				free(ln);
 				return (1);
+			}
 		}
 		else if (!try_parse_map(ln_nbr, metadata, ln))
 			return (1);
@@ -75,10 +78,14 @@ int	parser(char **argv, t_meta *metadata)
 	int	fd;
 
 	fd = ext_check(argv[1]);
+
 	if (fd < 0)
 		return (1);
 	if (parse_line(fd, metadata))
+	{
+		close(fd);
 		return (1);
+	}
 	if (fill_map_arr(metadata))
 		return (1);
 	if (check_map(metadata, metadata->map))

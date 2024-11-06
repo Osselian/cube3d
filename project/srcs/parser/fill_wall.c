@@ -21,14 +21,17 @@ static int	parse_color(t_color *txtr, char *ln)
 	int		j;
 	char	*tmp;
 
-	rgb = ft_split(ln, ',');
+	rgb = ft_split_ntrim(ln, ',');
 	txtr->c[3] = 0;
 	i = 0;
 	j = 2;
 	while (i != 3)
 	{
 		if (check_color(ft_strtrim(rgb[i], "\n")))
+		{
+			free_arr((void **)rgb, free);
 			return (1);
+		}
 		tmp = ft_strtrim(rgb[i], "\n");
 		txtr->c[j] = ft_atoi(tmp);
 		free(tmp);

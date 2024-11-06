@@ -16,7 +16,7 @@ PLAYER = init_player.c move.c rotate.c set_direction.c set_fov.c \
 RAYCAST = delta_len.c find_wall.c get_line_inds.c get_vectors_cos_angle.c \
 		ray_hit_len.c raycast.c 
 
-UTILS = print_error.c ft_isspace.c safe_malloc.c check_color.c 
+UTILS = print_error.c ft_isspace.c ft_split_ntrim.c safe_malloc.c check_color.c 
 
 SRC = srcs/main.c \
     srcs/debug/debug.c \
@@ -35,7 +35,7 @@ LIBFT_PATH	= libs/libft
 LIBFT_NAME	= libft.a
 LIBS = -L$(LIBFT_PATH) -lft
 
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address 
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address 
 
 ifeq ($(shell uname), Darwin) 
 	MLXPATH = libs/mlx_mac

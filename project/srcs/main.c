@@ -9,7 +9,9 @@ int	main(int argc, char **argv)
 		return (print_error("No .cub file provided!\n"));
 	metadata = meta_init(argv);
 	if (!metadata)
+	{
 		return (1);
+	}
 	game = game_init(metadata);
 	if (!game)
 		return (1);

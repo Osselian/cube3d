@@ -13,7 +13,7 @@ bool	is_wall2(int is_hor, t_calc calc_data, char **map)
 		if (calc_data.ray_hit.norm.y > 0)
 			y++;
 	}
-	else if (!is_hor)
+	else 
 	{
 		x = round(calc_data.ray_hit.val.x);
 		modf(calc_data.ray_hit.val.y, &y);

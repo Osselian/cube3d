@@ -38,6 +38,7 @@ static t_text	*select_texture(t_text *t, char orient)
 {
 	t_text	*wall;
 
+	wall = NULL;
 	if (orient == 's')
 		wall = t;
 	else if (orient == 'n')

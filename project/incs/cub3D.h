@@ -207,6 +207,7 @@ int			raycast(t_player *player, t_wallhit *hits, int scr_width,
 //utils
 bool		check_color(char *ln);
 bool		ft_isspace(const char a);
+char		**ft_split_ntrim(char const *s, char c);
 int			print_error(char *mes);
 void		*safe_malloc(size_t str);
 

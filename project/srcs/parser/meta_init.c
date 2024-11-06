@@ -13,6 +13,7 @@ t_meta	*meta_init(char **argv)
 	if (parser(argv, metadata))
 	{
 		free_meta(metadata);
+		system("leaks cub3D");
 		return (NULL);
 	}
 	return (metadata);
