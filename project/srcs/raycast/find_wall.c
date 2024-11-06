@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_wall.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 17:30:46 by defimova          #+#    #+#             */
+/*   Updated: 2024/11/06 17:30:47 by defimova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../incs/cub3D.h"
 #include <math.h>
 
@@ -13,7 +25,7 @@ bool	is_wall2(int is_hor, t_calc calc_data, char **map)
 		if (calc_data.ray_hit.norm.y > 0)
 			y++;
 	}
-	else 
+	else
 	{
 		x = round(calc_data.ray_hit.val.x);
 		modf(calc_data.ray_hit.val.y, &y);

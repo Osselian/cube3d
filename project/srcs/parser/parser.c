@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 17:17:53 by defimova          #+#    #+#             */
+/*   Updated: 2024/11/06 17:17:54 by defimova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../incs/cub3D.h"
 #include <stdbool.h>
 
@@ -24,7 +36,6 @@ static int	ext_check(char *file)
 
 static bool	try_parse_map(long ln_nbr, t_meta *metadata, char *ln)
 {
-
 	if (ln_nbr - 7 == INT_MAX)
 	{
 		print_error(LONGMAP);
@@ -78,7 +89,6 @@ int	parser(char **argv, t_meta *metadata)
 	int	fd;
 
 	fd = ext_check(argv[1]);
-
 	if (fd < 0)
 		return (1);
 	if (parse_line(fd, metadata))
