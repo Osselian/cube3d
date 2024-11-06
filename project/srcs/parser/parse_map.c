@@ -21,7 +21,7 @@ static int	check_map_row(char *ln)
 	{
 		free(ln);
 		return (print_error(EMPTYLINEINMAP));
-	}	
+	}
 	while ((ln[i] != '\0' && ln[i] != '\n'))
 	{
 		if (i == INT_MAX)

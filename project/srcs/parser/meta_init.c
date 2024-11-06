@@ -27,5 +27,6 @@ t_meta	*meta_init(char **argv)
 		free_meta(metadata);
 		return (NULL);
 	}
+	system("leaks cub3D");
 	return (metadata);
 }

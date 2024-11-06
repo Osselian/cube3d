@@ -1,19 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 22:06:12 by defimova          #+#    #+#             */
+/*   Updated: 2024/11/06 22:06:13 by defimova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DRAW_H
 # define DRAW_H
 
 # define WIN_WIDTH 1400
 # define WIN_HEIGHT 900
 
-/*** player ***/
 # define P_ROTATE_SPEED 2
 # define P_MOVE_SPEED 15
 
-/*** game ***/
 # define FOV 0.585398
 # define PI 3.1415926
-#define FPS 60
+# define FPS 60
 
-/*** keycodes, events and masks ***/
 # ifdef __APPLE__
 #  define KEY_ESC			53
 #  define KEY_W				13
