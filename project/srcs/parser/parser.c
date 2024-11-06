@@ -60,10 +60,7 @@ static int	parse_line(int fd, t_meta *metadata)
 			if (ln_nbr <= 5)
 			{
 				if (parse_dir(metadata, ln, &ln_nbr))
-				{
-					free(ln);
-					return (1);
-				}
+					return (free_ln_err(ln));
 			}
 			else if (!try_parse_map(&ln_nbr, metadata, ln))
 				return (1);

@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 22:06:00 by defimova          #+#    #+#             */
+/*   Updated: 2024/11/06 22:06:04 by defimova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef CUB3D
-# define CUB3D
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # ifdef __linux__
 #  define IS_LINUX 1	
@@ -72,21 +83,6 @@ typedef union u_color
 	char	c[4];
 }	t_color;
 
-/*
-MAP documentetion
-	- N, S, W, E: изначальная координата игрока
-	- 1: стена, которую игрок никода не увидит
-	- 0: пустое пространство, которое игрок никода не увидит
-	- s: пустое пространство
-player_pos:
-	- player_pos[0]: строка, где находится игрок
-	- player_pos[1]: колонка, где находится игрок
-	- player_pos[2]: изначальное направление взгляда игрока
-		- 0: N
-		- 1: S
-		- 2: W
-		- 3: E
-*/
 typedef struct s_meta
 {
 	char			*no_txtr;
@@ -161,16 +157,14 @@ typedef struct _data
 	t_wallhit	*wh;
 }	t_data;
 
-//debug.c
 void		print_grid_lines(t_grid *grid);
 void		print_wallhit(t_wallhit *wallhit, int screen_width);
 void		print_metadata(t_meta *meta);
-//free_res
 void		*free_arr(void **arr, void (*free_func)(void *));
 t_data		*free_data(t_data *g);
 void		free_meta(t_meta *meta);
 void		free_mlx(t_mlx *wm, void *main_img, void *text);
-// loop
+int			free_ln_err(char *ln);
 void		draw_frame(const t_data *g);
 void		draw_vertical_line(t_render_info *i, int x, t_meta *metadata);
 int			exit_game(t_data *data);
@@ -178,7 +172,6 @@ t_data		*game_init(t_meta *metadata);
 double		get_delta_time(void);
 int			hooks_init(t_mlx *wm, t_data *g);
 int			on_key_pressed(int keysym, t_data *g);
-//parser
 int			check_map(t_meta *meta, char **map);
 int			fill_wall(char *ln, int ln_nbr, t_meta *meta);
 t_meta		*meta_init(char **argv);
@@ -186,7 +179,6 @@ int			parse_dir(t_meta *meta, char *ln, long *ln_nbr);
 int			parse_map(t_meta *meta, char *ln);
 int			parser(char **argv, t_meta *metadata);
 int			flood_fill(char **map, int x, int y);
-//player
 void		init_player(t_player *player, t_meta *metadata);
 void		move(int keysym, t_data *g, double delta);
 void		rotate(int keysym, t_player *player, double delta);
@@ -194,10 +186,9 @@ void		set_direction(t_player *player, int dir_key, int len);
 void		set_fov(t_vector *dir, t_fov *fov, int screen_width,
 				double fov_width);
 void		update_direction( t_player *p);
-//raycast
 double		delta_len(int index, t_point ray);
 t_calc		find_wall(t_calc *calc_data, t_point loc, char **map);
-t_grid		*get_grid(char **map); //возможно, не понадобиться
+t_grid		*get_grid(char **map);
 int			get_line_inds(int *indexes, t_point location, t_point dir);
 double		get_vectors_cos_angle(double proj_x, double proj_y, double raydir_x,
 				double raydir_y);
@@ -205,7 +196,6 @@ t_vector	ray_hit_len(
 				int *line_inds, int index, t_player *player, t_vector *ray);
 int			raycast(t_player *player, t_wallhit *hits, int scr_width,
 				char **map);
-//utils
 bool		check_color(char *ln);
 bool		ft_isspace(const char a);
 char		**ft_split_ntrim(char const *s, char c);
