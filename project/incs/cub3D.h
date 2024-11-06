@@ -181,7 +181,7 @@ int			on_key_pressed(int keysym, t_data *g);
 int			check_map(t_meta *meta, char **map);
 int			fill_wall(char *ln, int ln_nbr, t_meta *meta);
 t_meta		*meta_init(char **argv);
-int			parse_dir(t_meta *meta, char *ln, long ln_nbr);
+int			parse_dir(t_meta *meta, char *ln, long *ln_nbr);
 int			parse_map(t_meta *meta, char *ln);
 int			parser(char **argv, t_meta *metadata);
 int			flood_fill(char **map, int x, int y);
