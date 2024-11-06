@@ -55,7 +55,7 @@ static int	parse_line(int fd, t_meta *metadata)
 	ln = get_next_line(fd);
 	while (ln && *ln)
 	{
-		if (!(ln_nbr <= 5 && ln[0] == '\n'))
+		if (!(ln_nbr <= 6 && ln[0] == '\n'))
 		{
 			if (ln_nbr <= 5)
 			{
