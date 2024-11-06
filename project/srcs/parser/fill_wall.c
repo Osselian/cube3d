@@ -79,9 +79,9 @@ int	fill_wall(char *ln, int ln_nbr, t_meta *meta)
 		return (parse_tfile(&(meta->we_txtr), ln));
 	else if (ln_nbr == 3)
 		return (parse_tfile(&(meta->ea_txtr), ln));
-	if (ln_nbr == 5)
+	if (ln_nbr == 4)
 		return (parse_color(meta->fl_txtr, ln));
-	else if (ln_nbr == 6)
+	else if (ln_nbr == 5)
 		return (parse_color(meta->ce_txtr, ln));
 	return (0);
 }
