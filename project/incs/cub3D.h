@@ -27,6 +27,7 @@
 # define LONGMAP		"Map is too big, maximum is MAXINTxMAXINT!\n"
 # define FATAL			"Error: fatal\n"
 # define NO_FILE		"File passed as map or texture doesn't exist\n"
+# define EMPTYLINEINMAP "Empty line inside map\n"
 
 # define RESET	"\033[0m"
 # define RED	"\033[1;31m"

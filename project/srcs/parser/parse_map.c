@@ -17,6 +17,11 @@ static int	check_map_row(char *ln)
 	unsigned int	i;
 
 	i = 0;
+	if (ln[0] == '\n')
+	{
+		free(ln);
+		return (print_error(EMPTYLINEINMAP));
+	}	
 	while ((ln[i] != '\0' && ln[i] != '\n'))
 	{
 		if (i == INT_MAX)
@@ -26,11 +31,10 @@ static int	check_map_row(char *ln)
 		}
 		if (!(ln[i] == '0' || ln[i] == '1' || ln[i] == 'N'
 				|| ln[i] == 'W' || ln[i] == 'E' || ln[i] == 'S'
-				|| ln[i] == ' '))
+				|| ln[i] == ' ' || ln[i] == 9))
 		{
 			free(ln);
-			print_error(INCORRECT_MAP_SYMBOL);
-			return (1);
+			return (print_error(INCORRECT_MAP_SYMBOL));
 		}
 		i++;
 	}
