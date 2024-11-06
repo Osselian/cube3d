@@ -16,7 +16,8 @@ int	flood_fill(char **map, int x, int y);
 
 static int	flood_fill_helper(char **map, int x, int y)
 {
-	if (!map || !map[x] || !map[x][y] || map[x][y] == '\0' || map[x][y] == ' ')
+	if (!map || x < 0 || y < 0 || !map[x] || !map[x][y]
+		|| map[x][y] == '\0' || map[x][y] == ' ')
 	{
 		return (print_error(BADMAP));
 	}
