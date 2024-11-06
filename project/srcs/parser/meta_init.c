@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sosokin <sosokin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:17:17 by defimova          #+#    #+#             */
-/*   Updated: 2024/11/06 17:17:18 by defimova         ###   ########.fr       */
+/*   Updated: 2024/11/06 22:03:26 by sosokin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_meta	*meta_init(char **argv)
 	if (parser(argv, metadata))
 	{
 		free_meta(metadata);
-		system("leaks cub3D");
 		return (NULL);
 	}
 	return (metadata);
