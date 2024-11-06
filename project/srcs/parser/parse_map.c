@@ -28,6 +28,7 @@ static int	check_map_row(char *ln)
 				|| ln[i] == 'W' || ln[i] == 'E' || ln[i] == 'S'
 				|| ln[i] == ' '))
 		{
+			free(ln);
 			print_error(INCORRECT_MAP_SYMBOL);
 			return (1);
 		}
