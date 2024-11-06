@@ -7,7 +7,6 @@ static void	fill_str(char *p1, char *p2, char **arr, int count)
 
 	i = 0;
 	len = p2 - p1;
-	printf("len: %d, str: %s\n", len, p1);
 	arr[count] = (char *)malloc(sizeof(char) * (len + 1));
 	while (p1 != p2)
 	{
@@ -30,12 +29,17 @@ static void	fill_arr(const char *str, char c, char **arr)
 	while (*p2)
 	{
 		p2 = ft_strchr(p2, c);
-		fill_str(p1, p2, arr, count);
+		if (p2)
+			fill_str(p1, p2, arr, count);
+		else 
+		{
+			fill_str(p1, (char *)str + ft_strlen(str), arr, count);
+			break;
+		}
 		count++;
 		p2++;
 		p1 = p2;
 	}
-	fill_str(p1, p2, arr, count);
 }
 
 static size_t	count_words(const char *str, char c)
