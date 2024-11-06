@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_wall.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 17:16:31 by defimova          #+#    #+#             */
+/*   Updated: 2024/11/06 17:16:44 by defimova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../incs/cub3D.h"
 
 static int	check_texture_ext(char *txtr)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(txtr);
-
 	if (len < 5 || ft_strncmp((txtr + len - 4), ".xpm", 4))
 	{
 		print_error(BAD_TXTR_EXT);

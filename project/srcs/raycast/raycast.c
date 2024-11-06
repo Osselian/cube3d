@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 17:31:51 by defimova          #+#    #+#             */
+/*   Updated: 2024/11/06 17:31:53 by defimova         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../incs/cub3D.h"
 
 static t_vector	set_ray(double raypoint_x, double raypoint_y, t_player *player)
@@ -25,7 +37,6 @@ static void	fill_calc_data(
 	calc_data[0].len_delta = delta_len(1, ray->val);
 	calc_data[0].wall_face_dir = ray->val.x;
 	calc_data[0].ray_hit = ray_hit_len(line_inds, 1, player, ray);
-
 	calc_data[1].is_vert = 0;
 	calc_data[1].orients[0] = 's';
 	calc_data[1].orients[1] = 'n';
@@ -33,7 +44,6 @@ static void	fill_calc_data(
 	calc_data[1].wall_face_dir = ray->val.y;
 	calc_data[1].ray_hit = ray_hit_len(line_inds, 0, player, ray);
 }
-
 
 static void	fill_wallhit(t_wallhit *hit, t_calc calc_data)
 {
