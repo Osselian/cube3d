@@ -20,7 +20,8 @@ static int	check_txtr_input(char *ln, char **txtrs, t_meta *meta)
 
 	i = 0;
 	txtrs_arr = ft_split_ntrim(ln, ' ');
-	if (txtrs_arr && txtrs_arr[2] && txtrs_arr[2][0] != '\0')
+	if (!txtrs_arr || !txtrs_arr[0] || txtrs_arr[0][0] == '\0' || !txtrs_arr[1] ||
+		txtrs_arr[1][0] == '\0' || (txtrs_arr && txtrs_arr[2] && txtrs_arr[2][0] != '\0'))
 	{
 		free_arr((void **)txtrs_arr, free);
 		return (1);
