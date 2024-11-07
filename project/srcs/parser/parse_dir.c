@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parse_dir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sosokin <sosokin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:17:41 by defimova          #+#    #+#             */
-/*   Updated: 2024/11/06 17:17:42 by defimova         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:24:02 by sosokin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/cub3D.h"
 
+static bool	is_txtrs_not_valid(char **txtrs_arr)
+{
+	return (!txtrs_arr || !txtrs_arr[0] || txtrs_arr[0][0] == '\0'
+		|| !txtrs_arr[1] || txtrs_arr[1][0] == '\0' || (txtrs_arr
+			&& txtrs_arr[2] && txtrs_arr[2][0] != '\0'));
+}
 
 static int	check_txtr_input(char *ln, char **txtrs, t_meta *meta)
 {
@@ -19,9 +25,8 @@ static int	check_txtr_input(char *ln, char **txtrs, t_meta *meta)
 	int		i;
 
 	i = 0;
-	txtrs_arr = ft_split_ntrim(ln, ' ');
-	if (!txtrs_arr || !txtrs_arr[0] || txtrs_arr[0][0] == '\0' || !txtrs_arr[1] ||
-		txtrs_arr[1][0] == '\0' || (txtrs_arr && txtrs_arr[2] && txtrs_arr[2][0] != '\0'))
+	txtrs_arr = ft_split(ln, ' ');
+	if (is_txtrs_not_valid(txtrs_arr))
 	{
 		free_arr((void **)txtrs_arr, free);
 		return (1);

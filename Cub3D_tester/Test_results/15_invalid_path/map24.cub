@@ -1,22 +1,24 @@
 Error
 File passed as map or texture doesn't exist
-Process:         cub3D [12318]
+Error
+Incorrect textures in .cub - check coords
+Process:         cub3D [73695]
 Path:            /Volumes/VOLUME/*/cub3D
-Load Address:    0x10ad8c000
+Load Address:    0x100866000
 Identifier:      cub3D
 Version:         ???
 Code Type:       X86-64
-Parent Process:  bash [11273]
+Parent Process:  bash [72723]
 
-Date/Time:       2024-11-06 21:50:00.033 +0400
-Launch Time:     2024-11-06 21:49:59.792 +0400
-OS Version:      Mac OS X 10.14.6 (18G9323)
+Date/Time:       2024-11-07 16:48:16.213 +0400
+Launch Time:     2024-11-07 16:48:15.935 +0400
+OS Version:      Mac OS X 10.14.6 (18G103)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
 Analysis Tool Version:  Xcode 11.3.1 (11C505)
 ----
 
 leaks Report Version: 4.0
-Process 12318: 784 nodes malloced for 108 KB
-Process 12318: 0 leaks for 0 total leaked bytes.
+Process 73695: 787 nodes malloced for 108 KB
+Process 73695: 0 leaks for 0 total leaked bytes.
 

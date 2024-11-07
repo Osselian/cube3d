@@ -1,22 +1,22 @@
 Error
-Incorrect textures in .cub - check coords
-Process:         cub3D [11630]
+There can't be zero players, check input file!
+Process:         cub3D [73075]
 Path:            /Volumes/VOLUME/*/cub3D
-Load Address:    0x108d49000
+Load Address:    0x10fe6c000
 Identifier:      cub3D
 Version:         ???
 Code Type:       X86-64
-Parent Process:  bash [11273]
+Parent Process:  bash [72723]
 
-Date/Time:       2024-11-06 21:49:08.853 +0400
-Launch Time:     2024-11-06 21:49:08.606 +0400
-OS Version:      Mac OS X 10.14.6 (18G9323)
+Date/Time:       2024-11-07 16:47:19.868 +0400
+Launch Time:     2024-11-07 16:47:19.592 +0400
+OS Version:      Mac OS X 10.14.6 (18G103)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
 Analysis Tool Version:  Xcode 11.3.1 (11C505)
 ----
 
 leaks Report Version: 4.0
-Process 11630: 784 nodes malloced for 108 KB
-Process 11630: 0 leaks for 0 total leaked bytes.
+Process 73075: 786 nodes malloced for 108 KB
+Process 73075: 0 leaks for 0 total leaked bytes.
 
