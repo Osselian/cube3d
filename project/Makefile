@@ -2,8 +2,7 @@ NAME = cub3D
 CC = cc
 GNL = libs/get_next_line/
 
-FREE_RES = free_arr.c free_data.c free_meta.c free_mlx.c free_ln_err.c \
-		free_arrarr.c
+FREE_RES = free_arr.c free_data.c free_meta.c free_mlx.c free_ln_err.c
 
 LOOP = draw_frame.c draw_vertical_line.c exit_game.c game_init.c \
         get_delta_time.c hooks_init.c on_key_pressed.c  

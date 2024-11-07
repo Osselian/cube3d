@@ -14,6 +14,9 @@
 
 void	free_meta(t_meta *meta)
 {
+	int	i;
+
+	i = 0;
 	if (meta->no_txtr)
 		free(meta->no_txtr);
 	if (meta->so_txtr)
@@ -28,8 +31,8 @@ void	free_meta(t_meta *meta)
 		free(meta->ce_txtr);
 	if (meta->map)
 		free_arr((void **)meta->map, free);
-	if (meta->txtrs)
-		free_arrarr((void ***)meta->txtrs, free);
+	while (i <= 6)
+		free(meta->txtrs[i++]);
 	free(meta->map_str);
 	free(meta);
 }

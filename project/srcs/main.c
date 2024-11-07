@@ -21,16 +21,13 @@ int	main(int argc, char **argv)
 		return (print_error("No .cub file provided!\n"));
 	metadata = meta_init(argv);
 	if (!metadata)
-	{
 		return (1);
-	}
 	game = game_init(metadata);
 	if (!game)
 		return (1);
 	hooks_init(&game->win_mng, game);
 	draw_frame(game);
 	mlx_loop(game->win_mng.mlx);
-	free_meta(metadata);
 	free_data(game);
 	return (0);
 }
