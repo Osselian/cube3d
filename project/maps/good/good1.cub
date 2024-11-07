@@ -3,8 +3,8 @@ SO data/textures/redbrick.xpm
 WE data/textures/bluestone.xpm
 EA data/textures/colorstone.xpm
 
-F 255,30,4
-C 200,30,4
+F 55,30,4
+C 200,130,4
 
 11111111111
 10000100001

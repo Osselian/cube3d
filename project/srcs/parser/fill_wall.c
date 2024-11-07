@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: defimova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sosokin <sosokin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:16:31 by defimova          #+#    #+#             */
-/*   Updated: 2024/11/06 17:16:44 by defimova         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:19:19 by sosokin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static int	check_texture_ext(char *txtr)
 	return (0);
 }
 
+static int	free_rgb(char **rgb)
+{
+	free_arr((void **)rgb, free);
+	return (1);
+}
+
 static int	parse_color(t_color *txtr, char *ln)
 {
 	char	**rgb;
@@ -41,10 +47,7 @@ static int	parse_color(t_color *txtr, char *ln)
 	while (i != 3)
 	{
 		if (check_color(ft_strtrim(rgb[i], "\n")))
-		{
-			free_arr((void **)rgb, free);
-			return (1);
-		}
+			return (free_rgb(rgb));
 		tmp = ft_strtrim(rgb[i], "\n");
 		txtr->c[j] = ft_atoi(tmp);
 		free(tmp);

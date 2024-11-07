@@ -36,7 +36,7 @@ LIBFT_PATH	= libs/libft
 LIBFT_NAME	= libft.a
 LIBS = -L$(LIBFT_PATH) -lft
 
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address 
+FLAGS = -Wall -Wextra -Werror 
 
 ifeq ($(shell uname), Darwin) 
 	MLXPATH = libs/mlx_mac

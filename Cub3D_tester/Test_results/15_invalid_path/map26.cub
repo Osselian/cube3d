@@ -1,22 +1,22 @@
 Error
 There can't be zero players, check input file!
-Process:         cub3D [12327]
+Process:         cub3D [73703]
 Path:            /Volumes/VOLUME/*/cub3D
-Load Address:    0x10cfb9000
+Load Address:    0x1080f4000
 Identifier:      cub3D
 Version:         ???
 Code Type:       X86-64
-Parent Process:  bash [11273]
+Parent Process:  bash [72723]
 
-Date/Time:       2024-11-06 21:50:00.721 +0400
-Launch Time:     2024-11-06 21:50:00.482 +0400
-OS Version:      Mac OS X 10.14.6 (18G9323)
+Date/Time:       2024-11-07 16:48:16.973 +0400
+Launch Time:     2024-11-07 16:48:16.701 +0400
+OS Version:      Mac OS X 10.14.6 (18G103)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
 Analysis Tool Version:  Xcode 11.3.1 (11C505)
 ----
 
 leaks Report Version: 4.0
-Process 12327: 783 nodes malloced for 108 KB
-Process 12327: 0 leaks for 0 total leaked bytes.
+Process 73703: 786 nodes malloced for 108 KB
+Process 73703: 0 leaks for 0 total leaked bytes.
 
