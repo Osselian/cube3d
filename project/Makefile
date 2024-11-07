@@ -2,7 +2,8 @@ NAME = cub3D
 CC = cc
 GNL = libs/get_next_line/
 
-FREE_RES = free_arr.c free_data.c free_meta.c free_mlx.c free_ln_err.c
+FREE_RES = free_arr.c free_data.c free_meta.c free_mlx.c free_ln_err.c \
+		free_arrarr.c
 
 LOOP = draw_frame.c draw_vertical_line.c exit_game.c game_init.c \
         get_delta_time.c hooks_init.c on_key_pressed.c  
@@ -16,7 +17,8 @@ PLAYER = init_player.c move.c rotate.c set_direction.c set_fov.c \
 RAYCAST = delta_len.c find_wall.c get_line_inds.c get_vectors_cos_angle.c \
 		ray_hit_len.c raycast.c 
 
-UTILS = print_error.c ft_isspace.c ft_split_ntrim.c safe_malloc.c check_color.c 
+UTILS = print_error.c ft_isspace.c ft_split_ntrim.c safe_malloc.c check_color.c  \
+		ft_strcmp.c
 
 SRC = srcs/main.c \
     srcs/debug/debug.c \
@@ -35,7 +37,7 @@ LIBFT_PATH	= libs/libft
 LIBFT_NAME	= libft.a
 LIBS = -L$(LIBFT_PATH) -lft
 
-FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address 
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address 
 
 ifeq ($(shell uname), Darwin) 
 	MLXPATH = libs/mlx_mac

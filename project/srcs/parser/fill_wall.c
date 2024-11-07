@@ -69,19 +69,29 @@ static int	parse_tfile(char **txtr, char *ln)
 	return (0);
 }
 
-int	fill_wall(char *ln, int ln_nbr, t_meta *meta)
+int	fill_wall(t_meta *meta)
 {
-	if (ln_nbr == 0)
-		return (parse_tfile(&(meta->no_txtr), ln));
-	else if (ln_nbr == 1)
-		return (parse_tfile(&(meta->so_txtr), ln));
-	else if (ln_nbr == 2)
-		return (parse_tfile(&(meta->we_txtr), ln));
-	else if (ln_nbr == 3)
-		return (parse_tfile(&(meta->ea_txtr), ln));
-	if (ln_nbr == 4)
-		return (parse_color(meta->fl_txtr, ln));
-	else if (ln_nbr == 5)
-		return (parse_color(meta->ce_txtr, ln));
+	int	i;
+
+	i = 0;
+	printf("DEBUG %s %d\n", __FILE__, __LINE__);
+	while (i <= 5)
+	{
+		printf("DEBUG %s %d %s\n", __FILE__, __LINE__, meta->txtrs[i][1]);
+		if (i == 0 && parse_tfile(&(meta->no_txtr), meta->txtrs[i][1]))
+			return (1);
+		else if (i == 1 && parse_tfile(&(meta->so_txtr), meta->txtrs[i][1]))
+			return (1);
+		else if (i == 2 && parse_tfile(&(meta->we_txtr), meta->txtrs[i][1]))
+			return (1);
+		else if (i == 3 && parse_tfile(&(meta->ea_txtr), meta->txtrs[i][1]))
+			return (1);
+		else if (i == 4 && parse_color(meta->fl_txtr, meta->txtrs[i][1]))
+			return (1);
+		else if (i == 5 && parse_color(meta->ce_txtr, meta->txtrs[i][1]))
+			return (1);
+		i++;
+	}
+	printf("DEBUG %s %d\n", __FILE__, __LINE__);
 	return (0);
 }

@@ -95,6 +95,7 @@ typedef struct s_meta
 	char			*map_str;
 	unsigned int	maplen;
 	int				player_pos[3];
+	char			***txtrs;
 }	t_meta;
 
 typedef struct s_wallhit
@@ -165,6 +166,7 @@ t_data		*free_data(t_data *g);
 void		free_meta(t_meta *meta);
 void		free_mlx(t_mlx *wm, void *main_img, void *text);
 int			free_ln_err(char *ln);
+void		*free_arrarr(void ***arr, void (*free_func)(void *));
 void		draw_frame(const t_data *g);
 void		draw_vertical_line(t_render_info *i, int x, t_meta *metadata);
 int			exit_game(t_data *data);
@@ -173,10 +175,10 @@ double		get_delta_time(void);
 int			hooks_init(t_mlx *wm, t_data *g);
 int			on_key_pressed(int keysym, t_data *g);
 int			check_map(t_meta *meta, char **map);
-int			fill_wall(char *ln, int ln_nbr, t_meta *meta);
+int			fill_wall(t_meta *meta);
 t_meta		*meta_init(char **argv);
-int			parse_dir(t_meta *meta, char *ln, long *ln_nbr);
-int			parse_map(t_meta *meta, char *ln);
+int			parse_dir(t_meta *meta, char *ln, bool *texture_flg);
+int			parse_map(t_meta *meta, char *ln, bool *map_flg);
 int			parser(char **argv, t_meta *metadata);
 int			flood_fill(char **map, int x, int y);
 void		init_player(t_player *player, t_meta *metadata);
@@ -198,6 +200,7 @@ int			raycast(t_player *player, t_wallhit *hits, int scr_width,
 				char **map);
 bool		check_color(char *ln);
 bool		ft_isspace(const char a);
+int			ft_strcmp(char *s1, char *s2);
 char		**ft_split_ntrim(char const *s, char c);
 int			print_error(char *mes);
 void		*safe_malloc(size_t str);

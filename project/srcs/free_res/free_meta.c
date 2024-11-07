@@ -28,6 +28,8 @@ void	free_meta(t_meta *meta)
 		free(meta->ce_txtr);
 	if (meta->map)
 		free_arr((void **)meta->map, free);
+	if (meta->txtrs)
+		free_arrarr((void ***)meta->txtrs, free);
 	free(meta->map_str);
 	free(meta);
 }

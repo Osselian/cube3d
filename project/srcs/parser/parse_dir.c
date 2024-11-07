@@ -12,34 +12,76 @@
 
 #include "../../incs/cub3D.h"
 
-static char	**init_coords(char **coords)
+static int	check_txtr_input(char *ln, char ***txtrs)
 {
-	coords = (char **)safe_malloc(8 * sizeof(char *));
-	coords[0] = ft_strdup("NO");
-	coords[1] = ft_strdup("SO");
-	coords[2] = ft_strdup("WE");
-	coords[3] = ft_strdup("EA");
-	coords[4] = ft_strdup("F");
-	coords[5] = ft_strdup("C");
-	coords[6] = ft_strdup("\0");
-	coords[7] = NULL;
-	return (coords);
+	char	**txtrs_arr;
+	int		i;
+	int		res;
+
+	i = 0;
+	res = 0;
+	printf("DEBUG %s %d\n", __FILE__, __LINE__);
+	txtrs_arr = ft_split_ntrim(ln, ' ');
+	printf("DEBUG %s %d\n", __FILE__, __LINE__);
+	if (txtrs_arr && txtrs_arr[2] && txtrs_arr[2][0] != '\0')
+	{
+		printf("DEBUG %s %d\n", __FILE__, __LINE__);
+		free_arr((void **)txtrs_arr, free);
+		printf("DEBUG %s %d\n", __FILE__, __LINE__);
+		return (res);
+	}
+	while (txtrs[i])
+	{
+		printf("DEBUG %s %d\n", __FILE__, __LINE__);
+		if (!ft_strcmp(txtrs_arr[0], txtrs[i][0]))
+		{
+			printf("DEBUG %s %d\n", __FILE__, __LINE__);
+			if (!txtrs[i][1] || txtrs[i][1][0] == '\0')
+			{
+				txtrs[i][1] = ft_strdup(txtrs_arr[1]);
+				res = 1;
+			}
+			printf("DEBUG %s %d\n", __FILE__, __LINE__);
+			free_arr((void **)txtrs_arr, free);
+			printf("DEBUG %s %d\n", __FILE__, __LINE__);
+			return (res);
+		}
+		i++;
+	}
+	printf("DEBUG %s %d\n", __FILE__, __LINE__);
+	free_arr((void **)txtrs_arr, free);
+	return (res);
 }
 
-int	parse_dir(t_meta *meta, char *ln, long *ln_nbr)
+static int	check_full_txtrs(char ***txtrs)
 {
-	char	**coords;
-	int		len;
+	int	i;
 
-	coords = NULL;
-	coords = init_coords(coords);
-	len = ft_strlen(coords[*ln_nbr]);
-	if (ft_strncmp(coords[*ln_nbr], ln, len)
-		|| !ft_isspace(ln[len]))
+	i = 0;
+	printf("DEBUG %s %d\n", __FILE__, __LINE__);
+	while (i <= 5)
 	{
-		free_arr((void **)coords, free);
-		return (print_error(INCORRECT_COORDS));
+		printf("DEBUG %s %d\n", __FILE__, __LINE__);
+		if (!txtrs[i][1] || txtrs[i][1][0] == '\0')
+			return (0);
+		i++;
 	}
-	free_arr((void **)coords, free);
-	return (fill_wall(ln + len + 1, *ln_nbr, meta));
+	return (1);
+}
+
+int	parse_dir(t_meta *meta, char *ln, bool *texture_flg)
+{
+	if (ln[0] == '\n')
+		return (0);
+	if (!check_txtr_input(ln, meta->txtrs))
+		return (print_error(INCORRECT_COORDS));
+	printf("DEBUG %s %d\n", __FILE__, __LINE__);
+	if (check_full_txtrs(meta->txtrs))
+	{
+		printf("DEBUG %s %d\n", __FILE__, __LINE__);
+		*texture_flg = true;
+		return (fill_wall(meta));
+	}
+	printf("DEBUG %s %d\n", __FILE__, __LINE__);
+	return (0);
 }
