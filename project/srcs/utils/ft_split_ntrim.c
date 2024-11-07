@@ -79,12 +79,10 @@ static size_t	count_words(const char *str, char c)
 char	**ft_split_ntrim(char const *s, char c)
 {
 	size_t	count;
-	size_t	len;
 	char	**arr;
 
 	if (!s)
 		return (NULL);
-	len = ft_strlen(s);
 	count = count_words(s, c);
 	arr = (char **)malloc((count + 1) * sizeof(char *));
 	if (!arr)

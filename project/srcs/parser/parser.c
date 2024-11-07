@@ -34,14 +34,9 @@ static int	ext_check(char *file)
 	return (fd);
 }
 
-static bool	try_parse_map(long *ln_nbr, t_meta *metadata, char *ln)
+static bool	try_parse_map(bool *map_flg, t_meta *metadata, char *ln)
 {
-	if (*ln_nbr == INT_MAX)
-	{
-		print_error(LONGMAP);
-		return (false);
-	}
-	if (parse_map(metadata, ln))
+	if (parse_map(metadata, ln, map_flg))
 		return (false);
 	return (true);
 }
@@ -49,23 +44,21 @@ static bool	try_parse_map(long *ln_nbr, t_meta *metadata, char *ln)
 static int	parse_line(int fd, t_meta *metadata)
 {
 	char	*ln;
-	long	ln_nbr;
+	bool	texture_flg;
+	bool	map_flg;
 
-	ln_nbr = 0;
+	texture_flg = false;
+	map_flg = false;
 	ln = get_next_line(fd);
 	while (ln && *ln)
 	{
-		if (!(ln_nbr <= 6 && ln[0] == '\n'))
+		if (!texture_flg)
 		{
-			if (ln_nbr <= 5)
-			{
-				if (parse_dir(metadata, ln, &ln_nbr))
-					return (free_ln_err(ln));
-			}
-			else if (!try_parse_map(&ln_nbr, metadata, ln))
-				return (1);
-			ln_nbr++;
+			if (parse_dir(metadata, ln, &texture_flg))
+				return (free_ln_err(ln));
 		}
+		else if (!try_parse_map(&map_flg, metadata, ln))
+			return (1);
 		free(ln);
 		ln = get_next_line(fd);
 	}
